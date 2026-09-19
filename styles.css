@@ -261,3 +261,15 @@ td strong { color: var(--text); }
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+.badge-open {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #052e16;
+  background: #86efac;
+  letter-spacing: 0.01em;
+}
