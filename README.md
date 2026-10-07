@@ -1,6 +1,6 @@
 # lughlammas.github.io
 
-Portfolio estático de **Guilherme Cavalcante (Gui)** — Coordenador de IAs para produtos digitais.
+Portfolio estático de **Guilherme Cavalcanti (Gui)** — Coordenador de IAs para produtos digitais.
 
 Site: https://lughlammas.github.io
 
