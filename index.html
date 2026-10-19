@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/">ARBOCK LABS</a>
-<nav aria-label="Main">
+<div class="container site-header__bar">
+<a class="brand" href="/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Primary">
+<ul class="nav-list">
+<li><a href="/services/">Services</a></li>
+<li><a href="/work/">Work</a></li>
+<li><a href="/methodology/">Methodology</a></li>
+<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/" hreflang="en" lang="en" aria-current="true">EN</a>
+<a href="/pt/" hreflang="pt-BR" lang="pt-BR">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/contact/">Discuss Your Project</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Primary (mobile)">
 <ul class="nav-list">
 <li><a href="/services/">Services</a></li>
 <li><a href="/work/">Work</a></li>
@@ -26,66 +45,143 @@
 <li><a href="/contact/">Contact</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/pt/" hreflang="pt-BR" lang="pt-BR">Português</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<div id="topo"></div>
-<section class="hero wrap" aria-labelledby="hero-title">
-<p class="eyebrow">ARBOCK LABS · Independent Software &amp; Applied AI Studio</p>
-<h1 id="hero-title">We turn problems into working software.</h1>
-<p class="lead">Web applications, intelligent automation and custom software solutions built through AI-assisted engineering and human oversight.</p>
-<p class="led-by">Independent studio led by Guilherme Cavalcanti</p>
-<div class="cta-row">
-<a class="btn-primary" href="/services/">Explore Our Services</a>
-<a class="btn" href="/work/flowdesk/">Try a Live Demo</a>
-<a class="btn" href="/contact/">Discuss Your Project</a>
+<span id="topo"></span>
+<section class="hero" aria-labelledby="hero-title">
+<div class="container hero__grid">
+<div>
+<p class="label hero__kicker">ARBOCK LABS · Independent Software &amp; Applied AI Studio</p>
+<h1 class="hero__title" id="hero-title">We turn problems into working software.</h1>
+<p class="hero__sub">Web applications, intelligent automation and custom software solutions built through AI-assisted engineering and human oversight.</p>
+<div class="btn-row">
+<a class="btn btn--primary" href="/services/">Explore Our Services</a>
+<!-- Held CTA (Gui's literal text, hidden per DIRECTIVE.md rodada 3 until a verified demo exists; restore unchanged as a secondary button): "Try a Live Demo" -> /work/flowdesk/ -->
+<a class="btn btn--secondary" href="/contact/">Discuss Your Project</a>
+</div>
+<p class="hero__lead">Independent studio led by Guilherme Cavalcanti</p>
+</div>
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>comercial-template</span><span class="sep">·</span><span>local run · synthetic data</span></div>
+<div class="stage__media">
+<img src="/assets/img/comercial-template-04-dashboard.webp" width="1440" height="900" decoding="async" alt="Comercial Template dashboard at 1440px: client count, recent proposals and their total for a synthetic test user (Alex Reviewer).">
+<img src="/assets/img/comercial-template-m02-dashboard-390.webp" width="780" height="1688" decoding="async" alt="The same Comercial Template dashboard at 390px mobile width, seeded demo account with fictional data.">
+</div>
+<figcaption>Real capture · commit 3ead252 · local run, synthetic data (<code>scripts/e2e-smoke.mjs</code> + seeded demo) · 2026-10-19 09:23 BRT</figcaption>
+</figure>
 </div>
 </section>
-<section class="wrap section" id="oferta" aria-labelledby="h-oferta">
-<div id="on-demand"></div><h2 id="h-oferta">Three ways to start</h2>
-<p><strong>S03 · AI Code Rescue &amp; Technical Delivery</strong> <em>(start here if you already have code)</em>
-Code that an AI tool helped you write, and that now fails to run, build or ship. We start with an assessment: what exists, what runs, what breaks. You get a written diagnosis before any promise of a fix.</p>
-<p class="more">→ <a href="/services/index.html#s03">S03 · AI Code Rescue &amp; Technical Delivery</a></p>
-<p><strong>S02 · Custom Software &amp; MVP Development</strong>
-A focused first version of a web application with authentication, persistence, the core workflow, tests and a README that tells you how to run it.</p>
-<p class="more">→ <a href="/services/index.html#s02">S02 · Custom Software &amp; MVP Development</a></p>
-<p><strong>S01 · Business Automation &amp; AI</strong>
-A repetitive process (intake, triage, drafting replies, logging) turned into a workflow where software does the routine work and a person approves what matters.</p>
-<p class="more">→ <a href="/services/index.html#s01">S01 · Business Automation &amp; AI</a></p>
+<section class="section section--band" id="oferta" aria-labelledby="h-oferta">
+<span id="on-demand"></span>
+<div class="container">
+<div class="section__head"><h2 id="h-oferta">Three ways to start</h2></div>
+<div class="card-grid card-grid--3">
+<article class="card card--link service-card service-card--priority">
+<p class="service-card__code">S03 <span class="tag tag--accent">priority</span></p>
+<h3>AI Code Rescue &amp; Technical Delivery</h3>
+<p class="label">start here if you already have code</p><p>Code that an AI tool helped you write, and that now fails to run, build or ship. We start with an assessment: what exists, what runs, what breaks. You get a written diagnosis before any promise of a fix.</p>
+<p class="service-card__not"><b>Not promised:</b> We do not promise that every project can be rescued. Sometimes the assessment concludes that rewriting is cheaper; you will hear that before spending more.</p>
+<a class="card__link" href="/services/index.html#s03">S03 details</a>
+</article>
+<article class="card card--link service-card">
+<p class="service-card__code">S02</p>
+<h3>Custom Software &amp; MVP Development</h3>
+<p>A focused first version of a web application with authentication, persistence, the core workflow, tests and a README that tells you how to run it.</p>
+<p class="service-card__not"><b>Not promised:</b> No production hosting, scaling or security guarantees unless they are scoped and assessed separately.</p>
+<a class="card__link" href="/services/index.html#s02">S02 details</a>
+</article>
+<article class="card card--link service-card">
+<p class="service-card__code">S01</p>
+<h3>Business Automation &amp; AI</h3>
+<p>A repetitive process (intake, triage, drafting replies, logging) turned into a workflow where software does the routine work and a person approves what matters.</p>
+<p class="service-card__not"><b>Not promised:</b> No guaranteed time or cost savings. We have not measured any yet, so we do not quote any.</p>
+<a class="card__link" href="/services/index.html#s01">S01 details</a>
+</article>
+</div>
 <p>None of these starts with a price or a deadline pulled from thin air. Each one starts with a scoped assessment.</p>
+</div>
 </section>
-<section class="wrap section" id="projetos" aria-labelledby="h-projetos">
-<div id="caso"></div><div id="flagship"></div><h2 id="h-projetos">Work you can inspect</h2>
-<p>Every number below comes from a test run or a CI record. No client names, because none are documented.</p>
-<p><strong>comercial-template:</strong> a Next.js application for client records and commercial proposals, with authentication, per-user data and server-generated PDFs. 24 of 24 unit tests passed in the run for this site; the CI workflow passed on the current commit.</p>
-<p class="more">→ <a href="/work/comercial-template/">comercial-template</a></p>
-<p><strong>SHERLOCK:</strong> a chess analysis environment in which a React interface talks to a native engine through a WebSocket controller and a UCI adapter, with an Android build. 8 of 8 parser and session tests passed.</p>
-<p class="more">→ <a href="/work/sherlock/">SHERLOCK</a></p>
-<p><strong>FLOWDESK:</strong> an AI-operations demo: form → triage → reply suggestion → human approval → log. Local demo, hosting pending.</p>
-<p class="more">→ <a href="/work/flowdesk/">FLOWDESK</a></p>
+<section class="section" id="projetos" aria-labelledby="h-projetos">
+<span id="flagship"></span><span id="caso"></span>
+<div class="container">
+<div class="section__head"><h2 id="h-projetos">Work you can inspect</h2><p>Every number below comes from a test run or a CI record. No client names, because none are documented.</p></div>
+<div class="card-grid card-grid--3">
+<article class="card card--link project-card">
+<div class="project-card__media"><img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1004" loading="lazy" decoding="async" alt="FLOWDESK ticket at 1280px after a rule-based suggestion: synthetic billing ticket, triage billing/high, the label &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, an editable suggested reply and Approve/Reject buttons."></div>
+<div class="project-card__body">
+<div class="project-card__meta"><span class="tag tag--warn">in development</span><span class="tag tag--sim">Simulação (regras) — não é um modelo de IA</span><span class="tag">local only · not deployed</span></div>
+<h3>FLOWDESK — AI Operations Demo</h3>
+<p>an operations demo: form → rule-based triage → simulated reply suggestion → human approval → log. 53 of 53 unit and integration tests and 22 of 22 browser checks passed locally. Local demo, hosting pending.</p>
+<p class="evidence"><b>flowdesk@5b41bf5</b> · local run, synthetic data · demo pending</p>
+<a class="card__link" href="/work/flowdesk/">Case study<span class="visually-hidden">: FLOWDESK — AI Operations Demo</span></a>
+</div>
+</article>
+<article class="card card--link project-card">
+<div class="project-card__media"><img src="/assets/img/comercial-template-07-proposal-detail.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Comercial Template proposal detail at 1440px: line items, quantities, prices, total and a Download PDF button, synthetic data."></div>
+<div class="project-card__body">
+<div class="project-card__meta"><span class="tag tag--ok">tests passed</span><span class="tag">Next.js · Prisma · PDF</span></div>
+<h3>Comercial Template</h3>
+<p>a Next.js application for client records and commercial proposals, with authentication, per-user data and server-generated PDFs. 24 of 24 unit tests passed in the run for this site; the CI workflow passed on the current commit.</p>
+<p class="evidence"><b>@3ead252</b> · npm test 24/24 · CI “Web validation” ✓ · 2026-10-19</p>
+<a class="card__link" href="/work/comercial-template/">Case study<span class="visually-hidden">: Comercial Template</span></a>
+</div>
+</article>
+<article class="card card--link project-card">
+<div class="project-card__media"><img src="/assets/img/sherlock-02-hub-1440.webp" width="1440" height="900" loading="lazy" decoding="async" alt="SHERLOCK hub screen at 1440px: chessboard in the starting position and a case-file menu with Play, Analyze and Train options."></div>
+<div class="project-card__body">
+<div class="project-card__meta"><span class="tag tag--ok">tests passed</span><span class="tag">React · WebSocket · UCI</span></div>
+<h3>SHERLOCK</h3>
+<p>a chess analysis environment in which a React interface talks to a native engine through a WebSocket controller and a UCI adapter, with an Android build. 8 of 8 parser and session tests passed.</p>
+<p class="evidence"><b>@e632035</b> · npm test 8/8 · 2026-10-19</p>
+<a class="card__link" href="/work/sherlock/">Case study<span class="visually-hidden">: SHERLOCK</span></a>
+</div>
+</article>
+</div>
 <p class="more">→ <a href="/work/">All work</a></p>
+</div>
 </section>
-<section class="wrap section" id="como" aria-labelledby="h-como">
-<h2 id="h-como">How the work is done</h2>
-<p>Human-directed AI-assisted development. Guilherme sets the objective and the acceptance criteria, assigns work to AI tools, inspects the result and decides what ships. The method is written down as playbooks, roles and handoff templates; it is a documented method, not an autonomous platform.</p>
+<section class="section section--band" id="como" aria-labelledby="h-como">
+<div class="container">
+<div class="section__head"><h2 id="h-como">How the work is done</h2><p>Human-directed AI-assisted development. Guilherme sets the objective and the acceptance criteria, assigns work to AI tools, inspects the result and decides what ships. The method is written down as playbooks, roles and handoff templates; it is a documented method, not an autonomous platform.</p>
+<p class="more">→ <a href="/methodology/">Methodology</a></p></div>
+<ol class="steps steps--row"><li><div><h3>Directed</h3></div></li><li><div><h3>Built with AI assistance</h3></div></li><li><div><h3>Tested</h3></div></li><li><div><h3>Reviewed</h3></div></li><li><div><h3>Handed off</h3></div></li></ol>
 <p class="more">→ <a href="/methodology/">Methodology</a></p>
+</div>
 </section>
-<section class="wrap section" id="linguas" aria-labelledby="h-linguas">
-<div id="formacao"></div><h2 id="h-linguas">Languages</h2>
-<p>Work in Portuguese, English or Spanish.</p>
+<section class="section" id="linguas" aria-labelledby="h-linguas">
+<span id="formacao"></span>
+<div class="container"><h2 id="h-linguas">Languages</h2><p>Work in Portuguese, English or Spanish.</p></div>
 </section>
-<section class="wrap section">
-<h2>Have a problem that should become software?</h2>
-<p>Describe what you have and what is not working.
-<a href="/contact/"><strong>Discuss Your Project</strong></a></p>
+<section class="section" aria-labelledby="cta-title">
+<div class="container">
+<div class="cta">
+<div>
+<h2 id="cta-title">Have a problem that should become software?</h2>
+<p>Describe what you have and what is not working.</p>
+</div>
+<div class="btn-row">
+<a class="btn btn--primary" href="/contact/">Discuss Your Project</a>
+<a class="btn btn--secondary" href="/work/">See the work</a>
+</div>
+</div>
+</div>
 </section>
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Independent studio led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Work</h2><ul><li><a href="/work/flowdesk/">FLOWDESK</a></li><li><a href="/work/comercial-template/">Comercial Template</a></li><li><a href="/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Language</h2><ul><li><a href="/" hreflang="en" lang="en">English</a></li><li><a href="/pt/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>
