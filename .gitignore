@@ -1,4 +1,4 @@
-# Internal work files live outside the repo in /workspace/arbock-sprint001/site-internal/ (not published).
+# Local work files, not published
 # GitHub Pages (legacy main:/) serves every tracked file, so these must never be committed here.
 STATUS.md
 docs/
