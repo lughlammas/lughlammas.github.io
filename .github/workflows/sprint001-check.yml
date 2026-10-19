@@ -1,0 +1,25 @@
+name: sprint001-check
+# Só verificação (links internos + HTML). Sem deploy. O Pages deste repo é legacy (main:/),
+# então este workflow NÃO altera a publicação.
+on:
+  push:
+    branches: ['sprint001/**']
+  pull_request:
+    branches: ['sprint001/**']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Links internos (lychee offline)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress --include-fragments --root-dir "${{ github.workspace }}" './**/*.html'
+          fail: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: HTML (html-validate)
+        run: npx --yes html-validate@9 "**/*.html"
