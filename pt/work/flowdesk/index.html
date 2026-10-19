@@ -132,7 +132,7 @@
   - as checagens estáticas;
   - gitleaks e trufflehog, rodados localmente, sem achados;
   - <code>npm audit</code> sem vulnerabilidades.</p>
-<p>As contagens detalhadas dos testes estão sendo reproduzidas pelo QA e serão publicadas depois de confirmadas.</p>
+<p>Contagens da execução local de 19/10/2026 (commit testado <code>1b489bf</code>, código idêntico ao <code>905a387</code>), reproduzidas de forma independente pelo QA: 88/88 testes unitários e de integração, 50/50 checagens no navegador, 16/16 mutações detectadas, 5/5 assinaturas de webhook conferidas por um receptor externo.</p>
 <h3>Links</h3>
 <ul>
 <li>Repositório público: ainda não há. Log de testes interno, repositório ainda não público.</li>
@@ -191,8 +191,8 @@
 <td><strong>nunca rodou</strong> (sem remoto)</td>
 </tr>
 <tr>
-<td>axe / pa11y, Lighthouse</td>
-<td><strong>não rodados</strong></td>
+<td>axe-core / pa11y (local, QA)</td>
+<td>axe: nenhuma violação em 9 estados da interface; pa11y: 2 problemas em aberto</td>
 </tr>
 </tbody>
 </table></div>
@@ -204,7 +204,7 @@
 <li><strong>Sem CI remoto.</strong> O arquivo de workflow existe, mas o repositório não tem remoto, então ele nunca rodou.</li>
 <li><strong>As novas tentativas de webhook não são duráveis.</strong> Elas rodam no mesmo ciclo da requisição. Sem o Cloudflare Queues, tentativas pendentes podem se perder se o worker for encerrado.</li>
 <li><strong>Sem limpeza agendada dos sandboxes.</strong> Os sandboxes expirados só são removidos quando acessados ou pela rota de administração; não há tarefa agendada.</li>
-<li><strong>axe/pa11y e Lighthouse não foram rodados.</strong> Acessibilidade e desempenho não foram medidos.</li>
+<li><strong>A acessibilidade foi verificada só de forma automática</strong> (axe-core, pa11y) num servidor local, sem teste com leitor de tela; o pa11y ainda aponta dois problemas em aberto.</li>
 <li>Os visitantes são anônimos e a administração usa um único token compartilhado; não há contas de usuário.</li>
 <li>O limite de envios é uma janela fixa simples, não serve contra abuso.</li>
 <li>A interface está em inglês, com exceção do rótulo de simulação em português.</li>

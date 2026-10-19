@@ -132,7 +132,7 @@
   - static checks;
   - gitleaks and trufflehog, both run locally, with no findings;
   - <code>npm audit</code> with no vulnerabilities.</p>
-<p>The detailed test counts are being reproduced by QA and will be published once confirmed.</p>
+<p>Counts from the local run of 2026-10-19 (tested commit <code>1b489bf</code>, code identical to <code>905a387</code>), reproduced independently by QA: 88/88 unit and integration tests, 50/50 browser checks, 16/16 mutants caught, 5/5 webhook signatures verified by an external receiver.</p>
 <h3>Links</h3>
 <ul>
 <li>Public repository: none yet. Internal test log, repository not yet public.</li>
@@ -191,8 +191,8 @@
 <td><strong>never run</strong> (no remote)</td>
 </tr>
 <tr>
-<td>axe / pa11y, Lighthouse</td>
-<td><strong>not run</strong></td>
+<td>axe-core / pa11y (local, QA)</td>
+<td>axe: no violations in 9 interface states; pa11y: 2 open issues</td>
 </tr>
 </tbody>
 </table></div>
@@ -204,7 +204,7 @@
 <li><strong>No remote CI.</strong> A workflow file exists, but the repository has no remote, so it has never run.</li>
 <li><strong>Webhook retry is not durable.</strong> Retries run in the same request lifecycle. Without Cloudflare Queues, pending attempts can be lost if the worker is stopped.</li>
 <li><strong>No scheduled sandbox cleanup.</strong> Expired sandboxes are removed only when accessed or through the admin route; there is no scheduled job.</li>
-<li><strong>axe/pa11y and Lighthouse were not run.</strong> Accessibility and performance have not been measured.</li>
+<li><strong>Accessibility was checked only automatically</strong> (axe-core, pa11y) on a local server, with no screen-reader test; pa11y still reports two open issues.</li>
 <li>Visitors are anonymous and the admin uses a single shared token; there are no user accounts.</li>
 <li>The rate limit is a simple fixed window, not abuse-grade.</li>
 <li>The interface is in English, apart from the Portuguese simulation label.</li>
