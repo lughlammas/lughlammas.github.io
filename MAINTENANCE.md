@@ -102,7 +102,7 @@ curl -s https://lughlammas.github.io/rota-inexistente/ | grep -c '<h1>Page not f
 - Só para verificar (opcional): Python 3 (preview), lychee e Node/npx (html-validate), gh e curl. Tudo gratuito.
 
 ## Limitações conhecidas
-- **Contato: canal ainda não configurado.** A página `/contact/` mostra o placeholder "pendente de configuração" e não envia nada (formulário sem `action`, botão desabilitado). Nenhum e-mail publicado.
+- **Contato:** o site publica `lughlammas@gmail.com` nas páginas EN e PT. O link abre o aplicativo de e-mail do visitante; não há formulário nem prazo de resposta garantido.
 - FLOWDESK: demo local, hospedagem pendente. As sugestões de resposta são uma simulação por regras, não um modelo de IA. Os números de testes publicados citam o commit do FLOWDESK que foi medido; se o app mudar, atualize os números e o commit juntos, em todas as páginas que os citam.
 - Sem domínio próprio: o endereço é `https://lughlammas.github.io/`.
 - A API do Pages mostra `custom_404: true` desde a publicação do redesign. Mesmo assim, confira o `404.html` depois de cada publicação.
