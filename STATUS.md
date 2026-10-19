@@ -29,12 +29,47 @@ Log completo e atual: `docs/luna-checks.log` (rodada 2: links 249/0 quebrados, h
 - Gerador re-executável: `/tmp/luna-gen/checks.sh` (regenera com /tmp/luna-gen/gen.py e roda todas as checagens; log em docs/luna-checks.log).
 - Conflito de conteúdo: a copy diz que o FLOWDESK "não tem código / not yet built", mas copy/EVIDENCE-hermes.log (09:32) já registra 2 commits em flowdesk/ (bd8a1c9, 80fe74d). Cabe ao Hermes atualizar; não alterei o texto.
 
+## Rodada 3 — design da Vênus + copy final do Hermes + imagens reais (2026-10-19 ~09:50 BRT)
+- `styles.css` = design/tokens.css + design/components.css (cópia literal) + bloco pequeno "Site additions". Nomes styles.css/main.js mantidos; TODO de CSS removido.
+- Todas as páginas seguem a ordem de seções do WIREFRAMES.md com as classes do styleguide: header (brand + descritor, nav-desktop, lang-toggle EN|PT com aria-current, nav-cta, nav-mobile em `<details>`), hero, service-card (S03 priority, linha "não prometemos" tirada de services.md), project-card, steps, case-header + facts + case-toc + 9 seções numeradas (c-problem…c-need, Limitations com `.limitations`), pager entre casos, faixa `.cta` em todas exceto /contact/, footer em 4 colunas.
+- Copy final do Hermes re-puxada (FLOWDESK "in development, demo pending"; seções Evidence com links; MIME só como card em /work; "What happens next" do contato segurada por Q2).
+- **Hero / CTAs:** decisão do coordenador registrada em DIRECTIVE.md "rodada 3" (veto #11 do Crono): a home tem 2 CTAs, "Explore Our Services → /services/" e "Discuss Your Project → /contact/" (PT: "Conheça nossas soluções" / "Solicite uma proposta"). "Try a Live Demo / Experimente uma demonstração" foi ocultado; o texto literal do Gui está preservado em comentário HTML (sem `<a>`) e em `HELD_CTA` no gerador, para voltar sem alteração. H1, sub e a linha "led by" continuam literais. Checagem do gerador: 10/10 textos iguais à copy + CTA segurado ausente da copy (conforme decidido).
+- Links de evidência da copy: 15 URLs externas, todas HTTP 200 com `curl -L` (log). Nenhum link morto.
+- main.js: Escape fecha o menu mobile e devolve o foco ao botão; o formulário nunca envia (preventDefault) e `?service=s0N` só pré-seleciona o serviço.
+- Contato: formulário do wireframe (Nome*, E-mail*, Serviço, problema*, URL do repositório, aceite), botão `disabled`, aviso "Pendente de configuração / Pending configuration", sem e-mail.
+
+### Imagens (todas capturas reais; nenhum mockup)
+| Arquivo no site | Origem | Commit da captura | sha256 da origem (verificado) | sha256 no site |
+|---|---|---|---|---|
+| assets/img/comercial-template-04-dashboard.webp | design/screenshots/comercial-template/04-dashboard.webp | comercial-template@3ead252 | 8d8b49a5…7cf70 | igual |
+| assets/img/comercial-template-m02-dashboard-390.webp | design/screenshots/comercial-template/m02-dashboard-390.webp | 3ead252 | 3e40f433…7f32 | igual |
+| assets/img/comercial-template-07-proposal-detail.webp | design/screenshots/comercial-template/07-proposal-detail.webp | 3ead252 | ecd94823…aab3 | igual |
+| assets/img/comercial-template-m03-proposal-detail-390.webp | design/screenshots/comercial-template/m03-proposal-detail-390.webp | 3ead252 | 0877e117…2832 | igual |
+| assets/img/sherlock-02-hub-1440.webp | design/screenshots/sherlock/02-hub-1440.webp | sherlock@e632035 | 3f767f69…5ae7 | igual |
+| assets/img/sherlock-01-hub-390.webp | design/screenshots/sherlock/01-hub-390.webp | e632035 | 826544e7…e9 | igual |
+| assets/img/flowdesk-05-suggestion-sim-label-1280.webp | design/prints/flowdesk/05-suggestion-sim-label-1280.webp | flowdesk@5b41bf5 | 1335ff9f…a5c (README OK) | igual |
+| assets/img/flowdesk-05-suggestion-sim-label-390.webp | design/prints/flowdesk/05-suggestion-sim-label-390.webp | 5b41bf5 | 0cd888fa…de09 (README OK) | igual |
+| assets/img/flowdesk-07-logged-history-1280.webp | design/prints/flowdesk/07-logged-history-1280.png → webp q85 (Pillow) | 5b41bf5 | 0213f036…e3 (README OK) | 3af6f805…b30f |
+
+\* As PNGs de origem dos webp do comercial-template/sherlock batem com o SHA-256 do design/screenshots/README.md (`sha256sum -c`: 6/6 OK); o README só lista PNG. As 27 entradas do design/prints/flowdesk/README.md: 27/27 OK.
+- Conferi cada imagem usada com o Read: dados sintéticos/fictícios, sem tela de erro. SHERLOCK: só a tela inicial (hub); as telas "Analisar" com "ERRO DO MOTOR" (03/04) **não** são usadas. FLOWDESK: estado 05 (rótulo "Simulação (regras) — não é um modelo de IA · provider rules-v1") e 07 (aprovado por demo-reviewer, `response_sent: false`). O rótulo de simulação também aparece em texto (aviso `.notice--sim`, tag) e a página mantém "demo pendente", com o botão "Abrir a demo" desativado (aria-disabled) e sem link para demo ao vivo.
+- Todas as `<img>` têm width/height, alt descritivo, `decoding=async`; `loading=lazy` em tudo abaixo da dobra (a imagem do hero carrega direto).
+
+### Medições da rodada 3 (log completo em docs/luna-checks.log)
+- html-validate@9: exit 0 · links internos: 679, 0 quebrados · CI local da Moony (lychee + html-validate): PASSOU · http 200: 18 rotas + 404 + assets.
+- URLs externas da copy: 15/15 HTTP 200.
+- Responsivo (Chrome headless/Playwright, 18 páginas × 360/768/1280 = 54 renders): 0 com scroll horizontal; 0 imagens quebradas (antes da correção: os 2 estudos de caso estouravam em 360/768 por URLs longas → `overflow-wrap:anywhere`).
+- Teclado (18 páginas × 360/1280 = 36 execuções): skip link é o 1º foco, aparece e leva o foco ao `<main>`; Tab alcança todos os elementos focáveis visíveis (ex.: home 360 30/30, sherlock 1280 43/43); foco visível em todos (cards usam o anel `:focus-within` do componente); sem armadilha; troca de idioma alcançável; menu mobile: Enter abre, Tab entra no painel, Escape fecha e devolve o foco.
+- axe-core 4 (36 execuções): 0 violações (corrigido `label-content-name-mismatch` no `.brand`, tirando o aria-label).
+- Grep: 0 `[E0-9`, 0 "TODO: copy". O grep de artefatos acha "STATUS" só na página do FLOWDESK: é texto da copy do Hermes citando `flowdesk/STATUS.md` (arquivo interno) na tabela de testes — mantido, sinalizado ao coordenador.
+- Capturas de página inteira em /tmp/luna-screens (54 PNG); 3 amostras pequenas em docs/screens/.
+
 ## Pendente
 - Copy: integrada (rodada 2). Reexecutar /tmp/luna-gen/checks.sh se o Hermes editar.
-- Design (Vênus): design/ estava vazio → CSS neutro mínimo com TODO no topo de styles.css; integrar tokens.css/components.css quando chegarem.
+- Design: integrado na rodada 3.
 - Lychee (links offline) do workflow não rodado localmente; equivalente feito com script próprio.
 - `.github/workflows/sprint001-check.yml` e `.htmlvalidate.json` não são meus: foram commitados por outro agente em fd952b4 (ci). Não alterei.
 
 ## Bloqueio
 - Canal de contato real inexistente (decisão do Gui).
-- Push NÃO feito: exige aprovação direta do Gui. Nada tocado em main.
+- Push: o branch foi enviado em 31f85ce com aprovação direta do Gui; os commits da rodada 3 são só locais (não enviei). Nada tocado em main.

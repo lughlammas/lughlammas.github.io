@@ -1,12 +1,14 @@
-# luna-checks 2026-10-19T09:33:46-03:00
+# luna-checks 2026-10-19T09:47:25-03:00
 $ /tmp/luna-gen/venv/bin/python /tmp/luna-gen/gen.py  (summary)
 mapped markers: []
 unmapped markers: []
 titles shortened: ["pt/methodology: 'Método — Desenvolvimento assistido por IA sob direção humana · ARBOCK LABS' -> 'Método · ARBOCK LABS'"]
-hero: 12 / 12 identical to copy
+hero: 10 / 12 identical to copy
+note: en/contact.md: section held (STATUS Q2, until a channel exists): What happens next
+note: pt/contact.md: section held (STATUS Q2, until a channel exists): O que acontece depois
 
 $ python3 /tmp/luna-gen/links.py
-internal links checked: 249, broken: 0
+internal links checked: 679, broken: 0
 exit=0
 
 $ npx --yes html-validate@9 "**/*.html"
@@ -17,10 +19,9 @@ $ grep -rEc '\[E[0-9]' --include=*.html . (total)
 $ grep -r 'TODO: copy' --include=*.html . (total)
 0
 $ grep -rn 'TODO' styles.css main.js *.html (intentional CSS TODO only)
-styles.css:2:   TODO: replace/extend with design/tokens.css + design/components.css (Vênus) when delivered. */
 
 $ leftover editorial artifacts (@@, ⟦, Kicker, STATUS, '→ /' plain)
-0 files
+2 files
 
 $ anchors on / 
 #topo ok
@@ -62,3 +63,120 @@ $ python3 -m http.server 8765 + curl
 200 /main.js
 200 /README.md
 200 /index.html
+
+$ /workspace/arbock-sprint001/release/ci-local.sh  (Moony local CI: lychee offline + html-validate)
+RESULTADO: PASSOU
+log: /workspace/arbock-sprint001/logs/moony-ci-31f85ce.log
+
+$ curl -sL -o /dev/null -w %{http_code} <each external URL in copy/en+pt>
+200 https://github.com/lughlammas
+200 https://github.com/lughlammas/ai-coordinator-portfolio
+200 https://github.com/lughlammas/ai-coordinator-portfolio/blob/main/case-studies/github-project-estate-consolidation.md
+200 https://github.com/lughlammas/comercial-template
+200 https://github.com/lughlammas/comercial-template/actions/runs/37713989999
+200 https://github.com/lughlammas/comercial-template/blob/3ead2526b0a2d5e5f7970b539016dba8f56def3c/.github/workflows/ci.yml
+200 https://github.com/lughlammas/comercial-template/blob/3ead2526b0a2d5e5f7970b539016dba8f56def3c/docs/PRODUCT_WALKTHROUGH.md
+200 https://github.com/lughlammas/comercial-template/commit/3ead2526b0a2d5e5f7970b539016dba8f56def3c
+200 https://github.com/lughlammas/comercial-template/tree/3ead2526b0a2d5e5f7970b539016dba8f56def3c/tests
+200 https://github.com/lughlammas/mime
+200 https://github.com/lughlammas/sherlock
+200 https://github.com/lughlammas/sherlock/blob/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/Sherlock-0.1.3-s21.apk.sha256
+200 https://github.com/lughlammas/sherlock/commit/e63203515a1b0ed3fbdf388e0bb317267bb14cfb
+200 https://github.com/lughlammas/sherlock/releases/tag/v0.1.3
+200 https://github.com/lughlammas/sherlock/tree/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/tests
+
+$ python -m http.server 8766 & ; /tmp/luna-gen/venv/bin/python /tmp/luna-gen/browser.py  (headless Chrome via Playwright: overflow 360/768/1280, keyboard, axe-core 4)
+OVERFLOW (54 renders: 18 pages x 360/768/1280):
+  ok       /@360                            scrollWidth=360 innerWidth=360
+  ok       /services/@360                   scrollWidth=360 innerWidth=360
+  ok       /work/@360                       scrollWidth=360 innerWidth=360
+  ok       /work/flowdesk/@360              scrollWidth=360 innerWidth=360
+  ok       /work/comercial-template/@360    scrollWidth=360 innerWidth=360
+  ok       /work/sherlock/@360              scrollWidth=360 innerWidth=360
+  ok       /methodology/@360                scrollWidth=360 innerWidth=360
+  ok       /about/@360                      scrollWidth=360 innerWidth=360
+  ok       /contact/@360                    scrollWidth=360 innerWidth=360
+  ok       /pt/@360                         scrollWidth=360 innerWidth=360
+  ok       /pt/services/@360                scrollWidth=360 innerWidth=360
+  ok       /pt/work/@360                    scrollWidth=360 innerWidth=360
+  ok       /pt/work/flowdesk/@360           scrollWidth=360 innerWidth=360
+  ok       /pt/work/comercial-template/@360 scrollWidth=360 innerWidth=360
+  ok       /pt/work/sherlock/@360           scrollWidth=360 innerWidth=360
+  ok       /pt/methodology/@360             scrollWidth=360 innerWidth=360
+  ok       /pt/about/@360                   scrollWidth=360 innerWidth=360
+  ok       /pt/contact/@360                 scrollWidth=360 innerWidth=360
+  ok       /@768                            scrollWidth=768 innerWidth=768
+  ok       /services/@768                   scrollWidth=768 innerWidth=768
+  ok       /work/@768                       scrollWidth=768 innerWidth=768
+  ok       /work/flowdesk/@768              scrollWidth=768 innerWidth=768
+  ok       /work/comercial-template/@768    scrollWidth=768 innerWidth=768
+  ok       /work/sherlock/@768              scrollWidth=768 innerWidth=768
+  ok       /methodology/@768                scrollWidth=768 innerWidth=768
+  ok       /about/@768                      scrollWidth=768 innerWidth=768
+  ok       /contact/@768                    scrollWidth=768 innerWidth=768
+  ok       /pt/@768                         scrollWidth=768 innerWidth=768
+  ok       /pt/services/@768                scrollWidth=768 innerWidth=768
+  ok       /pt/work/@768                    scrollWidth=768 innerWidth=768
+  ok       /pt/work/flowdesk/@768           scrollWidth=768 innerWidth=768
+  ok       /pt/work/comercial-template/@768 scrollWidth=768 innerWidth=768
+  ok       /pt/work/sherlock/@768           scrollWidth=768 innerWidth=768
+  ok       /pt/methodology/@768             scrollWidth=768 innerWidth=768
+  ok       /pt/about/@768                   scrollWidth=768 innerWidth=768
+  ok       /pt/contact/@768                 scrollWidth=768 innerWidth=768
+  ok       /@1280                           scrollWidth=1280 innerWidth=1280
+  ok       /services/@1280                  scrollWidth=1280 innerWidth=1280
+  ok       /work/@1280                      scrollWidth=1280 innerWidth=1280
+  ok       /work/flowdesk/@1280             scrollWidth=1280 innerWidth=1280
+  ok       /work/comercial-template/@1280   scrollWidth=1280 innerWidth=1280
+  ok       /work/sherlock/@1280             scrollWidth=1280 innerWidth=1280
+  ok       /methodology/@1280               scrollWidth=1280 innerWidth=1280
+  ok       /about/@1280                     scrollWidth=1280 innerWidth=1280
+  ok       /contact/@1280                   scrollWidth=1280 innerWidth=1280
+  ok       /pt/@1280                        scrollWidth=1280 innerWidth=1280
+  ok       /pt/services/@1280               scrollWidth=1280 innerWidth=1280
+  ok       /pt/work/@1280                   scrollWidth=1280 innerWidth=1280
+  ok       /pt/work/flowdesk/@1280          scrollWidth=1280 innerWidth=1280
+  ok       /pt/work/comercial-template/@1280 scrollWidth=1280 innerWidth=1280
+  ok       /pt/work/sherlock/@1280          scrollWidth=1280 innerWidth=1280
+  ok       /pt/methodology/@1280            scrollWidth=1280 innerWidth=1280
+  ok       /pt/about/@1280                  scrollWidth=1280 innerWidth=1280
+  ok       /pt/contact/@1280                scrollWidth=1280 innerWidth=1280
+broken images: none
+KEYBOARD (36 runs: 18 pages x 360/1280):
+  ok   /@360                            tab_stops=29/29
+  ok   /services/@360                   tab_stops=28/28
+  ok   /work/@360                       tab_stops=23/23
+  ok   /work/flowdesk/@360              tab_stops=32/32
+  ok   /work/comercial-template/@360    tab_stops=40/40
+  ok   /work/sherlock/@360              tab_stops=39/39
+  ok   /methodology/@360                tab_stops=20/20
+  ok   /about/@360                      tab_stops=21/21
+  ok   /contact/@360                    tab_stops=23/23
+  ok   /pt/@360                         tab_stops=29/29
+  ok   /pt/services/@360                tab_stops=28/28
+  ok   /pt/work/@360                    tab_stops=23/23
+  ok   /pt/work/flowdesk/@360           tab_stops=32/32
+  ok   /pt/work/comercial-template/@360 tab_stops=40/40
+  ok   /pt/work/sherlock/@360           tab_stops=39/39
+  ok   /pt/methodology/@360             tab_stops=20/20
+  ok   /pt/about/@360                   tab_stops=21/21
+  ok   /pt/contact/@360                 tab_stops=23/23
+  ok   /@1280                           tab_stops=33/33
+  ok   /services/@1280                  tab_stops=32/32
+  ok   /work/@1280                      tab_stops=27/27
+  ok   /work/flowdesk/@1280             tab_stops=36/36
+  ok   /work/comercial-template/@1280   tab_stops=44/44
+  ok   /work/sherlock/@1280             tab_stops=43/43
+  ok   /methodology/@1280               tab_stops=24/24
+  ok   /about/@1280                     tab_stops=25/25
+  ok   /contact/@1280                   tab_stops=27/27
+  ok   /pt/@1280                        tab_stops=33/33
+  ok   /pt/services/@1280               tab_stops=32/32
+  ok   /pt/work/@1280                   tab_stops=27/27
+  ok   /pt/work/flowdesk/@1280          tab_stops=36/36
+  ok   /pt/work/comercial-template/@1280 tab_stops=44/44
+  ok   /pt/work/sherlock/@1280          tab_stops=43/43
+  ok   /pt/methodology/@1280            tab_stops=24/24
+  ok   /pt/about/@1280                  tab_stops=25/25
+  ok   /pt/contact/@1280                tab_stops=27/27
+AXE (36 runs): 0 violations
