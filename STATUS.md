@@ -25,6 +25,7 @@ Log completo e atual: `docs/luna-checks.log` (rodada 2: links 249/0 quebrados, h
 - Notas editoriais da copy tratadas: "*(… STATUS Q1 …)*" removidas; seção "What happens next / O que acontece depois" do contato segurada (STATUS Q2, até existir canal); notas G3 mantidas como frase de limitação, sem a referência interna ao STATUS.
 - Título de pt/methodology encurtado para "Método · ARBOCK LABS" (copy tinha 80 caracteres; html-validate limita a 70).
 - Formulário de contato: campos da copy (nome, e-mail, descrição, oferta S01–S03, "tenho repositório"), sem action, botão disabled + preventDefault, aviso "Pendente de configuração / Pending configuration".
+- Links entre páginas com fragmento usam /services/index.html#s0N (o lychee do CI não confere fragmento em URL de diretório); CI local da Moony em 62eccca: PASSOU (logs/moony-ci-62eccca.log).
 - Gerador re-executável: `/tmp/luna-gen/checks.sh` (regenera com /tmp/luna-gen/gen.py e roda todas as checagens; log em docs/luna-checks.log).
 - Conflito de conteúdo: a copy diz que o FLOWDESK "não tem código / not yet built", mas copy/EVIDENCE-hermes.log (09:32) já registra 2 commits em flowdesk/ (bd8a1c9, 80fe74d). Cabe ao Hermes atualizar; não alterei o texto.
 
