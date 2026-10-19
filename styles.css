@@ -4,7 +4,7 @@
 /* ---------- tokens.css ---------- */
 /* ARBOCK LABS — design tokens (Sprint 001, AGENT 02 Design & UX)
    Fonts: system stacks only. No webfont download, no third-party request,
-   no license to track. (Optional upgrade documented in STATUS.md.)
+   no license to track.
    Contrast: every text/background pair used by components is computed in
    check_contrast.py → contrast-report.md. Do not add a pair without checking it. */
 
