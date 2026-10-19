@@ -38,7 +38,7 @@ npx --yes html-validate@9 '**/*.html'                                           
 ```
 - lychee: binário em https://github.com/lycheeverse/lychee/releases (repositório público no GitHub).
 - html-validate: via npx, com Node 20.
-- No GitHub, o workflow roda em push e pull_request dos branches `sprint001/**`, com `permissions: contents: read`. Acompanhe com `gh run list -R lughlammas/lughlammas.github.io`.
+- No GitHub, o workflow roda em push dos branches `sprint001/**` e `sprint002/**` e em pull requests para `main`, com `permissions: contents: read`. Acompanhe com `gh run list -R lughlammas/lughlammas.github.io`.
 
 ## Publicação
 - GitHub Pages em modo **legacy**, publicando **`main:/`** (sem build e sem Actions de deploy). Conferir com:
