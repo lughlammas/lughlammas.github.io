@@ -33,14 +33,14 @@
 <article class="wrap section">
 <nav aria-label="Breadcrumb" class="crumbs"><a href="/pt/work/">Projetos</a></nav>
 <blockquote>
-<p><strong>Estado: em desenvolvimento.</strong> O FLOWDESK ainda não foi construído nem hospedado. Esta página descreve o que está sendo feito e como vai ser verificado. As seções 5 e 7 ficam vazias até haver resultados.</p>
+<p><strong>Demo local, hospedagem pendente.</strong> Por enquanto o FLOWDESK roda só em ambiente local de desenvolvimento, sem URL pública. Os testes ainda não foram registrados, então as seções 5 e 7 dizem o que existe e o que falta.</p>
 </blockquote>
 <h1>FLOWDESK · AI Operations Demo</h1>
 <h2>1. Problema</h2>
 <p>Pedidos chegam por formulários e caixas de entrada. Alguém lê cada um, decide o que é e qual a urgência, escreve uma resposta e acompanha o caso. Quase tudo é rotina, mas a resposta ainda precisa do julgamento de uma pessoa.</p>
 <h2>2. Contexto</h2>
 <p>O FLOWDESK é a demonstração da ARBOCK LABS para a <strong>S01 · Business Automation &amp; AI</strong>. Usa só dados sintéticos.</p>
-<h2>3. Solução (planejada)</h2>
+<h2>3. Solução (escopo)</h2>
 <p><strong>Formulário → Triagem → Sugestão de resposta → Aprovação humana → Registro.</strong>
 1. Formulário de pedido.
 2. Persistência, com lista e detalhe.
@@ -53,23 +53,33 @@
 9. Estados de erro e de lista vazia.
 10. Documentação.</p>
 <p><strong>Sobre a "IA":</strong> nesta demonstração, a sugestão de resposta é gerada <strong>por regras</strong> e vem rotulada como <strong>"Simulação (regras) — não é um modelo de IA"</strong> na interface e na API. A camada de sugestão fica atrás de uma interface de provedor, para que um modelo de linguagem real possa ser conectado depois, só com um provedor autorizado. Uma regra fixa nunca é apresentada como modelo.</p>
-<h2>4. Arquitetura (planejada)</h2>
-<p>Front-end estático no site, com API em Cloudflare Workers e banco D1 (plano gratuito), desenvolvida e testada primeiro em ambiente local. A conta Cloudflare ainda não existe.</p>
+<h2>4. Arquitetura</h2>
+<p>Front-end estático com API em Cloudflare Workers e banco D1, rodando localmente com Wrangler. A conta Cloudflare para a hospedagem ainda não existe, então nada está publicado.</p>
 <h2>5. Evidências</h2>
-<p><em>Pendente. Ainda não há código commitado.</em></p>
+<ul>
+<li>O código está commitado num repositório <strong>local</strong> (commit <code>bd8a1c9</code>, 19/10/2026). Segundo a mensagem do commit, ele inclui o esquema D1, a triagem por regras, um provedor de sugestão desacoplado, uma máquina de estados, webhooks assinados, uma API REST e a interface.</li>
+<li>O rótulo "Simulação (regras) — não é um modelo de IA" está definido no código e aparece na interface.</li>
+<li>Ainda não verificado pelo QA.</li>
+</ul>
+<h3>Links</h3>
+<ul>
+<li>Repositório público: ainda não existe. O FLOWDESK está num repositório local e não foi publicado.</li>
+<li>Commit: <code>bd8a1c9</code> (local, sem URL pública).</li>
+<li>Log de testes: nenhum registrado ainda.</li>
+</ul>
 <h2>6. Papel humano e ferramentas de IA</h2>
 <p>A aprovação humana é uma etapa obrigatória <strong>dentro do próprio produto</strong>: nada conta como "respondido" sem uma pessoa aprovar, e a demonstração não envia e-mail real. O software é feito com desenvolvimento assistido por IA sob direção humana.</p>
 <h2>7. Testes executados</h2>
-<p><em>Pendente. Testes unitários e de integração em CI são critérios de aceite desta demonstração.</em></p>
+<p><em>Nenhum registrado ainda. Testes unitários e de integração em CI são critérios de aceite desta demonstração.</em></p>
 <h2>8. Limitações (conhecidas de antemão)</h2>
 <ul>
 <li>A sugestão de resposta é por regras, não por um modelo de linguagem.</li>
-<li>Ainda não está hospedado (conta pendente).</li>
+<li>Só demo local; hospedagem pendente (conta não criada).</li>
 <li>Depois de hospedado, valem os limites do plano gratuito.</li>
 </ul>
 <h2>9. Necessidade comercial</h2>
 <p>Mostra o formato de uma automação em que o software faz a triagem e o rascunho e a pessoa fica com a decisão. É o núcleo da <strong>S01</strong>.</p>
-<p class="more">→ <a href="/pt/services/#s01">S01 · Business Automation &amp; AI</a> · <a href="/pt/contact/">Solicite uma proposta</a></p>
+<p class="more">→ <a href="/pt/services/index.html#s01">S01 · Business Automation &amp; AI</a> · <a href="/pt/contact/">Solicite uma proposta</a></p>
 </article>
 </main>
 <footer class="site-footer">
