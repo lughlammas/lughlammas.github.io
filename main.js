@@ -15,4 +15,13 @@
     var r = c.getBoundingClientRect();
     if (r.top < hb && r.height <= window.innerHeight - hb) c.scrollIntoView({ block: "start" });
   });
+  // Preserve the service selected on /services/ in the email subject.
+  var contactLink = document.getElementById("contact-email-cta");
+  if (contactLink) {
+    var service = new URLSearchParams(window.location.search).get("service");
+    var labels = { s01: "S01 Business Automation & AI", s02: "S02 Custom Software & MVP", s03: "S03 AI Code Rescue" };
+    if (Object.prototype.hasOwnProperty.call(labels, service)) {
+      contactLink.href = "mailto:lughlammas@gmail.com?subject=" + encodeURIComponent("ARBOCK LABS — " + labels[service]);
+    }
+  }
 })();
