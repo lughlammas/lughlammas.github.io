@@ -15,12 +15,4 @@
     var r = c.getBoundingClientRect();
     if (r.top < hb && r.height <= window.innerHeight - hb) c.scrollIntoView({ block: "start" });
   });
-  // Contact form: channel not configured, never submit anywhere.
-  var form = document.getElementById("contact-form");
-  if (form) {
-    form.addEventListener("submit", function (e) { e.preventDefault(); });
-    var m = /[?&]service=(s0[123])\b/.exec(location.search);
-    var sel = document.getElementById("f-service");
-    if (m && sel) sel.value = m[1];
-  }
 })();
