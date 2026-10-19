@@ -102,8 +102,8 @@ curl -s https://lughlammas.github.io/rota-inexistente/ | grep -c '<h1>Page not f
 - Só para verificar (opcional): Python 3 (preview), lychee e Node/npx (html-validate), gh e curl. Tudo gratuito.
 
 ## Limitações conhecidas
-- **Contato:** o site publica `lughlammas@gmail.com` nas páginas EN e PT. O link abre o aplicativo de e-mail do visitante; não há formulário nem prazo de resposta garantido.
-- FLOWDESK: demo local, hospedagem pendente. As sugestões de resposta são uma simulação por regras, não um modelo de IA. Os números de testes publicados citam o commit do FLOWDESK que foi medido; se o app mudar, atualize os números e o commit juntos, em todas as páginas que os citam.
+- **Contato:** após o merge deste PR, o site exibirá `lughlammas@gmail.com` nas páginas EN e PT. O link abre o aplicativo de e-mail do visitante; não há formulário nem prazo de resposta garantido.
+- **FLOWDESK:** o MVP reconstruído está em `https://flowdesk.guilhermusico.workers.dev/`, com código privado em `lughlammas/flowdesk`. O código original da Sprint 001 não foi recuperado. As sugestões são por regras, sem modelo de IA; os testes antigos (94/94 e 64/64) não se aplicam ao MVP reconstruído. Após o merge, verificar o CTA e as descrições EN/PT no site público.
 - Sem domínio próprio: o endereço é `https://lughlammas.github.io/`.
 - A API do Pages mostra `custom_404: true` desde a publicação do redesign. Mesmo assim, confira o `404.html` depois de cada publicação.
 - Método de trabalho: desenvolvimento dirigido por humano e assistido por IA ("human-directed AI-assisted development").
