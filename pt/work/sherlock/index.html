@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHERLOCK — Estudo de caso · ARBOCK LABS</title>
+<meta name="description" content="Ambiente de análise de xadrez que liga uma interface React a um motor UCI nativo via controlador WebSocket e adaptador, com versão Android. 8/8 testes; limites declarados.">
+<link rel="canonical" href="https://lughlammas.github.io/pt/work/sherlock/">
+<link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/sherlock/">
+<link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/sherlock/">
+<link rel="alternate" hreflang="x-default" href="https://lughlammas.github.io/work/sherlock/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/styles.css">
+<script src="/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+<header class="site-header">
+<div class="container site-header__bar">
+<a class="brand" href="/pt/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Principal">
+<ul class="nav-list">
+<li><a href="/pt/services/">Serviços</a></li>
+<li><a href="/pt/work/" aria-current="page">Projetos</a></li>
+<li><a href="/pt/methodology/">Metodologia</a></li>
+<li><a href="/pt/about/">Sobre</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/work/sherlock/" hreflang="en" lang="en">EN</a>
+<a href="/pt/work/sherlock/" hreflang="pt-BR" lang="pt-BR" aria-current="true">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/pt/contact/">Solicite uma proposta</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Principal (celular)">
+<ul class="nav-list">
+<li><a href="/pt/services/">Serviços</a></li>
+<li><a href="/pt/work/" aria-current="page">Projetos</a></li>
+<li><a href="/pt/methodology/">Metodologia</a></li>
+<li><a href="/pt/about/">Sobre</a></li>
+<li><a href="/pt/contact/">Contato</a></li>
+</ul>
+</nav>
+</div>
+</details>
+</div>
+</header>
+<main id="main" tabindex="-1">
+<div class="section"><div class="container">
+<header class="case-header">
+<p class="label"><a href="/pt/work/">Projetos</a> / SHERLOCK</p>
+<h1>SHERLOCK</h1>
+<div class="lede"><p>Ambiente visual de investigação e análise de xadrez.
+Repositório: <a href="https://github.com/lughlammas/sherlock">https://github.com/lughlammas/sherlock</a> · commit <code>e632035</code> · release Android v0.1.3</p></div>
+<dl class="facts"><div><dt>Status</dt><dd>v0.1.3 · release com APK Android</dd></div><div><dt>Stack</dt><dd>React, TypeScript, Vite, Express, WebSocket, chess.js</dd></div><div><dt>Testes rodados</dt><dd><code>npm test</code> → 8/8 · typecheck exit 0 · 19/10/2026</dd></div><div><dt>Fonte</dt><dd><a href="https://github.com/lughlammas/sherlock">github.com/lughlammas/sherlock</a> @ e632035</dd></div></dl>
+
+</header>
+
+<div class="case-layout">
+<nav class="case-toc" aria-label="Nesta página"><ol><li><a href="#c-problem">Problema</a></li><li><a href="#c-context">Contexto</a></li><li><a href="#c-solution">Solução</a></li><li><a href="#c-arch">Arquitetura</a></li><li><a href="#c-evidence">Evidências</a></li><li><a href="#c-roles">Papel humano e ferramentas de IA</a></li><li><a href="#c-tests">Testes executados</a></li><li><a href="#c-limits">Limitações</a></li><li><a href="#c-need">Necessidade comercial</a></li></ol></nav>
+<div class="case-body">
+<section id="c-problem" aria-labelledby="c-problem-h"><h2 id="c-problem-h"><span class="num">01</span>Problema</h2>
+<p>Um motor de xadrez é um programa de linha de comando que fala um protocolo de texto (UCI). Colocá-lo atrás de uma interface visual traz problemas de integração: iniciar e encerrar o processo, interpretar a saída, cancelar uma busca e garantir que uma resposta atrasada de uma busca antiga nunca sobrescreva a posição atual.</p>
+</section>
+<section id="c-context" aria-labelledby="c-context-h"><h2 id="c-context-h"><span class="num">02</span>Contexto</h2>
+<p>É um projeto próprio, usado também como vitrine de engenharia. Integra o motor Lughnasadh na versão 0.2. Uma versão mais nova do motor (0.4.0) é mantida à parte e <strong>não</strong> foi integrada nem validada no SHERLOCK.</p>
+</section>
+<section id="c-solution" aria-labelledby="c-solution-h"><h2 id="c-solution-h"><span class="num">03</span>Solução</h2>
+<ul>
+<li>Tabuleiro responsivo, com carregar, copiar e reiniciar posições (FEN).</li>
+<li>Análise por profundidade ou por tempo, com profundidade, nós, velocidade, avaliação e linha principal ao vivo, e botão de parar.</li>
+<li>Estados claros: pronto, investigando, melhor lance e erro do motor (com tentar de novo e reiniciar).</li>
+<li>Um modo em que dois processos do motor jogam entre si.</li>
+<li>Versão Android.</li>
+</ul>
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>sherlock</span><span class="sep">·</span><span>tela inicial</span></div>
+<div class="stage__media">
+<img src="/assets/img/sherlock-02-hub-1440.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Tela inicial do SHERLOCK em 1440px: tabuleiro na posição inicial e menu de dossiê com Jogar, Analisar e Treinar.">
+<img src="/assets/img/sherlock-01-hub-390.webp" width="780" height="1688" loading="lazy" decoding="async" alt="Tela inicial do SHERLOCK em 390px (celular): tabuleiro acima do menu de dossiê.">
+</div>
+<figcaption>Captura real · commit e632035 · build de produção local · só a tela inicial (sem binário do motor na máquina da captura, então nenhuma análise é mostrada) · 19/10/2026 09:24 BRT</figcaption>
+</figure></section>
+<section id="c-arch" aria-labelledby="c-arch-h"><h2 id="c-arch-h"><span class="num">04</span>Arquitetura</h2>
+<p>Navegador (React) → WebSocket → controlador SHERLOCK → adaptador Lughnasadh → motor como processo filho. A interface <strong>nunca</strong> fala UCI cru: o adaptador cuida do protocolo, dos limites de tempo e dos <strong>tokens de sessão</strong>, de modo que respostas antigas são descartadas (coberto pelos testes de sessão). Por projeto, a posição do tabuleiro é mantida em timeout, travamento ou reinício do motor; esse caminho só é exercitado pelos smoke scripts, que não foram rodados aqui.
+No Android, a mesma interface roda num WebView e chega ao motor nativo por uma ponte JavaScript e <code>ProcessBuilder</code>, sem dependência de Node ou WebSocket no APK.</p>
+</section>
+<section id="c-evidence" aria-labelledby="c-evidence-h"><h2 id="c-evidence-h"><span class="num">05</span>Evidências</h2>
+<ul>
+<li><strong>Passou em 8/8 testes</strong> na execução feita para este site em 19/10/2026: 6 testes do parser UCI e 2 de sessão, entre eles "drops stale info when session rotates". Typecheck limpo.</li>
+<li><strong>A release v0.1.3</strong> com o APK está pública no GitHub, e o repositório publica o SHA-256 do APK.</li>
+</ul>
+<h3>Links</h3>
+<ul>
+<li>Repositório público: <a href="https://github.com/lughlammas/sherlock">https://github.com/lughlammas/sherlock</a></li>
+<li>Commit <code>e632035</code>: <a href="https://github.com/lughlammas/sherlock/commit/e63203515a1b0ed3fbdf388e0bb317267bb14cfb">https://github.com/lughlammas/sherlock/commit/e63203515a1b0ed3fbdf388e0bb317267bb14cfb</a></li>
+<li>Testes (código): <a href="https://github.com/lughlammas/sherlock/tree/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/tests">https://github.com/lughlammas/sherlock/tree/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/tests</a></li>
+<li>Release v0.1.3 (APK): <a href="https://github.com/lughlammas/sherlock/releases/tag/v0.1.3">https://github.com/lughlammas/sherlock/releases/tag/v0.1.3</a></li>
+<li>SHA-256 publicado do APK: <a href="https://github.com/lughlammas/sherlock/blob/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/Sherlock-0.1.3-s21.apk.sha256">https://github.com/lughlammas/sherlock/blob/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/Sherlock-0.1.3-s21.apk.sha256</a></li>
+<li>A execução 8/8: log de testes interno, não público (o repositório não tem CI).</li>
+</ul>
+</section>
+<section id="c-roles" aria-labelledby="c-roles-h"><h2 id="c-roles-h"><span class="num">06</span>Papel humano e ferramentas de IA</h2>
+<p>Feito com desenvolvimento assistido por IA sob direção humana.</p>
+</section>
+<section id="c-tests" aria-labelledby="c-tests-h"><h2 id="c-tests-h"><span class="num">07</span>Testes executados</h2>
+<div class="table-wrap"><table class="table">
+<thead>
+<tr>
+<th>Checagem</th>
+<th>Resultado</th>
+<th>Onde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm test</code> (saída do motor simulada, sem binário)</td>
+<td>8/8 passaram</td>
+<td>rodado em 19/10/2026</td>
+</tr>
+<tr>
+<td>typecheck (cliente + servidor)</td>
+<td>exit 0</td>
+<td>rodado em 19/10/2026</td>
+</tr>
+<tr>
+<td>Smoke do motor (<code>npm run smoke</code>, <code>smoke:match</code>)</td>
+<td><strong>não rodado</strong> (exige o binário nativo)</td>
+<td></td>
+</tr>
+<tr>
+<td>CI</td>
+<td><strong>inexistente</strong>: o repositório não tem workflow</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+</section>
+<section id="c-limits" class="limitations" aria-labelledby="c-limits-h"><h2 id="c-limits-h"><span class="num">08</span>Limitações</h2>
+<ul>
+<li>Sem integração contínua.</li>
+<li>Os testes usam linhas simuladas do motor; o comportamento com o motor real só é coberto pelos smoke scripts, que não foram rodados aqui.</li>
+<li>O motor integrado é a versão 0.2; a 0.4.0 não foi integrada.</li>
+<li>Sem benchmark de força de jogo nem de desempenho.</li>
+<li>O modo motor contra motor roda dois processos e consome bastante bateria e memória.</li>
+</ul>
+</section>
+<section id="c-need" aria-labelledby="c-need-h"><h2 id="c-need-h"><span class="num">09</span>Necessidade comercial</h2>
+<p>O SHERLOCK mostra trabalho de integração: um processo nativo, um protocolo de texto, uma interface em tempo real e empacotamento mobile, com os casos de falha (timeout, travamento, resposta atrasada) tratados explicitamente. É esse tipo de encanamento que está por trás da <strong>S02 · Custom Software</strong> e do diagnóstico da <strong>S03 · AI Code Rescue</strong>.</p>
+<p class="more">→ <a href="/pt/services/">Serviços</a> · <a href="/pt/contact/">Solicite uma proposta</a></p>
+</section>
+<nav class="pager" aria-label="Estudo de caso"><a href="/pt/work/comercial-template/">← Caso anterior: Comercial Template</a><a href="/pt/work/flowdesk/">Próximo caso: FLOWDESK →</a></nav>
+</div>
+</div>
+</div></div>
+<section class="section" aria-labelledby="cta-title">
+<div class="container">
+<div class="cta">
+<div>
+<h2 id="cta-title">Tem um problema que deveria virar software?</h2>
+<p>Conte o que você tem e o que não está funcionando.</p>
+</div>
+<div class="btn-row">
+<a class="btn btn--primary" href="/pt/contact/">Solicite uma proposta</a>
+<a class="btn btn--secondary" href="/pt/work/">Ver os projetos</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/pt/services/">Serviços</a></li><li><a href="/pt/work/">Projetos</a></li><li><a href="/pt/methodology/">Metodologia</a></li><li><a href="/pt/about/">Sobre</a></li><li><a href="/pt/contact/">Contato</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Projetos</h2><ul><li><a href="/pt/work/flowdesk/">FLOWDESK</a></li><li><a href="/pt/work/comercial-template/">Comercial Template</a></li><li><a href="/pt/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Idioma</h2><ul><li><a href="/work/sherlock/" hreflang="en" lang="en">English</a></li><li><a href="/pt/work/sherlock/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
+</div>
+</footer>
+</body>
+</html>
