@@ -1,11 +1,28 @@
+# luna-checks 2026-10-19T09:33:17-03:00
+$ /tmp/luna-gen/venv/bin/python /tmp/luna-gen/gen.py  (summary)
+mapped markers: []
+unmapped markers: []
+titles shortened: ["pt/methodology: 'Método — Desenvolvimento assistido por IA sob direção humana · ARBOCK LABS' -> 'Método · ARBOCK LABS'"]
+hero: 12 / 12 identical to copy
+
 $ python3 /tmp/luna-gen/links.py
-internal links checked: 215, broken: 0
+internal links checked: 249, broken: 0
 exit=0
 
 $ npx --yes html-validate@9 "**/*.html"
 exit=0
 
-$ anchors on home
+$ grep -rEc '\[E[0-9]' --include=*.html . (total)
+0
+$ grep -r 'TODO: copy' --include=*.html . (total)
+0
+$ grep -rn 'TODO' styles.css main.js *.html (intentional CSS TODO only)
+styles.css:2:   TODO: replace/extend with design/tokens.css + design/components.css (Vênus) when delivered. */
+
+$ leftover editorial artifacts (@@, ⟦, Kicker, STATUS, '→ /' plain)
+0 files
+
+$ anchors on / 
 #topo ok
 #on-demand ok
 #linguas ok
@@ -15,8 +32,13 @@ $ anchors on home
 #projetos ok
 #oferta ok
 #formacao ok
+$ contact forms: action attr / disabled submit
+contact/index.html:0
+pt/contact/index.html:0
+contact/index.html:1
+pt/contact/index.html:1
 
-$ python3 -m http.server 8765 + curl each route
+$ python3 -m http.server 8765 + curl
 200 /
 200 /pt/
 200 /services/
