@@ -77,7 +77,7 @@ git push origin main
 
 **Verificação depois do rollback ou de qualquer publicação:**
 ```bash
-gh run list -R lughlammas/lughlammas.github.io -w pages-build-deployment -L 1   # success no SHA esperado
+gh run list -R lughlammas/lughlammas.github.io -w pages-build-deployment -L 1 --json headSha,conclusion   # conclusion success e headSha = SHA esperado
 gh api repos/lughlammas/lughlammas.github.io/pages                             # status built, legacy, main:/
 curl -I https://lughlammas.github.io/
 curl -I https://lughlammas.github.io/pt/
