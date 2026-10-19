@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FLOWDESK · AI Operations Demo · ARBOCK LABS</title>
-<meta name="description" content="FLOWDESK is an operations demo: request form, rule-based triage, simulated reply suggestion, mandatory human approval, event log and signed webhooks. Local demo, hosting pending.">
+<meta name="description" content="FLOWDESK is an operations demo: request form, rule-based triage, simulated reply suggestion, mandatory human approval, event log and signed webhooks, with a private sandbox per visitor. Local demo, hosting pending.">
 <link rel="canonical" href="https://lughlammas.github.io/work/flowdesk/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/flowdesk/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/flowdesk/">
@@ -77,48 +77,75 @@
 </section>
 <section id="c-solution" aria-labelledby="c-solution-h"><h2 id="c-solution-h"><span class="num">03</span>Solution</h2>
 <p><strong>Form → Triage → Reply suggestion → Human approval → Record.</strong>
-- <strong>Intake form.</strong> Invalid submissions are refused with per-field messages.
-- <strong>Rule-based triage</strong> sets a category and a priority, and records the reasons.
+- <strong>A private sandbox for each visitor.</strong> The first visit issues an anonymous session cookie (HttpOnly, Secure, SameSite=Lax) and opens a sandbox loaded with a synthetic seed of six tickets. A visitor cannot see or change another visitor's tickets. After 24 hours the sandbox is replaced by a fresh seeded one.
+- <strong>Intake form.</strong> Each invalid field gets its own error message, linked to the field (<code>aria-invalid</code>, <code>aria-describedby</code>).
+- <strong>Rule-based triage</strong> sets a category and a priority, and records the reasons. A person can override the classification, and the override is logged.
 - <strong>Editable reply suggestion.</strong> It is labelled <strong>"Simulação (regras) — não é um modelo de IA"</strong> in the interface and in the API, and the API marks the provider as <code>is_ai_model: false</code>.
-- <strong>Human approval is mandatory.</strong> A ticket cannot be approved before a suggestion exists. Approving needs a named reviewer, rejecting needs a reason, and no email is ever sent.
-- <strong>Event history</strong> for every state change and every human edit, with who made it.
-- <strong>Signed webhooks</strong> on every state change, with an HMAC-SHA256 signature that the receiver checks.
+- <strong>Human approval is mandatory.</strong> A ticket cannot be approved before a suggestion exists, and rejecting it requires a reason, typed in an inline field. No email is ever sent.
+- <strong>Event history</strong> with the author of every state change, edit, override and webhook attempt.
+- <strong>Signed webhooks</strong> (HMAC-SHA256) on every state change, retried with backoff for up to three attempts, each attempt recorded in the ticket's history.
+- <strong>Token-protected admin.</strong> The admin routes require a bearer token, and anything else is refused with 401. In production mode, the server refuses to serve at all unless that token is configured.
 - <strong>Error and empty states</strong> in the API and in the interface.</p>
-<p>The developer's status file lists all 10 features required by the brief as done; the responsive panel is checked by automated tests only.</p>
 <figure class="stage stage--pair">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>local only · not deployed</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1004" loading="lazy" decoding="async" alt="FLOWDESK ticket at 1280px after a rule-based suggestion: synthetic billing ticket, triage billing/high, the label &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, an editable suggested reply and Approve/Reject buttons.">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="2590" loading="lazy" decoding="async" alt="The same FLOWDESK suggestion state at 390px mobile width, with the simulation label above the editable reply.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1054" loading="lazy" decoding="async" alt="FLOWDESK ticket at 1280px after a rule-based suggestion: synthetic billing ticket &#x27;Charged twice for October&#x27;, triage billing/high with the matched rule reasons, editable classification, the label &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, an editable suggested reply, Save edit/Approve/Reject buttons and a six-entry event history with webhook delivery attempts.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="3148" loading="lazy" decoding="async" alt="The same FLOWDESK suggestion state at 390px mobile width, with the simulation label above the editable reply.">
 </div>
-<figcaption>Real capture · FLOWDESK commit 5b41bf5 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 ~09:43 BRT</figcaption>
+<figcaption>Real capture · FLOWDESK commit 905a387 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:04–10:06 BRT</figcaption>
+</figure>
+<figure class="stage stage--grid">
+<div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>reject → reason required</span></div>
+<div class="stage__media">
+<img src="/assets/img/flowdesk-08-reject-reason-empty-1280.webp" width="1168" height="1286" loading="lazy" decoding="async" alt="FLOWDESK at 1280px, second synthetic ticket &#x27;Pricing for 5 seats&#x27; (sales/medium) after Reject: an inline, empty field for the rejection reason, with focus on it, and Confirm rejection/Cancel buttons.">
+<img src="/assets/img/flowdesk-08b-reject-reason-error-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK at 1280px after Confirm rejection with an empty reason: the field is marked invalid with the error &#x27;Please give a reason of at least 3 characters.&#x27;">
+<img src="/assets/img/flowdesk-09-reject-reason-filled-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK at 1280px with the rejection reason filled in: &#x27;Pricing needs a human quote, not a template&#x27;.">
+<img src="/assets/img/flowdesk-10-rejected-1280.webp" width="1168" height="1056" loading="lazy" decoding="async" alt="FLOWDESK at 1280px after the rejection: state rejected, the suggested reply read-only, &#x27;rejected by demo-reviewer — reason: Pricing needs a human quote, not a template · response_sent: false&#x27;, a Register (log &amp; close) button and an eight-entry event history.">
+</div>
+<figcaption>Real capture · FLOWDESK commit 905a387 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:04–10:06 BRT</figcaption>
 </figure></section>
 <section id="c-arch" aria-labelledby="c-arch-h"><h2 id="c-arch-h"><span class="num">04</span>Architecture</h2>
-<p>A Cloudflare Worker serving a static interface and a REST API, with a D1 (SQLite) database. Locally it runs on <code>wrangler dev --local</code> (miniflare/workerd). Suggestions come from a pluggable provider interface. The only provider today is the rules simulation, so connecting a real model later would mean adding a provider, which needs an authorised provider.</p>
+<p>A Cloudflare Worker serving a static interface and a REST API, with a D1 (SQLite) database. Data is isolated per visitor sandbox. Locally it runs on <code>wrangler dev --local</code> (miniflare/workerd). Suggestions come from a pluggable provider interface. The only provider today is the rules simulation, so connecting a real model later would mean adding a provider, which needs an authorised provider.</p>
 </section>
 <section id="c-evidence" aria-labelledby="c-evidence-h"><h2 id="c-evidence-h"><span class="num">05</span>Evidence</h2>
-<p>The tests below ran locally on 2026-10-19, against code identical to the cited commit:
-- <strong>Unit and integration tests: 53 of 53 passed</strong> in 2 test files, with typecheck exit 0.
-- <strong>Browser end-to-end: 22 checks passed, 0 failed.</strong> They cover:
-  - the simulation label in the interface;
+<p>Everything below ran locally on 2026-10-19, against code identical to the cited commit:
+- <strong>Unit and integration tests</strong> passed. They cover sandbox isolation, the session cookie, 24-hour expiry, admin authentication, production refusal, rate limits and webhook retry.
+- <strong>Browser end-to-end checks</strong> passed. They cover:
+  - the simulation label;
+  - per-field error messages;
   - an XSS payload rendered as plain text;
-  - triage → suggestion → edit → approve → register, and reject with a reason;
-  - a 6-entry event history;
+  - the full triage → suggestion → edit → approve → register flow, and reject with a reason;
+  - the event history;
   - the empty state;
-  - no horizontal overflow at 360, 768 and 1280 px;
+  - no horizontal overflow at 360, 390, 768 and 1280 px;
+  - a second visitor seeing only their own seed tickets;
   - no console errors.
-- <strong>API demo with curl.</strong> The suggestion response carries the simulation label and <code>is_ai_model: false</code>. Approving a fresh ticket is refused as an invalid transition. Invalid input returns 400 and a 100 KB body returns 413. A cross-site preflight returns 403. The intake rate limit returns 429.
-- <strong>Webhooks.</strong> An external receiver verified 5 of 5 signed events. A correctly signed request returned 200; a forged signature returned 401.
-- <strong>Static checks</strong> passed: no HTML-injection sinks, values bound in every SQL query, no secrets in tracked files.
-- <strong>gitleaks</strong> over the full history found no leaks.
-- <strong><code>npm audit</code></strong> found 0 vulnerabilities.</p>
+- <strong>API demo with curl.</strong>
+  - The sandbox cookie lasts 24 hours.
+  - Visitor B gets 404 on visitor A's ticket.
+  - The admin route returns 401 without the token, with a wrong token or with a visitor cookie, and 200 with the token.
+  - Production mode without the token answers 503 on every route.
+  - A forged webhook signature returns 401.
+- <strong>An external webhook receiver</strong> verified every signed event it received.
+- <strong>Security checks:</strong>
+  - a mutation check on the isolation, authentication, expiry, rate-limit and retry code, in which every mutant was caught;
+  - static checks;
+  - gitleaks and trufflehog, both run locally, with no findings;
+  - <code>npm audit</code> with no vulnerabilities.</p>
+<p>The detailed test counts are being reproduced by QA and will be published once confirmed.</p>
 <h3>Links</h3>
 <ul>
-<li>Public repository: none. FLOWDESK is in a local repository with no remote.</li>
-<li>Commit: <code>5b41bf5</code> (local, no public URL). The tests ran on <code>686bf11</code>; the commits after it change only documentation.</li>
-<li>Test log: <code>flowdesk/TEST-LOG.md</code> (local, not public). Status: <code>flowdesk/STATUS.md</code>.</li>
+<li>Public repository: none yet. Internal test log, repository not yet public.</li>
+<li>Commit: <code>905a387</code> (local, no public URL).</li>
 </ul>
-<figure class="stage"><div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>approved → logged</span></div><div class="stage__media"><img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1100" loading="lazy" decoding="async" alt="FLOWDESK ticket after human approval and logging: state logged, &#x27;approved by demo-reviewer · response_sent: false&#x27; and a six-entry event history including suggestion_edited by the human reviewer."></div><figcaption>Real capture · FLOWDESK commit 5b41bf5 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 ~09:43 BRT</figcaption></figure></section>
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>approved → logged</span></div>
+<div class="stage__media">
+<img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1112" loading="lazy" decoding="async" alt="FLOWDESK ticket at 1280px after human approval and logging: state logged, the simulation label marked &#x27;edited by a human&#x27;, the approved response read-only, &#x27;approved by demo-reviewer · response_sent: false (demo never sends email)&#x27; and an eleven-entry event history of state changes, the reviewer&#x27;s edit and webhook delivery attempts.">
+<img src="/assets/img/flowdesk-07-logged-history-390.webp" width="716" height="3516" loading="lazy" decoding="async" alt="The same logged FLOWDESK ticket at 390px mobile width, with the approved response and the full event history.">
+</div>
+<figcaption>Real capture · FLOWDESK commit 905a387 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:04–10:06 BRT</figcaption>
+</figure></section>
 <section id="c-roles" aria-labelledby="c-roles-h"><h2 id="c-roles-h"><span class="num">06</span>Human role and AI tools</h2>
 <p>Human approval is a step <strong>inside the product</strong>: nothing is approved or registered without a person acting, and every action is logged with its author. The software was built through human-directed AI-assisted development.</p>
 </section>
@@ -128,54 +155,44 @@
 <tr>
 <th>Check</th>
 <th>Result</th>
-<th>Where</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>npx vitest run</code> (unit + integration, local D1)</td>
-<td>53/53 passed</td>
-<td>TEST-LOG §3</td>
+<td>Unit and integration tests (local D1)</td>
+<td>passed</td>
 </tr>
 <tr>
-<td><code>npm run typecheck</code></td>
-<td>exit 0</td>
-<td>TEST-LOG §2</td>
+<td>Typecheck</td>
+<td>passed</td>
 </tr>
 <tr>
-<td>Browser E2E (<code>scripts/e2e-ui.mjs</code>, local server)</td>
-<td>22 passed, 0 failed</td>
-<td>TEST-LOG §8</td>
+<td>Browser end-to-end checks (local server)</td>
+<td>passed</td>
 </tr>
 <tr>
-<td>Static security checks</td>
-<td>all passed</td>
-<td>TEST-LOG §4</td>
+<td>Mutation check (isolation, auth, expiry, rate limit, retry)</td>
+<td>every mutant caught</td>
 </tr>
 <tr>
-<td>gitleaks, full history</td>
-<td>no leaks found</td>
-<td>TEST-LOG §5</td>
+<td>Static security checks; gitleaks; trufflehog (local)</td>
+<td>passed, no findings</td>
 </tr>
 <tr>
 <td><code>npm audit</code></td>
 <td>0 vulnerabilities</td>
-<td>TEST-LOG §6</td>
 </tr>
 <tr>
 <td>External webhook receiver</td>
-<td>5/5 signatures verified</td>
-<td>TEST-LOG §9</td>
+<td>all signatures verified</td>
 </tr>
 <tr>
-<td>CI (<code>.github/workflows/test.yml</code>)</td>
+<td>Remote CI</td>
 <td><strong>never run</strong> (no remote)</td>
-<td>STATUS</td>
 </tr>
 <tr>
 <td>axe / pa11y, Lighthouse</td>
 <td><strong>not run</strong></td>
-<td>STATUS</td>
 </tr>
 </tbody>
 </table></div>
@@ -183,14 +200,14 @@
 <section id="c-limits" class="limitations" aria-labelledby="c-limits-h"><h2 id="c-limits-h"><span class="num">08</span>Limitations</h2>
 <ul>
 <li><strong>Suggestions are rule-based: a simulation, not an AI model.</strong></li>
-<li><strong>Local demo; hosting pending.</strong> There is no Cloudflare account and nothing is deployed, so production behaviour has not been observed.</li>
-<li><strong>CI has never run.</strong> A workflow file exists, but the repository has no remote.</li>
+<li><strong>No hosting.</strong> It is a local demo with hosting pending: there is no Cloudflare account and nothing is deployed, so behaviour at the edge has not been observed.</li>
+<li><strong>No remote CI.</strong> A workflow file exists, but the repository has no remote, so it has never run.</li>
+<li><strong>Webhook retry is not durable.</strong> Retries run in the same request lifecycle. Without Cloudflare Queues, pending attempts can be lost if the worker is stopped.</li>
+<li><strong>No scheduled sandbox cleanup.</strong> Expired sandboxes are removed only when accessed or through the admin route; there is no scheduled job.</li>
 <li><strong>axe/pa11y and Lighthouse were not run.</strong> Accessibility and performance have not been measured.</li>
-<li>No authentication on write routes: anyone who reaches the server can approve or reject. That is acceptable only with synthetic data.</li>
-<li>Webhooks are sent once, with a 5-second timeout and no retry; failures are recorded as failed.</li>
+<li>Visitors are anonymous and the admin uses a single shared token; there are no user accounts.</li>
 <li>The rate limit is a simple fixed window, not abuse-grade.</li>
 <li>The interface is in English, apart from the Portuguese simulation label.</li>
-<li>trufflehog was not run.</li>
 </ul>
 </section>
 <section id="c-need" aria-labelledby="c-need-h"><h2 id="c-need-h"><span class="num">09</span>Commercial relevance</h2>

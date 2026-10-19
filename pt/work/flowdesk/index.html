@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FLOWDESK · AI Operations Demo · ARBOCK LABS</title>
-<meta name="description" content="O FLOWDESK é uma demonstração de operações: formulário de pedidos, triagem por regras, sugestão de resposta simulada, aprovação humana obrigatória, histórico de eventos e webhooks assinados. Demo local, hospedagem pendente.">
+<meta name="description" content="O FLOWDESK é uma demonstração de operações: formulário de pedidos, triagem por regras, sugestão de resposta simulada, aprovação humana obrigatória, histórico de eventos e webhooks assinados, com um sandbox privado por visitante. Demo local, hospedagem pendente.">
 <link rel="canonical" href="https://lughlammas.github.io/pt/work/flowdesk/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/flowdesk/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/flowdesk/">
@@ -77,48 +77,75 @@
 </section>
 <section id="c-solution" aria-labelledby="c-solution-h"><h2 id="c-solution-h"><span class="num">03</span>Solução</h2>
 <p><strong>Formulário → Triagem → Sugestão de resposta → Aprovação humana → Registro.</strong>
-- <strong>Formulário de entrada.</strong> Envios inválidos são recusados com mensagens por campo.
-- <strong>Triagem por regras</strong>, que define categoria e prioridade e registra os motivos.
+- <strong>Um sandbox privado para cada visitante.</strong> A primeira visita emite um cookie de sessão anônimo (HttpOnly, Secure, SameSite=Lax) e abre um sandbox carregado com uma base sintética de seis pedidos. Um visitante não vê nem altera os pedidos de outro. Depois de 24 horas, o sandbox é substituído por um novo, com a mesma base.
+- <strong>Formulário de entrada.</strong> Cada campo inválido recebe a sua própria mensagem de erro, ligada ao campo (<code>aria-invalid</code>, <code>aria-describedby</code>).
+- <strong>Triagem por regras</strong>, que define categoria e prioridade e registra os motivos. Uma pessoa pode corrigir a classificação, e a correção fica registrada.
 - <strong>Sugestão de resposta editável.</strong> Vem rotulada como <strong>"Simulação (regras) — não é um modelo de IA"</strong> na interface e na API, e a API marca o provedor como <code>is_ai_model: false</code>.
-- <strong>Aprovação humana obrigatória.</strong> Não dá para aprovar um pedido antes de existir sugestão. Aprovar exige um revisor identificado, rejeitar exige um motivo, e nenhum e-mail é enviado.
-- <strong>Histórico de eventos</strong> de cada mudança de estado e de cada edição humana, com o autor.
-- <strong>Webhooks assinados</strong> a cada mudança de estado, com assinatura HMAC-SHA256 que o receptor confere.
+- <strong>Aprovação humana obrigatória.</strong> Não dá para aprovar um pedido antes de existir sugestão, e rejeitar exige um motivo, digitado num campo na própria tela. Nenhum e-mail é enviado.
+- <strong>Histórico de eventos</strong> com o autor de cada mudança de estado, edição, correção e tentativa de webhook.
+- <strong>Webhooks assinados</strong> (HMAC-SHA256) a cada mudança de estado, com novas tentativas e espera crescente (até três tentativas), cada uma registrada no histórico do pedido.
+- <strong>Administração protegida por token.</strong> As rotas de administração exigem um token do tipo bearer, e qualquer outra coisa é recusada com 401. Em modo de produção, o servidor se recusa a funcionar se esse token não estiver configurado.
 - <strong>Estados de erro e de lista vazia</strong> na API e na interface.</p>
-<p>O arquivo de status do desenvolvedor dá como feitas as 10 funcionalidades exigidas no briefing; o painel responsivo é conferido só por testes automatizados.</p>
 <figure class="stage stage--pair">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>só local · sem deploy</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1004" loading="lazy" decoding="async" alt="Ticket do FLOWDESK em 1280px após a sugestão por regras: ticket sintético de cobrança, triagem billing/high, o rótulo &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, resposta sugerida editável e botões Aprovar/Rejeitar.">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="2590" loading="lazy" decoding="async" alt="O mesmo estado de sugestão do FLOWDESK em 390px (celular), com o rótulo de simulação acima da resposta editável.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1054" loading="lazy" decoding="async" alt="Ticket do FLOWDESK em 1280px após a sugestão por regras: ticket sintético de cobrança &#x27;Charged twice for October&#x27;, triagem billing/high com os motivos das regras, classificação editável, o rótulo &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, resposta sugerida editável, botões Save edit/Approve/Reject e histórico de seis eventos com as tentativas de webhook.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="3148" loading="lazy" decoding="async" alt="O mesmo estado de sugestão do FLOWDESK em 390px (celular), com o rótulo de simulação acima da resposta editável.">
 </div>
-<figcaption>Captura real · FLOWDESK commit 5b41bf5 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 ~09:43 BRT</figcaption>
+<figcaption>Captura real · FLOWDESK commit 905a387 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:04–10:06 BRT</figcaption>
+</figure>
+<figure class="stage stage--grid">
+<div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>rejeitar → motivo obrigatório</span></div>
+<div class="stage__media">
+<img src="/assets/img/flowdesk-08-reject-reason-empty-1280.webp" width="1168" height="1286" loading="lazy" decoding="async" alt="FLOWDESK em 1280px, segundo ticket sintético &#x27;Pricing for 5 seats&#x27; (sales/medium) depois de Reject: campo do motivo da rejeição na própria tela, vazio e com o foco, e botões Confirm rejection/Cancel.">
+<img src="/assets/img/flowdesk-08b-reject-reason-error-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK em 1280px depois de Confirm rejection com o motivo vazio: o campo fica marcado como inválido, com o erro &#x27;Please give a reason of at least 3 characters.&#x27;">
+<img src="/assets/img/flowdesk-09-reject-reason-filled-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK em 1280px com o motivo da rejeição preenchido: &#x27;Pricing needs a human quote, not a template&#x27;.">
+<img src="/assets/img/flowdesk-10-rejected-1280.webp" width="1168" height="1056" loading="lazy" decoding="async" alt="FLOWDESK em 1280px após a rejeição: estado rejected, resposta sugerida só para leitura, &#x27;rejected by demo-reviewer — reason: Pricing needs a human quote, not a template · response_sent: false&#x27;, botão Register (log &amp; close) e histórico de oito eventos.">
+</div>
+<figcaption>Captura real · FLOWDESK commit 905a387 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:04–10:06 BRT</figcaption>
 </figure></section>
 <section id="c-arch" aria-labelledby="c-arch-h"><h2 id="c-arch-h"><span class="num">04</span>Arquitetura</h2>
-<p>Um Cloudflare Worker que serve uma interface estática e uma API REST, com banco D1 (SQLite). Localmente, roda com <code>wrangler dev --local</code> (miniflare/workerd). As sugestões vêm de uma interface de provedor substituível. Hoje o único provedor é a simulação por regras, então conectar um modelo real depois significa acrescentar um provedor, o que exige um provedor autorizado.</p>
+<p>Um Cloudflare Worker que serve uma interface estática e uma API REST, com banco D1 (SQLite). Os dados ficam isolados por sandbox de visitante. Localmente, roda com <code>wrangler dev --local</code> (miniflare/workerd). As sugestões vêm de uma interface de provedor substituível. Hoje o único provedor é a simulação por regras, então conectar um modelo real depois significa acrescentar um provedor, o que exige um provedor autorizado.</p>
 </section>
 <section id="c-evidence" aria-labelledby="c-evidence-h"><h2 id="c-evidence-h"><span class="num">05</span>Evidências</h2>
-<p>Os testes abaixo rodaram localmente em 19/10/2026, sobre um código idêntico ao do commit citado:
-- <strong>Testes unitários e de integração: passaram 53 de 53</strong> em 2 arquivos, com typecheck exit 0.
-- <strong>Testes de ponta a ponta no navegador: 22 checagens passaram, 0 falharam.</strong> Cobrem:
-  - o rótulo de simulação na interface;
+<p>Tudo abaixo rodou localmente em 19/10/2026, sobre um código idêntico ao do commit citado:
+- <strong>Os testes unitários e de integração</strong> passaram. Cobrem isolamento dos sandboxes, cookie de sessão, expiração em 24 horas, autenticação da administração, recusa em produção, limites de envio e novas tentativas de webhook.
+- <strong>As checagens de ponta a ponta no navegador</strong> passaram. Cobrem:
+  - o rótulo de simulação;
+  - as mensagens de erro por campo;
   - um ataque XSS exibido como texto puro;
-  - triagem → sugestão → edição → aprovação → registro, e rejeição com motivo;
-  - um histórico de 6 eventos;
+  - o fluxo completo de triagem → sugestão → edição → aprovação → registro, e a rejeição com motivo;
+  - o histórico de eventos;
   - o estado de lista vazia;
-  - nenhum transbordo horizontal em 360, 768 e 1280 px;
+  - nenhum transbordo horizontal em 360, 390, 768 e 1280 px;
+  - um segundo visitante vendo só os próprios pedidos da base;
   - nenhum erro de console.
-- <strong>Demonstração da API com curl.</strong> A resposta da sugestão traz o rótulo de simulação e <code>is_ai_model: false</code>. Aprovar um pedido novo é recusado como transição inválida. Entrada inválida responde 400 e um corpo de 100 KB responde 413. Um preflight de outro site responde 403. O limite de envios responde 429.
-- <strong>Webhooks.</strong> Um receptor externo conferiu 5 de 5 eventos assinados. Um pedido com assinatura correta respondeu 200; uma assinatura forjada respondeu 401.
-- <strong>Checagens estáticas</strong> aprovadas: nenhum ponto de injeção de HTML, valores sempre vinculados nas consultas SQL, nenhum segredo nos arquivos versionados.
-- <strong>gitleaks</strong> no histórico completo não encontrou vazamentos.
-- <strong><code>npm audit</code></strong> encontrou 0 vulnerabilidades.</p>
+- <strong>Demonstração da API com curl.</strong>
+  - O cookie do sandbox dura 24 horas.
+  - O visitante B recebe 404 no pedido do visitante A.
+  - A rota de administração responde 401 sem token, com token errado ou só com o cookie de visitante, e 200 com o token.
+  - O modo de produção sem token responde 503 em todas as rotas.
+  - Uma assinatura de webhook forjada responde 401.
+- <strong>Um receptor externo de webhook</strong> conferiu todos os eventos assinados que recebeu.
+- <strong>Checagens de segurança:</strong>
+  - um teste de mutação no código de isolamento, autenticação, expiração, limites de envio e novas tentativas, em que todas as mutações foram detectadas;
+  - as checagens estáticas;
+  - gitleaks e trufflehog, rodados localmente, sem achados;
+  - <code>npm audit</code> sem vulnerabilidades.</p>
+<p>As contagens detalhadas dos testes estão sendo reproduzidas pelo QA e serão publicadas depois de confirmadas.</p>
 <h3>Links</h3>
 <ul>
-<li>Repositório público: não há. O FLOWDESK está num repositório local, sem remoto.</li>
-<li>Commit: <code>5b41bf5</code> (local, sem URL pública). Os testes rodaram em <code>686bf11</code>; os commits depois dele só mudam documentação.</li>
-<li>Log de testes: <code>flowdesk/TEST-LOG.md</code> (local, não público). Status: <code>flowdesk/STATUS.md</code>.</li>
+<li>Repositório público: ainda não há. Log de testes interno, repositório ainda não público.</li>
+<li>Commit: <code>905a387</code> (local, sem URL pública).</li>
 </ul>
-<figure class="stage"><div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>aprovado → registrado</span></div><div class="stage__media"><img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1100" loading="lazy" decoding="async" alt="Ticket do FLOWDESK após aprovação humana e registro: estado logged, &#x27;approved by demo-reviewer · response_sent: false&#x27; e histórico de seis eventos, incluindo suggestion_edited pelo revisor humano."></div><figcaption>Captura real · FLOWDESK commit 5b41bf5 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 ~09:43 BRT</figcaption></figure></section>
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>aprovado → registrado</span></div>
+<div class="stage__media">
+<img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1112" loading="lazy" decoding="async" alt="Ticket do FLOWDESK em 1280px após aprovação humana e registro: estado logged, o rótulo de simulação marcado &#x27;edited by a human&#x27;, a resposta aprovada só para leitura, &#x27;approved by demo-reviewer · response_sent: false (demo never sends email)&#x27; e histórico de onze eventos com as mudanças de estado, a edição do revisor e as tentativas de webhook.">
+<img src="/assets/img/flowdesk-07-logged-history-390.webp" width="716" height="3516" loading="lazy" decoding="async" alt="O mesmo ticket registrado do FLOWDESK em 390px (celular), com a resposta aprovada e o histórico completo.">
+</div>
+<figcaption>Captura real · FLOWDESK commit 905a387 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:04–10:06 BRT</figcaption>
+</figure></section>
 <section id="c-roles" aria-labelledby="c-roles-h"><h2 id="c-roles-h"><span class="num">06</span>Papel humano e ferramentas de IA</h2>
 <p>A aprovação humana é uma etapa <strong>dentro do produto</strong>: nada é aprovado nem registrado sem a ação de uma pessoa, e toda ação fica registrada com o autor. O software foi feito com desenvolvimento assistido por IA sob direção humana.</p>
 </section>
@@ -128,54 +155,44 @@
 <tr>
 <th>Checagem</th>
 <th>Resultado</th>
-<th>Onde</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>npx vitest run</code> (unitários + integração, D1 local)</td>
-<td>53/53 passaram</td>
-<td>TEST-LOG §3</td>
+<td>Testes unitários e de integração (D1 local)</td>
+<td>passaram</td>
 </tr>
 <tr>
-<td><code>npm run typecheck</code></td>
-<td>exit 0</td>
-<td>TEST-LOG §2</td>
+<td>Typecheck</td>
+<td>passou</td>
 </tr>
 <tr>
-<td>E2E no navegador (<code>scripts/e2e-ui.mjs</code>, servidor local)</td>
-<td>22 passaram, 0 falharam</td>
-<td>TEST-LOG §8</td>
+<td>Checagens de ponta a ponta no navegador (servidor local)</td>
+<td>passaram</td>
 </tr>
 <tr>
-<td>Checagens estáticas de segurança</td>
-<td>todas passaram</td>
-<td>TEST-LOG §4</td>
+<td>Teste de mutação (isolamento, autenticação, expiração, limites, novas tentativas)</td>
+<td>todas as mutações detectadas</td>
 </tr>
 <tr>
-<td>gitleaks, histórico completo</td>
-<td>nenhum vazamento</td>
-<td>TEST-LOG §5</td>
+<td>Checagens estáticas de segurança; gitleaks; trufflehog (local)</td>
+<td>passaram, sem achados</td>
 </tr>
 <tr>
 <td><code>npm audit</code></td>
 <td>0 vulnerabilidades</td>
-<td>TEST-LOG §6</td>
 </tr>
 <tr>
 <td>Receptor externo de webhook</td>
-<td>5/5 assinaturas conferidas</td>
-<td>TEST-LOG §9</td>
+<td>todas as assinaturas conferidas</td>
 </tr>
 <tr>
-<td>CI (<code>.github/workflows/test.yml</code>)</td>
+<td>CI remoto</td>
 <td><strong>nunca rodou</strong> (sem remoto)</td>
-<td>STATUS</td>
 </tr>
 <tr>
 <td>axe / pa11y, Lighthouse</td>
 <td><strong>não rodados</strong></td>
-<td>STATUS</td>
 </tr>
 </tbody>
 </table></div>
@@ -183,14 +200,14 @@
 <section id="c-limits" class="limitations" aria-labelledby="c-limits-h"><h2 id="c-limits-h"><span class="num">08</span>Limitações</h2>
 <ul>
 <li><strong>As sugestões são por regras: uma simulação, não um modelo de IA.</strong></li>
-<li><strong>Demo local; hospedagem pendente.</strong> Não há conta Cloudflare e nada está publicado, então o comportamento em produção não foi observado.</li>
-<li><strong>O CI nunca rodou.</strong> O arquivo de workflow existe, mas o repositório não tem remoto.</li>
+<li><strong>Sem hospedagem.</strong> É uma demo local com hospedagem pendente: não há conta Cloudflare e nada está publicado, então o comportamento na borda não foi observado.</li>
+<li><strong>Sem CI remoto.</strong> O arquivo de workflow existe, mas o repositório não tem remoto, então ele nunca rodou.</li>
+<li><strong>As novas tentativas de webhook não são duráveis.</strong> Elas rodam no mesmo ciclo da requisição. Sem o Cloudflare Queues, tentativas pendentes podem se perder se o worker for encerrado.</li>
+<li><strong>Sem limpeza agendada dos sandboxes.</strong> Os sandboxes expirados só são removidos quando acessados ou pela rota de administração; não há tarefa agendada.</li>
 <li><strong>axe/pa11y e Lighthouse não foram rodados.</strong> Acessibilidade e desempenho não foram medidos.</li>
-<li>As rotas de escrita não têm autenticação: quem acessar o servidor pode aprovar ou rejeitar. Isso só é aceitável com dados sintéticos.</li>
-<li>Os webhooks são enviados uma vez, com timeout de 5 segundos e sem nova tentativa; as falhas ficam registradas como falha.</li>
+<li>Os visitantes são anônimos e a administração usa um único token compartilhado; não há contas de usuário.</li>
 <li>O limite de envios é uma janela fixa simples, não serve contra abuso.</li>
 <li>A interface está em inglês, com exceção do rótulo de simulação em português.</li>
-<li>O trufflehog não foi rodado.</li>
 </ul>
 </section>
 <section id="c-need" aria-labelledby="c-need-h"><h2 id="c-need-h"><span class="num">09</span>Necessidade comercial</h2>

@@ -466,6 +466,8 @@ legend { font-weight: var(--fw-semi); font-size: var(--fs-sm); padding: 0; margi
 .service-block{padding-block:var(--sp-6);border-top:var(--bw) solid var(--c-line)}
 .service-block:first-of-type{border-top:0}
 .hero .btn-row{margin-top:var(--sp-5)}
+.stage--grid .stage__media{display:grid;grid-template-columns:1fr;gap:1px;background:var(--c-stage-line);align-items:start}
+@media (min-width:48rem){.stage--grid .stage__media{grid-template-columns:repeat(2,1fr)}}
 /* Focus / anchor targets clear the sticky header (Crono RC finding 3).
    Offset = header bar min-height (--header-h, 3.5rem) + its 1px bottom border (--bw) + --sp-4 gap
    = 73px, measured 57px header in Chrome at 360/768/1280. It lives on the targets (scroll-margin-top);
