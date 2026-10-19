@@ -1,0 +1,42 @@
+$ python3 /tmp/luna-gen/links.py
+internal links checked: 215, broken: 0
+exit=0
+
+$ npx --yes html-validate@9 "**/*.html"
+exit=0
+
+$ anchors on home
+#topo ok
+#on-demand ok
+#linguas ok
+#como ok
+#caso ok
+#flagship ok
+#projetos ok
+#oferta ok
+#formacao ok
+
+$ python3 -m http.server 8765 + curl each route
+200 /
+200 /pt/
+200 /services/
+200 /pt/services/
+200 /work/
+200 /pt/work/
+200 /work/flowdesk/
+200 /pt/work/flowdesk/
+200 /work/comercial-template/
+200 /pt/work/comercial-template/
+200 /work/sherlock/
+200 /pt/work/sherlock/
+200 /methodology/
+200 /pt/methodology/
+200 /about/
+200 /pt/about/
+200 /contact/
+200 /pt/contact/
+200 /404.html
+200 /styles.css
+200 /main.js
+200 /README.md
+200 /index.html
