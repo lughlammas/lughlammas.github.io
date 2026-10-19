@@ -21,7 +21,7 @@ Log completo: `docs/luna-checks.log` (gerado 2026-10-19). Resumo:
 - Copy (Hermes): copy/ estava vazio → textos provisórios marcados `<!-- TODO: copy (Hermes) -->` + texto visível em cinza.
 - Design (Vênus): design/ estava vazio → CSS neutro mínimo com TODO no topo de styles.css; integrar tokens.css/components.css quando chegarem.
 - Lychee (links offline) do workflow não rodado localmente; equivalente feito com script próprio.
-- `.github/workflows/sprint001-check.yml` e `.htmlvalidate.json` estão não rastreados na worktree e não são meus — deixei sem commitar (dono: Moony/Crono).
+- `.github/workflows/sprint001-check.yml` e `.htmlvalidate.json` não são meus: foram commitados por outro agente em fd952b4 (ci). Não alterei.
 
 ## Bloqueio
 - Canal de contato real inexistente (decisão do Gui).
