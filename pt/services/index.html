@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Serviços · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. Serviços">
+<title>Serviços — ARBOCK LABS</title>
+<meta name="description" content="Resgate de código feito com IA, software sob medida e MVP, e automação com IA. Cada um começa com avaliação e termina com testes, documentação e entrega verificável.">
 <link rel="canonical" href="https://lughlammas.github.io/pt/services/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/services/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/services/">
@@ -30,21 +30,116 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <h1>Serviços</h1>
-<p>Nenhum resultado de recuperação, segurança ou deploy é prometido antes de uma avaliação.</p>
-<section class="card" aria-labelledby="s1"><h2 id="s1">S01 · Business Automation &amp; AI</h2><!-- TODO: copy (Hermes) copy/pt/services.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p></section>
-<section class="card" aria-labelledby="s2"><h2 id="s2">S02 · Custom Software &amp; MVP Development</h2><!-- TODO: copy (Hermes) copy/pt/services.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p></section>
-<section class="card" aria-labelledby="s3"><h2 id="s3">S03 · AI Code Rescue &amp; Technical Delivery</h2><!-- TODO: copy (Hermes) copy/pt/services.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p></section>
-</section>
+<p>São três ofertas. Cada uma começa com uma avaliação e termina com algo que você pode rodar, testar e ler. Não prometemos resultado fechado antes de ver o código ou o processo.</p>
+<hr />
+<h2 id="s03">S03 · AI Code Rescue &amp; Technical Delivery <em>(oferta prioritária)</em></h2>
+<p><em>Resgate de código feito com IA e entrega técnica.</em></p>
+<h3>Para quem</h3>
+<p>Para quem usou uma ou várias ferramentas de IA para programar e agora tem um código que quase funciona. Ou para quem herdou um código sem a pessoa que o escreveu.</p>
+<h3>Problemas que resolve</h3>
+<ul>
+<li>O projeto não instala, não compila ou não sobe numa máquina limpa.</li>
+<li>Faltam testes, ou eles existem e falham, ou passam sem testar nada que importe.</li>
+<li>O README descreve funcionalidades que o código não tem, ou omite as que ele tem.</li>
+<li>Há segredos, chaves ou dados pessoais junto do código ou no histórico.</li>
+<li>Há pastas, cópias e branches duplicados, e ninguém sabe qual é o canônico.</li>
+<li>Há dependências com alertas de segurança conhecidos.</li>
+<li>Ninguém sabe dizer o que é seguro publicar.</li>
+</ul>
+<h3>O que você recebe</h3>
+<ol>
+<li><strong>Relatório de avaliação:</strong> inventário do que existe; o que instala, compila e roda, com os comandos e as saídas exatas; o que o README promete comparado com a realidade; e os riscos, classificados em "seguro mudar", "precisa de revisão" e "precisa da sua aprovação".</li>
+<li><strong>Plano de estabilização:</strong> lista ordenada de correções, cada uma com seu critério de aceite, que você aprova antes da implementação.</li>
+<li><strong>Implementação dos itens aprovados:</strong> commits pequenos, num branch separado, sem nunca forçar push no seu branch principal.</li>
+<li><strong>Registro de verificação:</strong> cada teste, build ou checagem com o comando e a saída. O que não foi rodado aparece como não rodado.</li>
+<li><strong>Handoff:</strong> README atualizado, limitações conhecidas e o que ficou em aberto.</li>
+</ol>
+<h3>Como validamos</h3>
+<ul>
+<li>Nada conta como "passou" sem ter sido executado; o comando e a saída vão para o registro.</li>
+<li>O que o README afirma é conferido contra o código e o build rodando, e não o contrário.</li>
+<li>Diante de ambiguidade (duas versões candidatas, fonte faltando), o trabalho para naquele item e a dúvida vai para você, sem chute.</li>
+<li>Ações irreversíveis (apagar branches ou histórico, mudar visibilidade ou licença, mexer em segredos ou em produção) só acontecem com a sua aprovação explícita.</li>
+</ul>
+<h3>O que NÃO prometemos</h3>
+<ul>
+<li>Que todo projeto tem salvação. Às vezes a avaliação conclui que reescrever sai mais barato, e você fica sabendo disso antes de gastar mais.</li>
+<li>Segurança. Relatamos os alertas, segredos e riscos que as ferramentas que rodamos encontraram. Isso não é auditoria nem certificação de segurança.</li>
+<li>Deploy ou disponibilidade antes de avaliar o ambiente de destino.</li>
+<li>Números de desempenho que não medimos.</li>
+<li>Reescrever o seu histórico Git ou apagar qualquer coisa sem a sua aprovação por escrito.</li>
+</ul>
+<h3>Evidência desse jeito de trabalhar</h3>
+<p>São projetos próprios, não resgates para clientes:
+- A auditoria e consolidação, por iniciativa própria, de uma conta inteira do GitHub e de um workspace local: inventário, detecção de duplicados, varredura de segredos no histórico de 41 repositórios (0 ocorrências) e parada em cada projeto ambíguo. <strong>Não foi trabalho pago para cliente.</strong>
+- No comercial-template, um alerta crítico do framework foi eliminado com a atualização do Next.js (commit <code>0e9e5db</code>), e os alertas restantes estão documentados, não escondidos.</p>
+<p class="more">→ <a href="/pt/contact/">Solicite uma proposta</a></p>
+<hr />
+<h2 id="s02">S02 · Custom Software &amp; MVP Development</h2>
+<p><em>Software sob medida e desenvolvimento de MVP.</em></p>
+<h3>Para quem</h3>
+<p>Para quem precisa de uma primeira versão funcional de uma aplicação web, suficiente para mostrar, testar com usuários reais ou servir de base.</p>
+<h3>O que você recebe</h3>
+<ul>
+<li>Uma primeira versão com escopo definido: o fluxo principal, autenticação quando necessária, persistência e as telas que importam.</li>
+<li>Testes automatizados para a lógica que carrega risco (dinheiro, permissões, dono dos dados).</li>
+<li>Um README com instalação, comando para rodar, o que está implementado e as limitações conhecidas.</li>
+<li>Um repositório versionado com histórico legível.</li>
+<li>Dados sintéticos para demonstração, nunca os seus dados reais.</li>
+</ul>
+<h3>Como validamos</h3>
+<ul>
+<li>Os critérios de aceite, do tipo passa/não passa, são combinados antes de começar.</li>
+<li>Os testes são rodados e a saída fica registrada; o CI é configurado quando o projeto permite.</li>
+<li>As limitações vão escritas na entrega, em vez de serem descobertas depois.</li>
+</ul>
+<h3>O que NÃO prometemos</h3>
+<ul>
+<li>Garantias de hospedagem em produção, escala ou segurança, a não ser que tenham escopo e avaliação próprios.</li>
+<li>Funcionalidades além dos critérios combinados dentro do mesmo escopo.</li>
+</ul>
+<h3>Projeto de referência</h3>
+<p><strong>comercial-template:</strong> autenticação, dados isolados por usuário, fluxos de clientes e propostas e PDF no servidor. Passou em 24/24 testes unitários e o CI passou no commit atual. Entre as limitações documentadas estão a falta de deploy hospedado e a imagem Docker não verificada.</p>
+<p class="more">→ <a href="/pt/work/comercial-template/">comercial-template</a></p>
+<hr />
+<h2 id="s01">S01 · Business Automation &amp; AI</h2>
+<p><em>Automação de processos de negócio com IA.</em></p>
+<h3>Para quem</h3>
+<p>Para quem faz todo dia a mesma recepção, triagem e resposta de pedidos.</p>
+<h3>O que você recebe</h3>
+<ul>
+<li>O processo mapeado: por onde os pedidos chegam, como são classificados, quem decide.</li>
+<li>Um fluxo funcionando: entrada → triagem automática → resposta sugerida → <strong>aprovação humana</strong> → registro.</li>
+<li>Cada passo automatizado traz um rótulo que diz se é regra ou modelo de linguagem. Regra fixa nunca é apresentada como IA.</li>
+<li>Provedores de IA conectados só com a sua autorização e na sua conta, atrás de uma interface que pode ser trocada.</li>
+<li>Logs e histórico de eventos, para você ver o que aconteceu e por quê.</li>
+</ul>
+<h3>Como validamos</h3>
+<ul>
+<li>Cada etapa do fluxo é testada com dados sintéticos.</li>
+<li>Nada é enviado aos seus clientes sem uma pessoa aprovar.</li>
+</ul>
+<h3>O que NÃO prometemos</h3>
+<ul>
+<li>Economia garantida de tempo ou de custo. Ainda não medimos nenhuma, então não citamos nenhuma.</li>
+<li>Respostas totalmente automáticas aos seus clientes.</li>
+<li>Custo de provedor de IA escondido no preço: se for preciso um modelo pago, a decisão e a conta são suas.</li>
+</ul>
+<h3>Projeto de referência</h3>
+<p><strong>FLOWDESK</strong> é a demonstração desta oferta. É uma <strong>demo local, com hospedagem pendente</strong>.</p>
+<p class="more">→ <a href="/pt/work/flowdesk/">FLOWDESK</a></p>
+<hr />
+<h2>Não sabe qual serve?</h2>
+<p>Descreva o problema; a avaliação define o caminho.</p>
+<p class="more">→ <a href="/pt/contact/">Contato</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">
 <p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana (human-directed AI-assisted development).</p>
+<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
 <p><a href="https://github.com/lughlammas">GitHub</a></p>
 </div>
 </footer>

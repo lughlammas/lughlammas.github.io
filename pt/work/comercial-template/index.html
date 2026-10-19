@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Comercial Template — estudo de caso · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. Comercial Template — estudo de caso">
+<title>comercial-template — Estudo de caso · ARBOCK LABS</title>
+<meta name="description" content="Aplicação Next.js de clientes e propostas comerciais com autenticação, dados por usuário e PDF no servidor. 24/24 testes unitários, CI passando e limitações documentadas.">
 <link rel="canonical" href="https://lughlammas.github.io/pt/work/comercial-template/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/comercial-template/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/comercial-template/">
@@ -30,18 +30,91 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <nav aria-label="Breadcrumb" class="crumbs"><a href="/pt/work/">Projetos</a></nav>
-<h1>Comercial Template — estudo de caso</h1>
-<p>Medido em 2026-10-19: <code>npm test</code> 24/24 passaram; CI "Web validation" success em 3ead252 (fonte: INVENTARIO.md da sprint).</p>
-<!-- TODO: copy (Hermes) copy/pt/work-comercial-template.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p>
-</section>
+<h1>comercial-template</h1>
+<p>Aplicação full-stack para cadastro de clientes e propostas comerciais.
+Repositório: <a href="https://github.com/lughlammas/comercial-template">https://github.com/lughlammas/comercial-template</a> · commit <code>3ead252</code></p>
+<h2>1. Problema</h2>
+<p>O problema que o projeto enfrenta são propostas feitas em documentos e planilhas: total calculado à mão, nenhum histórico por cliente e um PDF apresentável que precisa ser formatado de novo a cada vez. O projeto testa se esse fluxo (cliente → proposta → itens → total → PDF) cabe numa aplicação pequena, confiável e reaproveitável.</p>
+<h2>2. Contexto</h2>
+<p>É uma aplicação de demonstração, com interface em português e dados sintéticos. Não está publicada nem tem usuários, e não alega adoção em produção.</p>
+<h2>3. Solução</h2>
+<ul>
+<li>Cadastro e login com e-mail e senha, senha com hash bcrypt e sessão JWT.</li>
+<li>Painel protegido, com criação, lista e detalhe de clientes e de propostas.</li>
+<li>Itens com quantidade, preço e total arredondado em centavos.</li>
+<li>PDF de cada proposta gerado no servidor, que só o dono baixa.</li>
+</ul>
+<h2>4. Arquitetura</h2>
+<p>Uma única aplicação Next.js (App Router) em TypeScript. As páginas são React Server Components que consultam o banco via Prisma (SQLite); as gravações passam por Server Actions; uma rota gera o PDF com @react-pdf/renderer. Um middleware bloqueia as rotas protegidas sem sessão. Há Dockerfile e build standalone configurados.</p>
+<h2>5. Evidências</h2>
+<ul>
+<li><strong>Passou em 24/24 testes unitários</strong> (4 arquivos: dinheiro, server actions, middleware e rota de PDF), com typecheck limpo, na execução feita para este site em 19/10/2026.</li>
+<li><strong>O CI passou</strong> no commit atual. O workflow "Web validation" roda instalação, lint, testes unitários, build de produção, typecheck e um smoke test no navegador contra o build de produção.</li>
+<li><strong>O isolamento de dados é testado:</strong> a rota de PDF responde 401 sem sessão e 404 para propostas de outro usuário, e a criação de proposta recusa cliente de outro usuário.</li>
+<li>O repositório documenta uma execução no navegador em 07/10/2026 com 13/13 checagens, entre elas um segundo usuário recebendo 404 nos registros do primeiro. Essa execução não foi repetida para este site.</li>
+</ul>
+<h2>6. Papel humano e ferramentas de IA</h2>
+<p>Feito com desenvolvimento assistido por IA sob direção humana: ferramentas de IA contribuíram em produto, implementação, QA e documentação, sob direção humana. O repositório contém o código da aplicação, não uma plataforma de agentes.</p>
+<h2>7. Testes executados</h2>
+<table>
+<thead>
+<tr>
+<th>Checagem</th>
+<th>Resultado</th>
+<th>Onde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm test</code></td>
+<td>24/24 passaram</td>
+<td>rodado em 19/10/2026</td>
+</tr>
+<tr>
+<td><code>npm run typecheck</code></td>
+<td>exit 0</td>
+<td>rodado em 19/10/2026</td>
+</tr>
+<tr>
+<td>CI "Web validation"</td>
+<td>sucesso em <code>3ead252</code></td>
+<td>GitHub Actions</td>
+</tr>
+<tr>
+<td>Smoke no navegador (<code>test:e2e</code>)</td>
+<td>13/13, documentado</td>
+<td>docs do repo, 07/10/2026, não repetido</td>
+</tr>
+<tr>
+<td>lint / build / e2e locais</td>
+<td>não rodados para este site</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>8. Limitações</h2>
+<ul>
+<li>Sem demo hospedada nem deploy.</li>
+<li>Imagem Docker não verificada: o Dockerfile copia uma pasta <code>public/</code> que não existe.</li>
+<li>Clientes e propostas não podem ser editados nem apagados, e o status da proposta não muda pela interface.</li>
+<li>Sem verificação de e-mail, recuperação de senha nem limite de tentativas de login.</li>
+<li>Valores guardados em ponto flutuante (arredondados por linha), com BRL e pt-BR fixos no código.</li>
+<li>Esquema aplicado com <code>db push</code>, sem histórico de migrações.</li>
+<li>Restam 11 alertas de severidade alta em dependências de ferramentas (0 críticos).</li>
+<li>Sem testes de desempenho, acessibilidade ou segurança.</li>
+<li>Sem arquivo LICENSE.</li>
+</ul>
+<h2>9. Necessidade comercial</h2>
+<p>É a referência da <strong>S02 · Custom Software &amp; MVP</strong>: autenticação, dono dos dados, cálculo de dinheiro com teste e documento de saída, entregues com os limites declarados. Também serve de base para fluxos parecidos (orçamentos, recibos, contratos simples), depois de avaliar o que cada um exige.</p>
+<p class="more">→ <a href="/pt/services/#s02">S02 · Custom Software &amp; MVP Development</a> · <a href="/pt/contact/">Solicite uma proposta</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">
 <p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana (human-directed AI-assisted development).</p>
+<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
 <p><a href="https://github.com/lughlammas">GitHub</a></p>
 </div>
 </footer>

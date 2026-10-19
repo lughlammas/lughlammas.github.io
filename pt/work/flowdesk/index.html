@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FLOWDESK — Demo de operações com IA · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. FLOWDESK — Demo de operações com IA">
+<title>FLOWDESK · AI Operations Demo (em desenvolvimento) · ARBOCK LABS</title>
+<meta name="description" content="O FLOWDESK é uma demonstração de operações com IA em desenvolvimento: formulário de pedidos, triagem, sugestão de resposta, aprovação humana e registro de eventos.">
 <link rel="canonical" href="https://lughlammas.github.io/pt/work/flowdesk/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/flowdesk/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/flowdesk/">
@@ -30,18 +30,52 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <nav aria-label="Breadcrumb" class="crumbs"><a href="/pt/work/">Projetos</a></nav>
-<h1>FLOWDESK — Demo de operações com IA</h1>
-<p>Demo em desenvolvimento. Sugestões de resposta são por regras: "Simulação (regras) — não é um modelo de IA".</p>
-<!-- TODO: copy (Hermes) copy/pt/work-flowdesk.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p>
-</section>
+<blockquote>
+<p><strong>Estado: em desenvolvimento.</strong> O FLOWDESK ainda não foi construído nem hospedado. Esta página descreve o que está sendo feito e como vai ser verificado. As seções 5 e 7 ficam vazias até haver resultados.</p>
+</blockquote>
+<h1>FLOWDESK · AI Operations Demo</h1>
+<h2>1. Problema</h2>
+<p>Pedidos chegam por formulários e caixas de entrada. Alguém lê cada um, decide o que é e qual a urgência, escreve uma resposta e acompanha o caso. Quase tudo é rotina, mas a resposta ainda precisa do julgamento de uma pessoa.</p>
+<h2>2. Contexto</h2>
+<p>O FLOWDESK é a demonstração da ARBOCK LABS para a <strong>S01 · Business Automation &amp; AI</strong>. Usa só dados sintéticos.</p>
+<h2>3. Solução (planejada)</h2>
+<p><strong>Formulário → Triagem → Sugestão de resposta → Aprovação humana → Registro.</strong>
+1. Formulário de pedido.
+2. Persistência, com lista e detalhe.
+3. Categoria e prioridade automáticas.
+4. Sugestão de resposta editável.
+5. Aprovar ou rejeitar.
+6. Histórico de eventos de cada pedido.
+7. Painel responsivo.
+8. API e webhook.
+9. Estados de erro e de lista vazia.
+10. Documentação.</p>
+<p><strong>Sobre a "IA":</strong> nesta demonstração, a sugestão de resposta é gerada <strong>por regras</strong> e vem rotulada como <strong>"Simulação (regras) — não é um modelo de IA"</strong> na interface e na API. A camada de sugestão fica atrás de uma interface de provedor, para que um modelo de linguagem real possa ser conectado depois, só com um provedor autorizado. Uma regra fixa nunca é apresentada como modelo.</p>
+<h2>4. Arquitetura (planejada)</h2>
+<p>Front-end estático no site, com API em Cloudflare Workers e banco D1 (plano gratuito), desenvolvida e testada primeiro em ambiente local. A conta Cloudflare ainda não existe.</p>
+<h2>5. Evidências</h2>
+<p><em>Pendente. Ainda não há código commitado.</em></p>
+<h2>6. Papel humano e ferramentas de IA</h2>
+<p>A aprovação humana é uma etapa obrigatória <strong>dentro do próprio produto</strong>: nada conta como "respondido" sem uma pessoa aprovar, e a demonstração não envia e-mail real. O software é feito com desenvolvimento assistido por IA sob direção humana.</p>
+<h2>7. Testes executados</h2>
+<p><em>Pendente. Testes unitários e de integração em CI são critérios de aceite desta demonstração.</em></p>
+<h2>8. Limitações (conhecidas de antemão)</h2>
+<ul>
+<li>A sugestão de resposta é por regras, não por um modelo de linguagem.</li>
+<li>Ainda não está hospedado (conta pendente).</li>
+<li>Depois de hospedado, valem os limites do plano gratuito.</li>
+</ul>
+<h2>9. Necessidade comercial</h2>
+<p>Mostra o formato de uma automação em que o software faz a triagem e o rascunho e a pessoa fica com a decisão. É o núcleo da <strong>S01</strong>.</p>
+<p class="more">→ <a href="/pt/services/#s01">S01 · Business Automation &amp; AI</a> · <a href="/pt/contact/">Solicite uma proposta</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">
 <p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana (human-directed AI-assisted development).</p>
+<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
 <p><a href="https://github.com/lughlammas">GitHub</a></p>
 </div>
 </footer>

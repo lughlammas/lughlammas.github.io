@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Projetos · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. Projetos">
+<title>Projetos — ARBOCK LABS</title>
+<meta name="description" content="Projetos públicos com testes, estado do CI e limitações declaradas. Sem nomes de clientes, sem métricas inventadas.">
 <link rel="canonical" href="https://lughlammas.github.io/pt/work/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/">
@@ -30,22 +30,40 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <h1>Projetos</h1>
-<ul class="card-grid">
-<li class="card"><h2><a href="/pt/work/flowdesk/">FLOWDESK</a></h2><!-- TODO: copy (Hermes) copy/pt/work.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p></li>
-<li class="card"><h2><a href="/pt/work/comercial-template/">Comercial Template</a></h2><!-- TODO: copy (Hermes) copy/pt/work.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p></li>
-<li class="card"><h2><a href="/pt/work/sherlock/">SHERLOCK</a></h2><!-- TODO: copy (Hermes) copy/pt/work.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p></li>
-</ul>
-</section>
+<p>Repositórios públicos de Guilherme Cavalcanti sob a ARBOCK LABS. Para cada projeto mostramos o que ele é, o que foi testado e o que não foi. As contagens de testes vêm das execuções registradas em 19/10/2026, salvo indicação em contrário.</p>
+<hr />
+<h2>Estudos de caso</h2>
+<h3>comercial-template</h3>
+<p><strong>O que é:</strong> aplicação full-stack em Next.js para cadastro de clientes e propostas comerciais, com autenticação, persistência por usuário, totais por item e PDF gerado no servidor.
+<strong>Testado:</strong> passou em 24/24 testes unitários e o typecheck está limpo. O workflow de CI "Web validation" passou no commit atual.
+<strong>Não feito:</strong> não há demo hospedada, e a imagem Docker não foi verificada.</p>
+<p class="more">→ <a href="/pt/work/comercial-template/">comercial-template</a></p>
+<h3>SHERLOCK</h3>
+<p><strong>O que é:</strong> ambiente de análise de xadrez. A interface React só conversa com o motor nativo por meio de um controlador WebSocket e de um adaptador UCI; a versão Android roda o motor como processo nativo.
+<strong>Testado:</strong> passou em 8/8 testes de parser e de sessão (com saída de motor simulada), e o typecheck está limpo.
+<strong>Não feito:</strong> sem CI, sem rodar os smoke tests do motor e sem benchmark de força ou desempenho.</p>
+<p class="more">→ <a href="/pt/work/sherlock/">SHERLOCK</a></p>
+<h3>FLOWDESK · AI Operations Demo</h3>
+<p><strong>O que é:</strong> a demonstração de um fluxo de operações: formulário → triagem → sugestão de resposta → aprovação humana → registro.
+<strong>Estado:</strong> demo local, hospedagem pendente. Testes ainda não registrados.</p>
+<p class="more">→ <a href="/pt/work/flowdesk/">FLOWDESK</a></p>
+<hr />
+<h2>Outros projetos públicos</h2>
+<h3>MIME</h3>
+<p>Treinador offline de linhas de xadrez: o app mostra uma linha, você repete, e um lance errado reinicia o exercício. <strong>Passou em 21/21 testes.</strong></p>
+<p class="more">→ <a href="https://github.com/lughlammas/mime">Repositório público</a></p>
+<hr />
+<h2>Método</h2>
+<p>Como esses projetos foram feitos, com desenvolvimento assistido por IA sob direção humana, está documentado à parte.</p>
+<p class="more">→ <a href="/pt/methodology/">Metodologia</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">
 <p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana (human-directed AI-assisted development).</p>
+<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
 <p><a href="https://github.com/lughlammas">GitHub</a></p>
 </div>
 </footer>

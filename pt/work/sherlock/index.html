@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHERLOCK — estudo de caso · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. SHERLOCK — estudo de caso">
+<title>SHERLOCK — Estudo de caso · ARBOCK LABS</title>
+<meta name="description" content="Ambiente de análise de xadrez que liga uma interface React a um motor UCI nativo via controlador WebSocket e adaptador, com versão Android. 8/8 testes; limites declarados.">
 <link rel="canonical" href="https://lughlammas.github.io/pt/work/sherlock/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/sherlock/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/sherlock/">
@@ -30,18 +30,82 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <nav aria-label="Breadcrumb" class="crumbs"><a href="/pt/work/">Projetos</a></nav>
-<h1>SHERLOCK — estudo de caso</h1>
-<p>Medido em 2026-10-19: <code>npm test</code> 8/8 passaram; ainda sem workflow de CI (fonte: INVENTARIO.md da sprint).</p>
-<!-- TODO: copy (Hermes) copy/pt/work-sherlock.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p>
-</section>
+<h1>SHERLOCK</h1>
+<p>Ambiente visual de investigação e análise de xadrez.
+Repositório: <a href="https://github.com/lughlammas/sherlock">https://github.com/lughlammas/sherlock</a> · commit <code>e632035</code> · release Android v0.1.3</p>
+<h2>1. Problema</h2>
+<p>Um motor de xadrez é um programa de linha de comando que fala um protocolo de texto (UCI). Colocá-lo atrás de uma interface visual traz problemas de integração: iniciar e encerrar o processo, interpretar a saída, cancelar uma busca e garantir que uma resposta atrasada de uma busca antiga nunca sobrescreva a posição atual.</p>
+<h2>2. Contexto</h2>
+<p>É um projeto próprio, usado também como vitrine de engenharia. Integra o motor Lughnasadh na versão 0.2. Uma versão mais nova do motor (0.4.0) é mantida à parte e <strong>não</strong> foi integrada nem validada no SHERLOCK.</p>
+<h2>3. Solução</h2>
+<ul>
+<li>Tabuleiro responsivo, com carregar, copiar e reiniciar posições (FEN).</li>
+<li>Análise por profundidade ou por tempo, com profundidade, nós, velocidade, avaliação e linha principal ao vivo, e botão de parar.</li>
+<li>Estados claros: pronto, investigando, melhor lance e erro do motor (com tentar de novo e reiniciar).</li>
+<li>Um modo em que dois processos do motor jogam entre si.</li>
+<li>Versão Android.</li>
+</ul>
+<h2>4. Arquitetura</h2>
+<p>Navegador (React) → WebSocket → controlador SHERLOCK → adaptador Lughnasadh → motor como processo filho. A interface <strong>nunca</strong> fala UCI cru: o adaptador cuida do protocolo, dos limites de tempo e dos <strong>tokens de sessão</strong>, de modo que respostas antigas são descartadas e a posição do tabuleiro sobrevive a timeout, travamento ou reinício do motor.
+No Android, a mesma interface roda num WebView e chega ao motor nativo por uma ponte JavaScript e <code>ProcessBuilder</code>, sem dependência de Node ou WebSocket no APK.</p>
+<h2>5. Evidências</h2>
+<ul>
+<li><strong>Passou em 8/8 testes</strong> na execução feita para este site em 19/10/2026: 6 testes do parser UCI e 2 de sessão, entre eles "drops stale info when session rotates". Typecheck limpo.</li>
+<li><strong>A release v0.1.3</strong> com o APK está pública no GitHub, e o repositório publica o SHA-256 do APK.</li>
+</ul>
+<h2>6. Papel humano e ferramentas de IA</h2>
+<p>Feito com desenvolvimento assistido por IA sob direção humana.</p>
+<h2>7. Testes executados</h2>
+<table>
+<thead>
+<tr>
+<th>Checagem</th>
+<th>Resultado</th>
+<th>Onde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm test</code> (saída do motor simulada, sem binário)</td>
+<td>8/8 passaram</td>
+<td>rodado em 19/10/2026</td>
+</tr>
+<tr>
+<td>typecheck (cliente + servidor)</td>
+<td>exit 0</td>
+<td>rodado em 19/10/2026</td>
+</tr>
+<tr>
+<td>Smoke do motor (<code>npm run smoke</code>, <code>smoke:match</code>)</td>
+<td><strong>não rodado</strong> (exige o binário nativo)</td>
+<td></td>
+</tr>
+<tr>
+<td>CI</td>
+<td><strong>inexistente</strong>: o repositório não tem workflow</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>8. Limitações</h2>
+<ul>
+<li>Sem integração contínua.</li>
+<li>Os testes usam linhas simuladas do motor; o comportamento com o motor real só é coberto pelos smoke scripts, que não foram rodados aqui.</li>
+<li>O motor integrado é a versão 0.2; a 0.4.0 não foi integrada.</li>
+<li>Sem benchmark de força de jogo nem de desempenho.</li>
+<li>O modo motor contra motor roda dois processos e consome bastante bateria e memória.</li>
+</ul>
+<h2>9. Necessidade comercial</h2>
+<p>O SHERLOCK mostra trabalho de integração: um processo nativo, um protocolo de texto, uma interface em tempo real e empacotamento mobile, com os casos de falha (timeout, travamento, resposta atrasada) tratados explicitamente. É esse tipo de encanamento que está por trás da <strong>S02 · Custom Software</strong> e do diagnóstico da <strong>S03 · AI Code Rescue</strong>.</p>
+<p class="more">→ <a href="/pt/services/">Serviços</a> · <a href="/pt/contact/">Solicite uma proposta</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">
 <p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana (human-directed AI-assisted development).</p>
+<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
 <p><a href="https://github.com/lughlammas">GitHub</a></p>
 </div>
 </footer>

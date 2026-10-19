@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Metodologia · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. Metodologia">
+<title>Método · ARBOCK LABS</title>
+<meta name="description" content="Como a ARBOCK LABS usa ferramentas de IA: uma pessoa define o objetivo, distribui o trabalho, inspeciona o resultado e responde pelo que é entregue. Um método documentado, não uma plataforma autônoma.">
 <link rel="canonical" href="https://lughlammas.github.io/pt/methodology/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/methodology/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/methodology/">
@@ -30,16 +30,40 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
-<h1>Metodologia</h1>
-<!-- TODO: copy (Hermes) copy/pt/methodology.md -->
-<p class="todo">TODO: copy (Hermes) — texto provisório, copy final pendente.</p>
-</section>
+<article class="wrap section">
+<h1>Desenvolvimento assistido por IA sob direção humana</h1>
+<p>Ferramentas de IA escrevem muito código, e rápido. Se esse código funciona, se é honesto sobre os próprios limites e se dá para manter depende de quem dirige as ferramentas. Esta página descreve como essa direção funciona aqui.</p>
+<blockquote>
+<p><strong>O que isto não é.</strong> O método está escrito no repositório público <strong>AI Coordinator Portfolio</strong>, que reúne playbooks, definições de papéis, modelos de prompt e registros de decisão. Ele não contém runtime de agentes, agendador nem serviço de orquestração, e não executa nada sozinho. É um método, não uma plataforma nem um produto.</p>
+</blockquote>
+<hr />
+<h2>1. Uma pessoa é dona do objetivo</h2>
+<p>Guilherme define o objetivo, as restrições e os pontos de aprovação, e dá o aceite final. Escalonamentos e decisões vão para ele.</p>
+<h2>2. O problema vira critério verificável</h2>
+<p>Cada ciclo começa com um briefing: problema, público, restrições, o que já existe e uma definição de sucesso observável. Dele saem <strong>de 5 a 10 critérios de aceite do tipo passa/não passa</strong>, com o que está dentro e fora do escopo por escrito.</p>
+<h2>3. O trabalho é distribuído por papel</h2>
+<p>Produto, Código, QA, Docs e Comercial são papéis. Cada um pode ser ocupado por uma pessoa, por uma ferramenta de IA supervisionada ou pelas duas, e cada papel tem um artefato mínimo a entregar ao seguinte.</p>
+<h2>4. Toda passagem de bastão é escrita</h2>
+<p>O handoff registra o que foi entregue, o que está pendente, quais critérios validar agora, <strong>como verificar (comandos e passos)</strong> e os bloqueios.</p>
+<h2>5. O resultado é inspecionado, e recusado quando preciso</h2>
+<p>O QA devolve bugs reproduzíveis. Trabalho fora dos critérios não é aceito. Diante de ambiguidade (duas versões de um projeto, fonte faltando, conflito de branch), o trabalho para naquele item e a dúvida é relatada, sem chute.</p>
+<h2>6. Só conta o que foi executado</h2>
+<p>"Relatar apenas checagens efetivamente feitas e resultados efetivamente observados" (tradução nossa de "Report only checks actually performed and results actually observed"). Um teste só conta como aprovado depois de rodar, e o comando vai para o registro. Este site segue a mesma regra: cada número aqui aponta para um log de teste ou um registro de CI.</p>
+<h2>7. Ações irreversíveis esperam o dono</h2>
+<p>Apagar branches ou releases, mudar visibilidade ou licença, reescrever histórico e mexer em segredos exigem aprovação explícita do dono.</p>
+<hr />
+<h2>Exemplo aplicado</h2>
+<p><strong>GitHub &amp; Project Estate Consolidation:</strong> auditoria e consolidação, por iniciativa própria, da conta do GitHub e do workspace do próprio Guilherme. Agentes de IA fizeram o inventário, as comparações, as varreduras, as edições e os rascunhos de relatório; Guilherme tomou todas as decisões de visibilidade, licença, marca e projetos ambíguos. A varredura de segredos no histórico de 41 repositórios teve 0 ocorrências. Um merge que conflitava com trabalho mais novo de uma sessão paralela foi abortado em vez de forçado. <strong>Não foi trabalho pago para cliente.</strong></p>
+<p class="more">→ <a href="https://github.com/lughlammas/ai-coordinator-portfolio/blob/main/case-studies/github-project-estate-consolidation.md">github.com/lughlammas/ai-coordinator-portfolio/blob/main/case-studies/github-project-estate-consolidation.md</a></p>
+<h2>O que não afirmamos</h2>
+<p>Não há números de produtividade, velocidade ou qualidade para este método. Ele define um processo; sozinho, não prova que algum produto passou no QA.</p>
+<p class="more">→ <a href="https://github.com/lughlammas/ai-coordinator-portfolio">Leia o método</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">
 <p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana (human-directed AI-assisted development).</p>
+<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
 <p><a href="https://github.com/lughlammas">GitHub</a></p>
 </div>
 </footer>
