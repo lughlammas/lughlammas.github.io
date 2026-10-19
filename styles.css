@@ -94,6 +94,7 @@
   /* ---- Layers ---- */
   --z-header: 50;
   --header-h: 3.5rem;
+  --scroll-offset: 73px;    /* single anchor/focus offset under the sticky header (= site scroll-margin-top) */
 
   color-scheme: light;
 }
@@ -109,7 +110,11 @@
 
 /* ===== Base ===== */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + var(--sp-4)); }
+/* Sticky-header offset: ONE mechanism only. scroll-padding-top stays 0 on purpose;
+   the offset lives in scroll-margin-top on targets (site: 73px, per Lugh). Using both
+   stacked (~145px) and pushed focused/anchored content too far down (Luna, 2026-10-19). */
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 0; }
+[id] { scroll-margin-top: var(--scroll-offset); }
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -147,6 +152,7 @@ code, kbd, samp, .mono { font-family: var(--font-mono); font-size: 0.92em; }
   background: var(--c-ink); color: var(--c-surface); padding: var(--sp-2) var(--sp-4); border-radius: var(--r-md);
 }
 .skip-link:focus { top: var(--sp-3); color: var(--c-surface); }
+main:focus { outline: none; } /* programmatic focus target of the skip link (tabindex="-1") */
 
 /* Mono uppercase label (kicker, meta) */
 .label {
@@ -468,10 +474,6 @@ legend { font-weight: var(--fw-semi); font-size: var(--fs-sm); padding: 0; margi
 .hero .btn-row{margin-top:var(--sp-5)}
 .stage--grid .stage__media{display:grid;grid-template-columns:1fr;gap:1px;background:var(--c-stage-line);align-items:start}
 @media (min-width:48rem){.stage--grid .stage__media{grid-template-columns:repeat(2,1fr)}}
-/* Focus / anchor targets clear the sticky header (Crono RC finding 3).
-   Offset = header bar min-height (--header-h, 3.5rem) + its 1px bottom border (--bw) + --sp-4 gap
-   = 73px, measured 57px header in Chrome at 360/768/1280. It lives on the targets (scroll-margin-top);
-   html scroll-padding-top from components.css is reset so the offset is not applied twice. */
-:root{--scroll-offset:calc(var(--header-h) + var(--bw) + var(--sp-4))}
-html{scroll-padding-top:0}
-:target,[id],a,button,input,select,textarea,summary,[tabindex],.card{scroll-margin-top:var(--scroll-offset)}
+/* Focusable targets use Vênus's single offset (tokens.css --scroll-offset: 73px; components.css already
+   sets it on [id] and keeps html scroll-padding-top: 0). Extends it to focusables, no second offset. */
+a,button,input,select,textarea,summary,[tabindex],.card{scroll-margin-top:var(--scroll-offset)}

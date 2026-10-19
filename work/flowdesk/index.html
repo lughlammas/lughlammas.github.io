@@ -89,20 +89,20 @@
 <figure class="stage stage--pair">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>local only · not deployed</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1054" loading="lazy" decoding="async" alt="FLOWDESK ticket at 1280px after a rule-based suggestion: synthetic billing ticket &#x27;Charged twice for October&#x27;, triage billing/high with the matched rule reasons, editable classification, the label &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, an editable suggested reply, Save edit/Approve/Reject buttons and a six-entry event history with webhook delivery attempts.">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="3148" loading="lazy" decoding="async" alt="The same FLOWDESK suggestion state at 390px mobile width, with the simulation label above the editable reply.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1104" loading="lazy" decoding="async" alt="FLOWDESK ticket #7 at 1280px after a rule-based suggestion: synthetic billing ticket &#x27;Charged twice for October&#x27;, triage billing/high with the matched rule reasons, editable classification, the label &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, an editable suggested reply, Save edit/Approve/Reject buttons and a three-entry event history, each entry with its webhook attempts collapsed beneath it.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="3104" loading="lazy" decoding="async" alt="The same FLOWDESK suggestion state at 390px mobile width, with the simulation label above the editable reply.">
 </div>
-<figcaption>Real capture · FLOWDESK commit 905a387 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:04–10:06 BRT</figcaption>
+<figcaption>Real capture · FLOWDESK commit b9e77fb · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:22–10:24 BRT</figcaption>
 </figure>
 <figure class="stage stage--grid">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>reject → reason required</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-08-reject-reason-empty-1280.webp" width="1168" height="1286" loading="lazy" decoding="async" alt="FLOWDESK at 1280px, second synthetic ticket &#x27;Pricing for 5 seats&#x27; (sales/medium) after Reject: an inline, empty field for the rejection reason, with focus on it, and Confirm rejection/Cancel buttons.">
-<img src="/assets/img/flowdesk-08b-reject-reason-error-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK at 1280px after Confirm rejection with an empty reason: the field is marked invalid with the error &#x27;Please give a reason of at least 3 characters.&#x27;">
-<img src="/assets/img/flowdesk-09-reject-reason-filled-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK at 1280px with the rejection reason filled in: &#x27;Pricing needs a human quote, not a template&#x27;.">
-<img src="/assets/img/flowdesk-10-rejected-1280.webp" width="1168" height="1056" loading="lazy" decoding="async" alt="FLOWDESK at 1280px after the rejection: state rejected, the suggested reply read-only, &#x27;rejected by demo-reviewer — reason: Pricing needs a human quote, not a template · response_sent: false&#x27;, a Register (log &amp; close) button and an eight-entry event history.">
+<img src="/assets/img/flowdesk-08-reject-reason-empty-1280.webp" width="1168" height="1336" loading="lazy" decoding="async" alt="FLOWDESK at 1280px, second synthetic ticket #8 &#x27;Pricing for 5 seats&#x27; (sales/medium) after Reject: an inline, empty field for the rejection reason, with focus on it, Confirm rejection/Cancel buttons, and Save edit/Approve disabled.">
+<img src="/assets/img/flowdesk-08b-reject-reason-error-1280.webp" width="1168" height="1362" loading="lazy" decoding="async" alt="FLOWDESK at 1280px after Confirm rejection with an empty reason: the field is marked invalid with the error &#x27;Please give a reason of at least 3 characters.&#x27;">
+<img src="/assets/img/flowdesk-09-reject-reason-filled-1280.webp" width="1168" height="1336" loading="lazy" decoding="async" alt="FLOWDESK at 1280px with the rejection reason filled in, &#x27;Pricing needs a human quote, not a template&#x27;: the error is cleared and Save edit/Approve stay disabled.">
+<img src="/assets/img/flowdesk-10-rejected-1280.webp" width="1168" height="1114" loading="lazy" decoding="async" alt="FLOWDESK at 1280px after the rejection: state rejected, the suggested reply read-only, &#x27;rejected by demo-reviewer — reason: Pricing needs a human quote, not a template · response_sent: false&#x27;, a Register (log &amp; close) button and a four-entry event history with collapsed webhook attempts.">
 </div>
-<figcaption>Real capture · FLOWDESK commit 905a387 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:04–10:06 BRT</figcaption>
+<figcaption>Real capture · FLOWDESK commit b9e77fb · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:22–10:24 BRT</figcaption>
 </figure></section>
 <section id="c-arch" aria-labelledby="c-arch-h"><h2 id="c-arch-h"><span class="num">04</span>Architecture</h2>
 <p>A Cloudflare Worker serving a static interface and a REST API, with a D1 (SQLite) database. Data is isolated per visitor sandbox. Locally it runs on <code>wrangler dev --local</code> (miniflare/workerd). Suggestions come from a pluggable provider interface. The only provider today is the rules simulation, so connecting a real model later would mean adding a provider, which needs an authorised provider.</p>
@@ -128,23 +128,30 @@
   - A forged webhook signature returns 401.
 - <strong>An external webhook receiver</strong> verified every signed event it received.
 - <strong>Security checks:</strong>
-  - a mutation check on the isolation, authentication, expiry, rate-limit and retry code, in which every mutant was caught;
   - static checks;
   - gitleaks and trufflehog, both run locally, with no findings;
   - <code>npm audit</code> with no vulnerabilities.</p>
-<p>Counts from the local run of 2026-10-19 (tested commit <code>1b489bf</code>, code identical to <code>905a387</code>), reproduced independently by QA: 88/88 unit and integration tests, 50/50 browser checks, 16/16 mutants caught, 5/5 webhook signatures verified by an external receiver.</p>
+<p>Counts from the local run of 2026-10-19 at commit <code>b9e77fb</code>, reproduced independently by QA: 94/94 unit and integration tests, 64/64 browser checks, 5/5 webhook signatures verified by an external receiver.</p>
 <h3>Links</h3>
 <ul>
 <li>Public repository: none yet. Internal test log, repository not yet public.</li>
-<li>Commit: <code>905a387</code> (local, no public URL).</li>
+<li>Commit: <code>b9e77fb</code> (local, no public URL).</li>
 </ul>
 <figure class="stage stage--pair">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>approved → logged</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1112" loading="lazy" decoding="async" alt="FLOWDESK ticket at 1280px after human approval and logging: state logged, the simulation label marked &#x27;edited by a human&#x27;, the approved response read-only, &#x27;approved by demo-reviewer · response_sent: false (demo never sends email)&#x27; and an eleven-entry event history of state changes, the reviewer&#x27;s edit and webhook delivery attempts.">
-<img src="/assets/img/flowdesk-07-logged-history-390.webp" width="716" height="3516" loading="lazy" decoding="async" alt="The same logged FLOWDESK ticket at 390px mobile width, with the approved response and the full event history.">
+<img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1186" loading="lazy" decoding="async" alt="FLOWDESK ticket #7 at 1280px after human approval and logging: state logged, the simulation label marked &#x27;edited by a human&#x27;, the approved response read-only, &#x27;approved by demo-reviewer · response_sent: false (demo never sends email)&#x27; and a six-entry event history (state changes and the reviewer&#x27;s edit), with the webhook attempts collapsed under each state change.">
+<img src="/assets/img/flowdesk-07-logged-history-390.webp" width="716" height="3424" loading="lazy" decoding="async" alt="The same logged FLOWDESK ticket at 390px mobile width, with the approved response and the event history.">
 </div>
-<figcaption>Real capture · FLOWDESK commit 905a387 · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:04–10:06 BRT</figcaption>
+<figcaption>Real capture · FLOWDESK commit b9e77fb · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:22–10:24 BRT</figcaption>
+</figure>
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>webhook attempts expanded</span></div>
+<div class="stage__media">
+<img src="/assets/img/flowdesk-07b-logged-history-attempts-expanded-1280.webp" width="1168" height="1214" loading="lazy" decoding="async" alt="The same logged FLOWDESK ticket #7 at 1280px with the first webhook group expanded: &#x27;webhook ticket.new: 1 attempt · delivered 200&#x27; opens to show attempt 1/3, delivered 200.">
+<img src="/assets/img/flowdesk-07b-logged-history-attempts-expanded-390.webp" width="716" height="3528" loading="lazy" decoding="async" alt="The same expanded webhook attempt group at 390px mobile width.">
+</div>
+<figcaption>Real capture · FLOWDESK commit b9e77fb · local run (wrangler dev --local), synthetic data · not deployed · 2026-10-19 10:22–10:24 BRT</figcaption>
 </figure></section>
 <section id="c-roles" aria-labelledby="c-roles-h"><h2 id="c-roles-h"><span class="num">06</span>Human role and AI tools</h2>
 <p>Human approval is a step <strong>inside the product</strong>: nothing is approved or registered without a person acting, and every action is logged with its author. The software was built through human-directed AI-assisted development.</p>
@@ -171,10 +178,6 @@
 <td>passed</td>
 </tr>
 <tr>
-<td>Mutation check (isolation, auth, expiry, rate limit, retry)</td>
-<td>every mutant caught</td>
-</tr>
-<tr>
 <td>Static security checks; gitleaks; trufflehog (local)</td>
 <td>passed, no findings</td>
 </tr>
@@ -192,7 +195,7 @@
 </tr>
 <tr>
 <td>axe-core / pa11y (local, QA)</td>
-<td>axe: no violations in 9 interface states; pa11y: 2 open issues</td>
+<td>axe: no violations in 9 interface states; pa11y: no errors (4/4 interface states checked)</td>
 </tr>
 </tbody>
 </table></div>
@@ -204,7 +207,7 @@
 <li><strong>No remote CI.</strong> A workflow file exists, but the repository has no remote, so it has never run.</li>
 <li><strong>Webhook retry is not durable.</strong> Retries run in the same request lifecycle. Without Cloudflare Queues, pending attempts can be lost if the worker is stopped.</li>
 <li><strong>No scheduled sandbox cleanup.</strong> Expired sandboxes are removed only when accessed or through the admin route; there is no scheduled job.</li>
-<li><strong>Accessibility was checked only automatically</strong> (axe-core, pa11y) on a local server, with no screen-reader test; pa11y still reports two open issues.</li>
+<li><strong>Accessibility was checked only automatically</strong> (axe-core, pa11y) on a local server, with no screen-reader test.</li>
 <li>Visitors are anonymous and the admin uses a single shared token; there are no user accounts.</li>
 <li>The rate limit is a simple fixed window, not abuse-grade.</li>
 <li>The interface is in English, apart from the Portuguese simulation label.</li>

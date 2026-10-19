@@ -89,20 +89,20 @@
 <figure class="stage stage--pair">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>só local · sem deploy</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1054" loading="lazy" decoding="async" alt="Ticket do FLOWDESK em 1280px após a sugestão por regras: ticket sintético de cobrança &#x27;Charged twice for October&#x27;, triagem billing/high com os motivos das regras, classificação editável, o rótulo &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, resposta sugerida editável, botões Save edit/Approve/Reject e histórico de seis eventos com as tentativas de webhook.">
-<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="3148" loading="lazy" decoding="async" alt="O mesmo estado de sugestão do FLOWDESK em 390px (celular), com o rótulo de simulação acima da resposta editável.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1104" loading="lazy" decoding="async" alt="Ticket #7 do FLOWDESK em 1280px após a sugestão por regras: ticket sintético de cobrança &#x27;Charged twice for October&#x27;, triagem billing/high com os motivos das regras, classificação editável, o rótulo &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, resposta sugerida editável, botões Save edit/Approve/Reject e histórico de três eventos, cada um com as tentativas de webhook recolhidas logo abaixo.">
+<img src="/assets/img/flowdesk-05-suggestion-sim-label-390.webp" width="716" height="3104" loading="lazy" decoding="async" alt="O mesmo estado de sugestão do FLOWDESK em 390px (celular), com o rótulo de simulação acima da resposta editável.">
 </div>
-<figcaption>Captura real · FLOWDESK commit 905a387 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:04–10:06 BRT</figcaption>
+<figcaption>Captura real · FLOWDESK commit b9e77fb · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:22–10:24 BRT</figcaption>
 </figure>
 <figure class="stage stage--grid">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>rejeitar → motivo obrigatório</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-08-reject-reason-empty-1280.webp" width="1168" height="1286" loading="lazy" decoding="async" alt="FLOWDESK em 1280px, segundo ticket sintético &#x27;Pricing for 5 seats&#x27; (sales/medium) depois de Reject: campo do motivo da rejeição na própria tela, vazio e com o foco, e botões Confirm rejection/Cancel.">
-<img src="/assets/img/flowdesk-08b-reject-reason-error-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK em 1280px depois de Confirm rejection com o motivo vazio: o campo fica marcado como inválido, com o erro &#x27;Please give a reason of at least 3 characters.&#x27;">
-<img src="/assets/img/flowdesk-09-reject-reason-filled-1280.webp" width="1168" height="1312" loading="lazy" decoding="async" alt="FLOWDESK em 1280px com o motivo da rejeição preenchido: &#x27;Pricing needs a human quote, not a template&#x27;.">
-<img src="/assets/img/flowdesk-10-rejected-1280.webp" width="1168" height="1056" loading="lazy" decoding="async" alt="FLOWDESK em 1280px após a rejeição: estado rejected, resposta sugerida só para leitura, &#x27;rejected by demo-reviewer — reason: Pricing needs a human quote, not a template · response_sent: false&#x27;, botão Register (log &amp; close) e histórico de oito eventos.">
+<img src="/assets/img/flowdesk-08-reject-reason-empty-1280.webp" width="1168" height="1336" loading="lazy" decoding="async" alt="FLOWDESK em 1280px, segundo ticket sintético #8 &#x27;Pricing for 5 seats&#x27; (sales/medium) depois de Reject: campo do motivo da rejeição na própria tela, vazio e com o foco, botões Confirm rejection/Cancel, e Save edit/Approve desativados.">
+<img src="/assets/img/flowdesk-08b-reject-reason-error-1280.webp" width="1168" height="1362" loading="lazy" decoding="async" alt="FLOWDESK em 1280px depois de Confirm rejection com o motivo vazio: o campo fica marcado como inválido, com o erro &#x27;Please give a reason of at least 3 characters.&#x27;">
+<img src="/assets/img/flowdesk-09-reject-reason-filled-1280.webp" width="1168" height="1336" loading="lazy" decoding="async" alt="FLOWDESK em 1280px com o motivo da rejeição preenchido, &#x27;Pricing needs a human quote, not a template&#x27;: o erro some e Save edit/Approve continuam desativados.">
+<img src="/assets/img/flowdesk-10-rejected-1280.webp" width="1168" height="1114" loading="lazy" decoding="async" alt="FLOWDESK em 1280px após a rejeição: estado rejected, resposta sugerida só para leitura, &#x27;rejected by demo-reviewer — reason: Pricing needs a human quote, not a template · response_sent: false&#x27;, botão Register (log &amp; close) e histórico de quatro eventos com as tentativas de webhook recolhidas.">
 </div>
-<figcaption>Captura real · FLOWDESK commit 905a387 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:04–10:06 BRT</figcaption>
+<figcaption>Captura real · FLOWDESK commit b9e77fb · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:22–10:24 BRT</figcaption>
 </figure></section>
 <section id="c-arch" aria-labelledby="c-arch-h"><h2 id="c-arch-h"><span class="num">04</span>Arquitetura</h2>
 <p>Um Cloudflare Worker que serve uma interface estática e uma API REST, com banco D1 (SQLite). Os dados ficam isolados por sandbox de visitante. Localmente, roda com <code>wrangler dev --local</code> (miniflare/workerd). As sugestões vêm de uma interface de provedor substituível. Hoje o único provedor é a simulação por regras, então conectar um modelo real depois significa acrescentar um provedor, o que exige um provedor autorizado.</p>
@@ -128,23 +128,30 @@
   - Uma assinatura de webhook forjada responde 401.
 - <strong>Um receptor externo de webhook</strong> conferiu todos os eventos assinados que recebeu.
 - <strong>Checagens de segurança:</strong>
-  - um teste de mutação no código de isolamento, autenticação, expiração, limites de envio e novas tentativas, em que todas as mutações foram detectadas;
   - as checagens estáticas;
   - gitleaks e trufflehog, rodados localmente, sem achados;
   - <code>npm audit</code> sem vulnerabilidades.</p>
-<p>Contagens da execução local de 19/10/2026 (commit testado <code>1b489bf</code>, código idêntico ao <code>905a387</code>), reproduzidas de forma independente pelo QA: 88/88 testes unitários e de integração, 50/50 checagens no navegador, 16/16 mutações detectadas, 5/5 assinaturas de webhook conferidas por um receptor externo.</p>
+<p>Contagens da execução local de 19/10/2026 no commit <code>b9e77fb</code>, reproduzidas de forma independente pelo QA: 94/94 testes unitários e de integração, 64/64 checagens no navegador, 5/5 assinaturas de webhook conferidas por um receptor externo.</p>
 <h3>Links</h3>
 <ul>
 <li>Repositório público: ainda não há. Log de testes interno, repositório ainda não público.</li>
-<li>Commit: <code>905a387</code> (local, sem URL pública).</li>
+<li>Commit: <code>b9e77fb</code> (local, sem URL pública).</li>
 </ul>
 <figure class="stage stage--pair">
 <div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>aprovado → registrado</span></div>
 <div class="stage__media">
-<img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1112" loading="lazy" decoding="async" alt="Ticket do FLOWDESK em 1280px após aprovação humana e registro: estado logged, o rótulo de simulação marcado &#x27;edited by a human&#x27;, a resposta aprovada só para leitura, &#x27;approved by demo-reviewer · response_sent: false (demo never sends email)&#x27; e histórico de onze eventos com as mudanças de estado, a edição do revisor e as tentativas de webhook.">
-<img src="/assets/img/flowdesk-07-logged-history-390.webp" width="716" height="3516" loading="lazy" decoding="async" alt="O mesmo ticket registrado do FLOWDESK em 390px (celular), com a resposta aprovada e o histórico completo.">
+<img src="/assets/img/flowdesk-07-logged-history-1280.webp" width="1168" height="1186" loading="lazy" decoding="async" alt="Ticket #7 do FLOWDESK em 1280px após aprovação humana e registro: estado logged, o rótulo de simulação marcado &#x27;edited by a human&#x27;, a resposta aprovada só para leitura, &#x27;approved by demo-reviewer · response_sent: false (demo never sends email)&#x27; e histórico de seis eventos (mudanças de estado e a edição do revisor), com as tentativas de webhook recolhidas sob cada mudança de estado.">
+<img src="/assets/img/flowdesk-07-logged-history-390.webp" width="716" height="3424" loading="lazy" decoding="async" alt="O mesmo ticket registrado do FLOWDESK em 390px (celular), com a resposta aprovada e o histórico de eventos.">
 </div>
-<figcaption>Captura real · FLOWDESK commit 905a387 · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:04–10:06 BRT</figcaption>
+<figcaption>Captura real · FLOWDESK commit b9e77fb · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:22–10:24 BRT</figcaption>
+</figure>
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>flowdesk</span><span class="sep">·</span><span>tentativas de webhook abertas</span></div>
+<div class="stage__media">
+<img src="/assets/img/flowdesk-07b-logged-history-attempts-expanded-1280.webp" width="1168" height="1214" loading="lazy" decoding="async" alt="O mesmo ticket #7 registrado do FLOWDESK em 1280px com o primeiro grupo de webhook aberto: &#x27;webhook ticket.new: 1 attempt · delivered 200&#x27; mostra a tentativa 1/3, entregue com 200.">
+<img src="/assets/img/flowdesk-07b-logged-history-attempts-expanded-390.webp" width="716" height="3528" loading="lazy" decoding="async" alt="O mesmo grupo de tentativas de webhook aberto, em 390px (celular).">
+</div>
+<figcaption>Captura real · FLOWDESK commit b9e77fb · execução local (wrangler dev --local), dados sintéticos · sem deploy · 19/10/2026 10:22–10:24 BRT</figcaption>
 </figure></section>
 <section id="c-roles" aria-labelledby="c-roles-h"><h2 id="c-roles-h"><span class="num">06</span>Papel humano e ferramentas de IA</h2>
 <p>A aprovação humana é uma etapa <strong>dentro do produto</strong>: nada é aprovado nem registrado sem a ação de uma pessoa, e toda ação fica registrada com o autor. O software foi feito com desenvolvimento assistido por IA sob direção humana.</p>
@@ -171,10 +178,6 @@
 <td>passaram</td>
 </tr>
 <tr>
-<td>Teste de mutação (isolamento, autenticação, expiração, limites, novas tentativas)</td>
-<td>todas as mutações detectadas</td>
-</tr>
-<tr>
 <td>Checagens estáticas de segurança; gitleaks; trufflehog (local)</td>
 <td>passaram, sem achados</td>
 </tr>
@@ -192,7 +195,7 @@
 </tr>
 <tr>
 <td>axe-core / pa11y (local, QA)</td>
-<td>axe: nenhuma violação em 9 estados da interface; pa11y: 2 problemas em aberto</td>
+<td>axe: nenhuma violação em 9 estados da interface; pa11y: nenhum erro (4/4 estados da interface verificados)</td>
 </tr>
 </tbody>
 </table></div>
@@ -204,7 +207,7 @@
 <li><strong>Sem CI remoto.</strong> O arquivo de workflow existe, mas o repositório não tem remoto, então ele nunca rodou.</li>
 <li><strong>As novas tentativas de webhook não são duráveis.</strong> Elas rodam no mesmo ciclo da requisição. Sem o Cloudflare Queues, tentativas pendentes podem se perder se o worker for encerrado.</li>
 <li><strong>Sem limpeza agendada dos sandboxes.</strong> Os sandboxes expirados só são removidos quando acessados ou pela rota de administração; não há tarefa agendada.</li>
-<li><strong>A acessibilidade foi verificada só de forma automática</strong> (axe-core, pa11y) num servidor local, sem teste com leitor de tela; o pa11y ainda aponta dois problemas em aberto.</li>
+<li><strong>A acessibilidade foi verificada só de forma automática</strong> (axe-core, pa11y) num servidor local, sem teste com leitor de tela.</li>
 <li>Os visitantes são anônimos e a administração usa um único token compartilhado; não há contas de usuário.</li>
 <li>O limite de envios é uma janela fixa simples, não serve contra abuso.</li>
 <li>A interface está em inglês, com exceção do rótulo de simulação em português.</li>
