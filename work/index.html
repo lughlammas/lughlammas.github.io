@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Work · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. Work">
+<title>Work — ARBOCK LABS</title>
+<meta name="description" content="Public projects with their tests, CI status and limitations stated. No client names, no invented metrics.">
 <link rel="canonical" href="https://lughlammas.github.io/work/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/">
@@ -30,17 +30,35 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <h1>Work</h1>
-<ul class="card-grid">
-<li class="card"><h2><a href="/work/flowdesk/">FLOWDESK</a></h2><!-- TODO: copy (Hermes) copy/en/work.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p></li>
-<li class="card"><h2><a href="/work/comercial-template/">Comercial Template</a></h2><!-- TODO: copy (Hermes) copy/en/work.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p></li>
-<li class="card"><h2><a href="/work/sherlock/">SHERLOCK</a></h2><!-- TODO: copy (Hermes) copy/en/work.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p></li>
-</ul>
-</section>
+<p>Public repositories by Guilherme Cavalcanti under ARBOCK LABS. For each project we show what it is, what was tested, and what was not. Test counts come from runs recorded on 2026-10-19 unless stated otherwise.</p>
+<hr />
+<h2>Case studies</h2>
+<h3>comercial-template</h3>
+<p><strong>What it is:</strong> a full-stack Next.js application for client records and commercial proposals, with authentication, per-user persistence, line-item totals and server-generated PDFs.
+<strong>Tested:</strong> 24/24 unit tests passed; typecheck clean. The "Web validation" CI workflow passed on the current commit.
+<strong>Not done:</strong> no hosted demo; Docker image not verified.</p>
+<p class="more">→ <a href="/work/comercial-template/">comercial-template</a></p>
+<h3>SHERLOCK</h3>
+<p><strong>What it is:</strong> a chess analysis environment. A React interface talks to a native chess engine only through a WebSocket controller and a UCI adapter; an Android build runs the engine as a native process.
+<strong>Tested:</strong> 8/8 parser and session tests passed (mocked engine output); typecheck clean.
+<strong>Not done:</strong> no CI; engine smoke tests not run; no strength or performance benchmark.</p>
+<p class="more">→ <a href="/work/sherlock/">SHERLOCK</a></p>
+<h3>FLOWDESK · AI Operations Demo</h3>
+<p><strong>What it is:</strong> a demo of an operations flow: form → triage → reply suggestion → human approval → log.
+<strong>Status:</strong> local demo, hosting pending. Tests not yet recorded.</p>
+<p class="more">→ <a href="/work/flowdesk/">FLOWDESK</a></p>
+<hr />
+<h2>Other public projects</h2>
+<h3>MIME</h3>
+<p>An offline chess line trainer: the app shows a line, you repeat it, and a wrong move resets the drill. <strong>21/21 tests passed.</strong></p>
+<p class="more">→ <a href="https://github.com/lughlammas/mime">Public repository</a></p>
+<hr />
+<h2>Method</h2>
+<p>How these projects were built, through human-directed AI-assisted development, is documented separately.</p>
+<p class="more">→ <a href="/methodology/">Methodology</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">

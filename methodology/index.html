@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Methodology · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. Methodology">
+<title>Methodology — Human-directed AI-assisted development · ARBOCK LABS</title>
+<meta name="description" content="How ARBOCK LABS uses AI tools: a person sets the goal, assigns the work, inspects the result and is accountable for what ships. A documented method, not an autonomous platform.">
 <link rel="canonical" href="https://lughlammas.github.io/methodology/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/methodology/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/methodology/">
@@ -30,11 +30,35 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
-<h1>Methodology</h1>
-<!-- TODO: copy (Hermes) copy/en/methodology.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p>
-</section>
+<article class="wrap section">
+<h1>Human-directed AI-assisted development</h1>
+<p>AI tools write a lot of code quickly. Whether that code works, is honest about its limits and can be maintained depends on the person directing the tools. This page describes how that direction works here.</p>
+<blockquote>
+<p><strong>What this is not.</strong> The method is written in the public repository <strong>AI Coordinator Portfolio</strong>, which contains playbooks, role definitions, prompt templates and decision records. It contains no agent runtime, scheduler or orchestration service, and it does not run anything by itself. It is a method, not a platform or a product.</p>
+</blockquote>
+<hr />
+<h2>1. A person owns the objective</h2>
+<p>Guilherme sets the goal, the constraints and the approval gates, and gives final acceptance. Escalations and decisions go to him.</p>
+<h2>2. The problem becomes checkable criteria</h2>
+<p>Each cycle starts with a briefing: problem, audience, constraints, what already exists and an observable definition of success. It produces <strong>5 to 10 pass/fail acceptance criteria</strong>, with scope in and out written down.</p>
+<h2>3. Work is assigned by role</h2>
+<p>Product, Code, QA, Docs and Commercial are roles. Each one can be filled by a person, by an AI tool under supervision, or by both, and each role has a minimum artifact to hand over.</p>
+<h2>4. Every handoff is written</h2>
+<p>A handoff records what was delivered, what is pending, which criteria to validate now, <strong>how to verify them (commands and steps)</strong>, and the blockers.</p>
+<h2>5. Results are inspected, and rejected when needed</h2>
+<p>QA sends reproducible bugs back. Work outside the criteria is not accepted. When something is ambiguous (two versions of a project, missing source, a branch conflict), work on that item stops and the question is reported rather than guessed.</p>
+<h2>6. Only executed checks count</h2>
+<p>"Report only checks actually performed and results actually observed." A test counts as passing only after it has run, and the command goes in the log. This site follows the same rule: every number on it points to a test log or a CI record.</p>
+<h2>7. Irreversible actions wait for the owner</h2>
+<p>Deleting branches or releases, changing visibility or licences, rewriting history and touching secrets all need explicit approval from the owner.</p>
+<hr />
+<h2>Applied example</h2>
+<p><strong>GitHub &amp; Project Estate Consolidation:</strong> a self-directed audit and consolidation of Guilherme's own GitHub account and workspace. AI coding agents did the inventory, comparisons, scans, edits and report drafting; Guilherme made every decision on visibility, licensing, branding and ambiguous projects. A secret scan over the history of 41 repositories returned 0 findings. A merge that conflicted with newer work from a parallel agent session was aborted rather than forced. <strong>Not paid client work.</strong></p>
+<p class="more">→ <a href="https://github.com/lughlammas/ai-coordinator-portfolio/blob/main/case-studies/github-project-estate-consolidation.md">github.com/lughlammas/ai-coordinator-portfolio/blob/main/case-studies/github-project-estate-consolidation.md</a></p>
+<h2>What we do not claim</h2>
+<p>No productivity, speed or quality figures are claimed for this method. It defines a process; it does not prove by itself that any product passed QA.</p>
+<p class="more">→ <a href="https://github.com/lughlammas/ai-coordinator-portfolio">Read the method</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">

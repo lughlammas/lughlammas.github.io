@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SHERLOCK — case study · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. SHERLOCK — case study">
+<title>SHERLOCK — Case study · ARBOCK LABS</title>
+<meta name="description" content="A chess analysis environment connecting a React interface to a native UCI engine through a WebSocket controller and an adapter, with an Android build. 8/8 tests; limits stated.">
 <link rel="canonical" href="https://lughlammas.github.io/work/sherlock/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/sherlock/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/sherlock/">
@@ -30,13 +30,77 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <nav aria-label="Breadcrumb" class="crumbs"><a href="/work/">Work</a></nav>
-<h1>SHERLOCK — case study</h1>
-<p>Measured 2026-10-19: <code>npm test</code> 8/8 passed; no CI workflow yet (source: sprint INVENTARIO.md).</p>
-<!-- TODO: copy (Hermes) copy/en/work-sherlock.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p>
-</section>
+<h1>SHERLOCK</h1>
+<p>A visual chess investigation and analysis environment.
+Repository: <a href="https://github.com/lughlammas/sherlock">https://github.com/lughlammas/sherlock</a> · commit <code>e632035</code> · Android release v0.1.3</p>
+<h2>1. Problem</h2>
+<p>A chess engine is a command-line program that speaks a text protocol (UCI). Putting it behind a visual interface raises integration problems: starting and stopping the process, parsing its output, cancelling a search, and making sure that a late answer from an old search never overwrites the current position.</p>
+<h2>2. Context</h2>
+<p>Its own project, also used as an engineering showcase. It integrates the engine Lughnasadh, version 0.2. A newer engine version (0.4.0) is maintained separately and has <strong>not</strong> been integrated or validated in SHERLOCK.</p>
+<h2>3. Solution</h2>
+<ul>
+<li>Responsive board; load, copy and reset positions (FEN).</li>
+<li>Analysis by depth or by time, with live depth, nodes, speed, evaluation and principal line, and a stop button.</li>
+<li>Clear states: ready, investigating, best move, engine error (with retry and restart).</li>
+<li>A mode in which two engine processes play each other.</li>
+<li>An Android version.</li>
+</ul>
+<h2>4. Architecture</h2>
+<p>Browser (React) → WebSocket → SHERLOCK controller → Lughnasadh adapter → engine as a child process. The interface <strong>never</strong> speaks raw UCI; the adapter owns the protocol, timeouts and <strong>session tokens</strong>, so stale replies are discarded, and the board position survives an engine timeout, crash or restart.
+On Android, the same interface runs in a WebView and reaches the native engine through a JavaScript bridge and <code>ProcessBuilder</code>, with no Node or WebSocket dependency in the APK.</p>
+<h2>5. Evidence</h2>
+<ul>
+<li><strong>8/8 tests passed</strong> in the run for this site on 2026-10-19: 6 UCI-parser tests and 2 session tests, including "drops stale info when session rotates". Typecheck clean.</li>
+<li><strong>Release v0.1.3</strong> with its APK is public on GitHub, and the repository publishes the APK's SHA-256.</li>
+</ul>
+<h2>6. Human role and AI tools</h2>
+<p>Built through human-directed AI-assisted development.</p>
+<h2>7. Tests executed</h2>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Result</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm test</code> (mock engine output, no binary)</td>
+<td>8/8 passed</td>
+<td>run on 2026-10-19</td>
+</tr>
+<tr>
+<td>typecheck (client + server)</td>
+<td>exit 0</td>
+<td>run on 2026-10-19</td>
+</tr>
+<tr>
+<td>Engine smoke (<code>npm run smoke</code>, <code>smoke:match</code>)</td>
+<td><strong>not run</strong> (needs the native binary)</td>
+<td></td>
+</tr>
+<tr>
+<td>CI</td>
+<td><strong>none</strong>: the repository has no workflow</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>8. Limitations</h2>
+<ul>
+<li>No continuous integration.</li>
+<li>Tests use mocked engine lines; real-engine behaviour is covered only by smoke scripts that were not run here.</li>
+<li>Integrated engine is version 0.2; 0.4.0 not integrated.</li>
+<li>No playing-strength or performance benchmark.</li>
+<li>Engine-versus-engine mode runs two processes and uses substantial battery and memory.</li>
+</ul>
+<h2>9. Commercial relevance</h2>
+<p>SHERLOCK shows integration work: a native process, a text protocol, a real-time interface and mobile packaging, with the failure cases (timeouts, crashes, late replies) handled explicitly. That is the kind of plumbing behind <strong>S02 · Custom Software</strong> and the diagnosis in <strong>S03 · AI Code Rescue</strong>.</p>
+<p class="more">→ <a href="/services/">Services</a> · <a href="/contact/">Discuss Your Project</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">

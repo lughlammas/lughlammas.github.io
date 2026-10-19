@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FLOWDESK — AI Operations Demo · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. FLOWDESK — AI Operations Demo">
+<title>FLOWDESK · AI Operations Demo (in development) · ARBOCK LABS</title>
+<meta name="description" content="FLOWDESK is an AI-operations demo in development: request form, triage, reply suggestion, human approval and event log.">
 <link rel="canonical" href="https://lughlammas.github.io/work/flowdesk/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/work/flowdesk/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/work/flowdesk/">
@@ -30,13 +30,47 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <nav aria-label="Breadcrumb" class="crumbs"><a href="/work/">Work</a></nav>
-<h1>FLOWDESK — AI Operations Demo</h1>
-<p>Demo in development. Response suggestions are rule-based: "Simulação (regras) — não é um modelo de IA".</p>
-<!-- TODO: copy (Hermes) copy/en/work-flowdesk.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p>
-</section>
+<blockquote>
+<p><strong>Status: in development.</strong> FLOWDESK is not built or hosted yet. This page describes what is being built and how it will be verified. Sections 5 and 7 stay empty until there are results.</p>
+</blockquote>
+<h1>FLOWDESK · AI Operations Demo</h1>
+<h2>1. Problem</h2>
+<p>Requests arrive through forms and inboxes. Someone reads each one, decides what it is and how urgent it is, writes a reply and keeps track of it. Most of that is routine, but the reply still needs a person's judgement.</p>
+<h2>2. Context</h2>
+<p>FLOWDESK is ARBOCK LABS' demonstration for <strong>S01 · Business Automation &amp; AI</strong>. It uses synthetic data only.</p>
+<h2>3. Solution (planned)</h2>
+<p><strong>Form → Triage → Reply suggestion → Human approval → Record.</strong>
+1. A request form.
+2. Persistence and a list and detail view.
+3. Automatic category and priority.
+4. An editable reply suggestion.
+5. Approve or reject.
+6. An event history for each request.
+7. A responsive panel.
+8. An API and webhook.
+9. Error and empty states.
+10. Documentation.</p>
+<p><strong>About the "AI":</strong> in this demo, the reply suggestion is generated <strong>by rules</strong> and labelled <strong>"Simulation (rules) — not an AI model"</strong> in the interface and in the API. The suggestion layer sits behind a provider interface, so a real language model can be connected later, only with an authorised provider. A fixed rule is never presented as a model.</p>
+<h2>4. Architecture (planned)</h2>
+<p>A static front end on the site, with an API on Cloudflare Workers and a D1 database (free tier), developed and tested locally first. The Cloudflare account does not exist yet.</p>
+<h2>5. Evidence</h2>
+<p><em>Pending. No code has been committed yet.</em></p>
+<h2>6. Human role and AI tools</h2>
+<p>Human approval is a required step <strong>in the product itself</strong>: nothing counts as "replied" without a person approving it, and the demo sends no real email. The software is built through human-directed AI-assisted development.</p>
+<h2>7. Tests executed</h2>
+<p><em>Pending. Unit and integration tests in CI are acceptance criteria for this demo.</em></p>
+<h2>8. Limitations (known in advance)</h2>
+<ul>
+<li>The reply suggestion is rule-based, not a language model.</li>
+<li>Not hosted yet (account pending).</li>
+<li>Free-tier limits apply once hosted.</li>
+</ul>
+<h2>9. Commercial relevance</h2>
+<p>It shows the shape of an automation in which software does the sorting and drafting and a person keeps the decision. That is the core of <strong>S01</strong>.</p>
+<p class="more">→ <a href="/services/#s01">S01 · Business Automation &amp; AI</a> · <a href="/contact/">Discuss Your Project</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">

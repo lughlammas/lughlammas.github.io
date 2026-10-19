@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Services · ARBOCK LABS</title>
-<meta name="description" content="ARBOCK LABS — Independent Software &amp; Applied AI Studio. Services">
+<title>Services — ARBOCK LABS</title>
+<meta name="description" content="AI Code Rescue, custom software and MVPs, and business automation, each starting with an assessment and ending with tests, documentation and a verifiable handoff.">
 <link rel="canonical" href="https://lughlammas.github.io/services/">
 <link rel="alternate" hreflang="en" href="https://lughlammas.github.io/services/">
 <link rel="alternate" hreflang="pt-BR" href="https://lughlammas.github.io/pt/services/">
@@ -30,16 +30,108 @@
 </div>
 </header>
 <main id="main" tabindex="-1">
-<section class="wrap section">
+<article class="wrap section">
 <h1>Services</h1>
-<p>No recovery, security or deployment outcome is promised before an assessment.</p>
-<section class="card" aria-labelledby="s1"><h2 id="s1">S01 · Business Automation &amp; AI</h2><!-- TODO: copy (Hermes) copy/en/services.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p></section>
-<section class="card" aria-labelledby="s2"><h2 id="s2">S02 · Custom Software &amp; MVP Development</h2><!-- TODO: copy (Hermes) copy/en/services.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p></section>
-<section class="card" aria-labelledby="s3"><h2 id="s3">S03 · AI Code Rescue &amp; Technical Delivery</h2><!-- TODO: copy (Hermes) copy/en/services.md -->
-<p class="todo">TODO: copy (Hermes) — placeholder text, final copy pending.</p></section>
-</section>
+<p>Three offers. Each begins with an assessment and ends with something you can run, test and read. We do not quote fixed results before seeing the code or the process.</p>
+<hr />
+<h2 id="s03">S03 · AI Code Rescue &amp; Technical Delivery <em>(priority offer)</em></h2>
+<h3>For whom</h3>
+<p>You used an AI coding tool, or several, and now have a codebase that almost works. It may also be code you inherited without the person who wrote it.</p>
+<h3>Problems this addresses</h3>
+<ul>
+<li>The project does not install, build or start on a clean machine.</li>
+<li>Tests are missing, or exist and fail, or pass without testing anything that matters.</li>
+<li>The README describes features that the code does not have, or omits ones it does.</li>
+<li>Secrets, keys or personal data sit next to the source code or in the history.</li>
+<li>Duplicated folders, copies and branches, and nobody knows which one is canonical.</li>
+<li>Dependencies with known security advisories.</li>
+<li>Nobody can say what is safe to deploy.</li>
+</ul>
+<h3>What you receive</h3>
+<ol>
+<li><strong>Assessment report:</strong> inventory of what exists; what installs, builds and runs, with the exact commands and outputs; README claims versus reality; risks, sorted into "safe to change", "needs review" and "needs your approval".</li>
+<li><strong>Stabilisation plan:</strong> an ordered list of fixes with an acceptance criterion for each, which you approve before implementation begins.</li>
+<li><strong>Implementation of the approved items:</strong> small commits on a separate branch, never force-pushed to your main branch.</li>
+<li><strong>Verification log:</strong> every test, build or check reported with its command and output. A check that was not run is listed as not run.</li>
+<li><strong>Handoff:</strong> an updated README, a list of known limitations, and what remains open.</li>
+</ol>
+<h3>How we validate</h3>
+<ul>
+<li>Nothing counts as "passing" unless it was executed; command and output go in the log.</li>
+<li>README statements are checked against the code and the running build, not the other way round.</li>
+<li>Where there is ambiguity (two candidate versions, missing source), work on that item stops and the question goes to you instead of being guessed.</li>
+<li>Irreversible actions (deleting branches or history, changing visibility or licences, touching secrets or production) only happen with your explicit approval.</li>
+</ul>
+<h3>What we do NOT promise</h3>
+<ul>
+<li>We do not promise that every project can be rescued. Sometimes the assessment concludes that rewriting is cheaper; you will hear that before spending more.</li>
+<li>We do not promise security. We report the advisories, secrets and risks we found with the tools we ran. That is not a security audit or a certification.</li>
+<li>We do not promise deployment or uptime before assessing the target environment.</li>
+<li>We do not promise performance numbers we have not measured.</li>
+<li>We do not rewrite your Git history or delete anything without your written approval.</li>
+</ul>
+<h3>Evidence of this way of working</h3>
+<p>These are our own projects, not client rescues:
+- A self-directed audit and consolidation of a full GitHub account and local workspace: inventory, duplicate detection, a secret scan over the history of 41 repositories with 0 findings, and a stop on every ambiguous project. <strong>Not paid client work.</strong>
+- In comercial-template, a critical framework advisory was cleared by updating Next.js (commit <code>0e9e5db</code>), and the remaining advisories are documented rather than hidden.</p>
+<p class="more">→ <a href="/contact/">Discuss Your Project</a></p>
+<hr />
+<h2 id="s02">S02 · Custom Software &amp; MVP Development</h2>
+<h3>For whom</h3>
+<p>You need a first working version of a web application: enough to show, test with real users or build on.</p>
+<h3>What you receive</h3>
+<ul>
+<li>A scoped first version: the core workflow, authentication where needed, persistence, and the screens that matter.</li>
+<li>Automated tests for the logic that carries risk (money, permissions, data ownership).</li>
+<li>A README with setup, the run command, a list of what is implemented, and the known limitations.</li>
+<li>A versioned repository with readable history.</li>
+<li>Synthetic seed data for demos, never your real data.</li>
+</ul>
+<h3>How we validate</h3>
+<ul>
+<li>Pass/fail acceptance criteria are agreed before the build starts.</li>
+<li>Tests are run and their output recorded; CI is set up where the project allows.</li>
+<li>Limitations are written down in the delivery, not discovered later.</li>
+</ul>
+<h3>What we do NOT promise</h3>
+<ul>
+<li>No production hosting, scaling or security guarantees unless they are scoped and assessed separately.</li>
+<li>No features beyond the agreed criteria inside the same scope.</li>
+</ul>
+<h3>Reference project</h3>
+<p><strong>comercial-template:</strong> authentication, per-user data scoping, client and proposal workflows, server-side PDF; 24/24 unit tests passed and CI passed on the current commit. Its documented limits include no hosted deployment and an unverified Docker image.</p>
+<p class="more">→ <a href="/work/comercial-template/">comercial-template</a></p>
+<hr />
+<h2 id="s01">S01 · Business Automation &amp; AI</h2>
+<h3>For whom</h3>
+<p>Anyone who handles the same intake, triage and reply work every day.</p>
+<h3>What you receive</h3>
+<ul>
+<li>A mapped process: where requests arrive, how they are classified, who decides.</li>
+<li>A working flow: intake → automatic triage → suggested response → <strong>human approval</strong> → record.</li>
+<li>A clear label on every automated step stating whether it is a rule or a language model. A fixed rule is never presented as AI.</li>
+<li>AI providers connected only with your authorisation and account, behind an interface that can be swapped.</li>
+<li>Logs and an event history so you can see what happened and why.</li>
+</ul>
+<h3>How we validate</h3>
+<ul>
+<li>Each step of the flow is tested with synthetic data.</li>
+<li>Nothing is sent to your customers without a person approving it.</li>
+</ul>
+<h3>What we do NOT promise</h3>
+<ul>
+<li>No guaranteed time or cost savings. We have not measured any yet, so we do not quote any.</li>
+<li>No fully automatic replies to your customers.</li>
+<li>No AI provider costs hidden in the price: if a paid model is needed, that is your decision and your account.</li>
+</ul>
+<h3>Reference project</h3>
+<p><strong>FLOWDESK</strong> is the demo for this offer. It is a <strong>local demo, hosting pending</strong>.</p>
+<p class="more">→ <a href="/work/flowdesk/">FLOWDESK</a></p>
+<hr />
+<h2>Not sure which one fits?</h2>
+<p>Describe the problem; the assessment decides the path.</p>
+<p class="more">→ <a href="/contact/">Contact</a></p>
+</article>
 </main>
 <footer class="site-footer">
 <div class="wrap">
