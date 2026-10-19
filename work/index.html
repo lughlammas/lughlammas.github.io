@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/">ARBOCK LABS</a>
-<nav aria-label="Main">
+<div class="container site-header__bar">
+<a class="brand" href="/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Primary">
+<ul class="nav-list">
+<li><a href="/services/">Services</a></li>
+<li><a href="/work/" aria-current="page">Work</a></li>
+<li><a href="/methodology/">Methodology</a></li>
+<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/work/" hreflang="en" lang="en" aria-current="true">EN</a>
+<a href="/pt/work/" hreflang="pt-BR" lang="pt-BR">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/contact/">Discuss Your Project</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Primary (mobile)">
 <ul class="nav-list">
 <li><a href="/services/">Services</a></li>
 <li><a href="/work/" aria-current="page">Work</a></li>
@@ -26,45 +45,62 @@
 <li><a href="/contact/">Contact</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/pt/work/" hreflang="pt-BR" lang="pt-BR">Português</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<article class="wrap section">
+<div class="section"><div class="container">
+<header class="section__head">
+<p class="label">Work</p>
 <h1>Work</h1>
-<p>Public repositories by Guilherme Cavalcanti under ARBOCK LABS. For each project we show what it is, what was tested, and what was not. Test counts come from runs recorded on 2026-10-19 unless stated otherwise.</p>
-<hr />
-<h2>Case studies</h2>
-<h3>comercial-template</h3>
+<p>Public repositories by Guilherme Cavalcanti under ARBOCK LABS. For each project we show what it is, what was tested, and what was not. Test counts come from runs recorded on 2026-10-19 unless stated otherwise.</p></header>
+<section class="section__head" aria-labelledby="w-0"><h2 id="w-0">Case studies</h2><div class="card-grid card-grid--3"><article class="card project-card"><div class="project-card__media"><img src="/assets/img/comercial-template-04-dashboard.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Comercial Template dashboard at 1440px: client count, recent proposals and their total for a synthetic test user (Alex Reviewer)."></div><div class="project-card__body"><div class="project-card__meta"><span class="tag tag--ok">tests passed</span></div><h3>comercial-template</h3>
 <p><strong>What it is:</strong> a full-stack Next.js application for client records and commercial proposals, with authentication, per-user persistence, line-item totals and server-generated PDFs.
 <strong>Tested:</strong> 24/24 unit tests passed; typecheck clean. The "Web validation" CI workflow passed on the current commit.
 <strong>Not done:</strong> no hosted demo; Docker image not verified.</p>
-<p class="more">→ <a href="/work/comercial-template/">comercial-template</a></p>
-<h3>SHERLOCK</h3>
+<p class="more">→ <a href="/work/comercial-template/">comercial-template</a></p></div></article><article class="card project-card"><div class="project-card__media"><img src="/assets/img/sherlock-02-hub-1440.webp" width="1440" height="900" loading="lazy" decoding="async" alt="SHERLOCK hub screen at 1440px: chessboard in the starting position and a case-file menu with Play, Analyze and Train options."></div><div class="project-card__body"><div class="project-card__meta"><span class="tag tag--ok">tests passed</span></div><h3>SHERLOCK</h3>
 <p><strong>What it is:</strong> a chess analysis environment. A React interface talks to a native chess engine only through a WebSocket controller and a UCI adapter; an Android build runs the engine as a native process.
 <strong>Tested:</strong> 8/8 parser and session tests passed (mocked engine output); typecheck clean.
 <strong>Not done:</strong> no CI; engine smoke tests not run; no strength or performance benchmark.</p>
-<p class="more">→ <a href="/work/sherlock/">SHERLOCK</a></p>
-<h3>FLOWDESK · AI Operations Demo</h3>
-<p><strong>What it is:</strong> a demo of an operations flow: form → triage → reply suggestion → human approval → log.
-<strong>Status:</strong> local demo, hosting pending. Tests not yet recorded.</p>
-<p class="more">→ <a href="/work/flowdesk/">FLOWDESK</a></p>
-<hr />
-<h2>Other public projects</h2>
-<h3>MIME</h3>
+<p class="more">→ <a href="/work/sherlock/">SHERLOCK</a></p></div></article><article class="card project-card"><div class="project-card__media"><img src="/assets/img/flowdesk-05-suggestion-sim-label-1280.webp" width="1168" height="1004" loading="lazy" decoding="async" alt="FLOWDESK ticket at 1280px after a rule-based suggestion: synthetic billing ticket, triage billing/high, the label &#x27;Simulação (regras) — não é um modelo de IA · provider rules-v1&#x27;, an editable suggested reply and Approve/Reject buttons."></div><div class="project-card__body"><div class="project-card__meta"><span class="tag tag--warn">in development</span><span class="tag tag--sim">Simulação (regras) — não é um modelo de IA</span><span class="tag">local only · not deployed</span></div><h3>FLOWDESK · AI Operations Demo</h3>
+<p><strong>What it is:</strong> a demo of an operations flow: form → rule-based triage → simulated reply suggestion → human approval → log, with signed webhooks.
+<strong>Tested:</strong> 53/53 unit and integration tests; 22/22 browser checks (local server).
+<strong>Not done:</strong> local demo, hosting pending; CI never run; axe and Lighthouse not run.</p>
+<p class="more">→ <a href="/work/flowdesk/">FLOWDESK</a></p></div></article></div></section>
+<section class="section__head" aria-labelledby="w-1"><h2 id="w-1">Other public projects</h2><div class="card-grid card-grid--3"><article class="card project-card"><div class="project-card__body"><h3>MIME</h3>
 <p>An offline chess line trainer: the app shows a line, you repeat it, and a wrong move resets the drill. <strong>21/21 tests passed.</strong></p>
-<p class="more">→ <a href="https://github.com/lughlammas/mime">Public repository</a></p>
-<hr />
-<h2>Method</h2>
-<p>How these projects were built, through human-directed AI-assisted development, is documented separately.</p>
-<p class="more">→ <a href="/methodology/">Methodology</a></p>
-</article>
+<p class="more">→ <a href="https://github.com/lughlammas/mime">Public repository</a></p></div></article></div></section>
+<section class="section__head" aria-labelledby="w-2"><h2 id="w-2">Method</h2><p>How these projects were built, through human-directed AI-assisted development, is documented separately.</p>
+<p class="more">→ <a href="/methodology/">Methodology</a></p></section>
+</div></div>
+<section class="section" aria-labelledby="cta-title">
+<div class="container">
+<div class="cta">
+<div>
+<h2 id="cta-title">Have a problem that should become software?</h2>
+<p>Describe what you have and what is not working.</p>
+</div>
+<div class="btn-row">
+<a class="btn btn--primary" href="/contact/">Discuss Your Project</a>
+<a class="btn btn--secondary" href="/work/">See the work</a>
+</div>
+</div>
+</div>
+</section>
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Independent studio led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Work</h2><ul><li><a href="/work/flowdesk/">FLOWDESK</a></li><li><a href="/work/comercial-template/">Comercial Template</a></li><li><a href="/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Language</h2><ul><li><a href="/work/" hreflang="en" lang="en">English</a></li><li><a href="/pt/work/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>

@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/pt/">ARBOCK LABS</a>
-<nav aria-label="Principal">
+<div class="container site-header__bar">
+<a class="brand" href="/pt/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Principal">
+<ul class="nav-list">
+<li><a href="/pt/services/" aria-current="page">Serviços</a></li>
+<li><a href="/pt/work/">Projetos</a></li>
+<li><a href="/pt/methodology/">Metodologia</a></li>
+<li><a href="/pt/about/">Sobre</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/services/" hreflang="en" lang="en">EN</a>
+<a href="/pt/services/" hreflang="pt-BR" lang="pt-BR" aria-current="true">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/pt/contact/">Solicite uma proposta</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Principal (celular)">
 <ul class="nav-list">
 <li><a href="/pt/services/" aria-current="page">Serviços</a></li>
 <li><a href="/pt/work/">Projetos</a></li>
@@ -26,15 +45,22 @@
 <li><a href="/pt/contact/">Contato</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/services/" hreflang="en" lang="en">English</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<article class="wrap section">
+<div class="section"><div class="container">
+<header class="section__head">
+<p class="label">Serviços</p>
 <h1>Serviços</h1>
+
 <p>São três ofertas. Cada uma começa com uma avaliação e termina com algo que você pode rodar, testar e ler. Não prometemos resultado fechado antes de ver o código ou o processo.</p>
 <hr />
-<h2 id="s03">S03 · AI Code Rescue &amp; Technical Delivery <em>(oferta prioritária)</em></h2>
+</header>
+<nav class="case-toc anchor-nav" aria-label="Nesta página"><ol><li><a href="#s03">S03</a></li><li><a href="#s02">S02</a></li><li><a href="#s01">S01</a></li></ol></nav>
+<div class="prose"><section class="service-block service-card--priority" aria-labelledby="s03"><h2 id="s03">S03 · AI Code Rescue &amp; Technical Delivery <em>(oferta prioritária)</em></h2>
+
 <p><em>Resgate de código feito com IA e entrega técnica.</em></p>
 <h3>Para quem</h3>
 <p>Para quem usou uma ou várias ferramentas de IA para programar e agora tem um código que quase funciona. Ou para quem herdou um código sem a pessoa que o escreveu.</p>
@@ -63,21 +89,24 @@
 <li>Diante de ambiguidade (duas versões candidatas, fonte faltando), o trabalho para naquele item e a dúvida vai para você, sem chute.</li>
 <li>Ações irreversíveis (apagar branches ou histórico, mudar visibilidade ou licença, mexer em segredos ou em produção) só acontecem com a sua aprovação explícita.</li>
 </ul>
-<h3>O que NÃO prometemos</h3>
+<div class="service-card__not"><h3>O que NÃO prometemos</h3>
 <ul>
 <li>Que todo projeto tem salvação. Às vezes a avaliação conclui que reescrever sai mais barato, e você fica sabendo disso antes de gastar mais.</li>
 <li>Segurança. Relatamos os alertas, segredos e riscos que as ferramentas que rodamos encontraram. Isso não é auditoria nem certificação de segurança.</li>
 <li>Deploy ou disponibilidade antes de avaliar o ambiente de destino.</li>
 <li>Números de desempenho que não medimos.</li>
 <li>Reescrever o seu histórico Git ou apagar qualquer coisa sem a sua aprovação por escrito.</li>
-</ul>
+</ul></div>
 <h3>Evidência desse jeito de trabalhar</h3>
 <p>São projetos próprios, não resgates para clientes:
 - A auditoria e consolidação, por iniciativa própria, de uma conta inteira do GitHub e de um workspace local: inventário, detecção de duplicados, varredura de segredos no histórico de 41 repositórios (0 ocorrências) e parada em cada projeto ambíguo. <strong>Não foi trabalho pago para cliente.</strong>
 - No comercial-template, um alerta crítico do framework foi eliminado com a atualização do Next.js (commit <code>0e9e5db</code>), e os alertas restantes estão documentados, não escondidos.</p>
 <p class="more">→ <a href="/pt/contact/">Solicite uma proposta</a></p>
 <hr />
-<h2 id="s02">S02 · Custom Software &amp; MVP Development</h2>
+
+<p class="more">→ <a href="/pt/contact/?service=s03">Conversar sobre este serviço</a></p></section>
+<section class="service-block" aria-labelledby="s02"><h2 id="s02">S02 · Custom Software &amp; MVP Development</h2>
+
 <p><em>Software sob medida e desenvolvimento de MVP.</em></p>
 <h3>Para quem</h3>
 <p>Para quem precisa de uma primeira versão funcional de uma aplicação web, suficiente para mostrar, testar com usuários reais ou servir de base.</p>
@@ -95,16 +124,19 @@
 <li>Os testes são rodados e a saída fica registrada; o CI é configurado quando o projeto permite.</li>
 <li>As limitações vão escritas na entrega, em vez de serem descobertas depois.</li>
 </ul>
-<h3>O que NÃO prometemos</h3>
+<div class="service-card__not"><h3>O que NÃO prometemos</h3>
 <ul>
 <li>Garantias de hospedagem em produção, escala ou segurança, a não ser que tenham escopo e avaliação próprios.</li>
 <li>Funcionalidades além dos critérios combinados dentro do mesmo escopo.</li>
-</ul>
+</ul></div>
 <h3>Projeto de referência</h3>
 <p><strong>comercial-template:</strong> autenticação, dados isolados por usuário, fluxos de clientes e propostas e PDF no servidor. Passou em 24/24 testes unitários e o CI passou no commit atual. Entre as limitações documentadas estão a falta de deploy hospedado e a imagem Docker não verificada.</p>
 <p class="more">→ <a href="/pt/work/comercial-template/">comercial-template</a></p>
 <hr />
-<h2 id="s01">S01 · Business Automation &amp; AI</h2>
+
+<p class="more">→ <a href="/pt/contact/?service=s02">Conversar sobre este serviço</a></p></section>
+<section class="service-block" aria-labelledby="s01"><h2 id="s01">S01 · Business Automation &amp; AI</h2>
+
 <p><em>Automação de processos de negócio com IA.</em></p>
 <h3>Para quem</h3>
 <p>Para quem faz todo dia a mesma recepção, triagem e resposta de pedidos.</p>
@@ -121,26 +153,50 @@
 <li>Cada etapa do fluxo é testada com dados sintéticos.</li>
 <li>Nada é enviado aos seus clientes sem uma pessoa aprovar.</li>
 </ul>
-<h3>O que NÃO prometemos</h3>
+<div class="service-card__not"><h3>O que NÃO prometemos</h3>
 <ul>
 <li>Economia garantida de tempo ou de custo. Ainda não medimos nenhuma, então não citamos nenhuma.</li>
 <li>Respostas totalmente automáticas aos seus clientes.</li>
 <li>Custo de provedor de IA escondido no preço: se for preciso um modelo pago, a decisão e a conta são suas.</li>
-</ul>
+</ul></div>
 <h3>Projeto de referência</h3>
-<p><strong>FLOWDESK</strong> é a demonstração desta oferta. É uma <strong>demo local, com hospedagem pendente</strong>.</p>
+<p><strong>FLOWDESK</strong> é a demonstração desta oferta. É uma <strong>demo local, com hospedagem pendente</strong>; as sugestões de resposta são uma simulação por regras.</p>
 <p class="more">→ <a href="/pt/work/flowdesk/">FLOWDESK</a></p>
 <hr />
-<h2>Não sabe qual serve?</h2>
+
+<p class="more">→ <a href="/pt/contact/?service=s01">Conversar sobre este serviço</a></p></section>
+<section class="service-block"><h2>Não sabe qual serve?</h2>
+
 <p>Descreva o problema; a avaliação define o caminho.</p>
-<p class="more">→ <a href="/pt/contact/">Contato</a></p>
-</article>
+<p class="more">→ <a href="/pt/contact/">Contato</a></p></section></div>
+</div></div>
+<section class="section" aria-labelledby="cta-title">
+<div class="container">
+<div class="cta">
+<div>
+<h2 id="cta-title">Tem um problema que deveria virar software?</h2>
+<p>Conte o que você tem e o que não está funcionando.</p>
+</div>
+<div class="btn-row">
+<a class="btn btn--primary" href="/pt/contact/">Solicite uma proposta</a>
+<a class="btn btn--secondary" href="/pt/work/">Ver os projetos</a>
+</div>
+</div>
+</div>
+</section>
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/pt/services/">Serviços</a></li><li><a href="/pt/work/">Projetos</a></li><li><a href="/pt/methodology/">Metodologia</a></li><li><a href="/pt/about/">Sobre</a></li><li><a href="/pt/contact/">Contato</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Projetos</h2><ul><li><a href="/pt/work/flowdesk/">FLOWDESK</a></li><li><a href="/pt/work/comercial-template/">Comercial Template</a></li><li><a href="/pt/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Idioma</h2><ul><li><a href="/services/" hreflang="en" lang="en">English</a></li><li><a href="/pt/services/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>

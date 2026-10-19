@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/">ARBOCK LABS</a>
-<nav aria-label="Main">
+<div class="container site-header__bar">
+<a class="brand" href="/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Primary">
+<ul class="nav-list">
+<li><a href="/services/">Services</a></li>
+<li><a href="/work/">Work</a></li>
+<li><a href="/methodology/">Methodology</a></li>
+<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/contact/" hreflang="en" lang="en" aria-current="true">EN</a>
+<a href="/pt/contact/" hreflang="pt-BR" lang="pt-BR">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/contact/">Discuss Your Project</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Primary (mobile)">
 <ul class="nav-list">
 <li><a href="/services/">Services</a></li>
 <li><a href="/work/">Work</a></li>
@@ -26,14 +45,19 @@
 <li><a href="/contact/" aria-current="page">Contact</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/pt/contact/" hreflang="pt-BR" lang="pt-BR">Português</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<article class="wrap section">
+<div class="section"><div class="container container--narrow">
+<header class="section__head">
+<p class="label">Contact</p>
 <h1>Discuss Your Project</h1>
+
 <p>Tell us what you have, what is not working, and what "done" would look like for you. The first step is always an assessment, not a quote.</p>
-<h2>Useful to include</h2>
+</header>
+<section><h2>Useful to include</h2>
 <ul>
 <li>What the software or process is supposed to do.</li>
 <li>What exists today (repository, prototype, spreadsheet, nothing yet).</li>
@@ -41,31 +65,43 @@
 <li>Constraints: deadline, budget range, hosting, data sensitivity.</li>
 <li>Which offer seems closest: S01 Automation, S02 MVP or S03 AI Code Rescue.</li>
 </ul>
-<h2>Contact channel</h2>
-<blockquote>
+</section>
+<section aria-labelledby="ch-h"><h2 id="ch-h">Contact channel</h2>
 <p><strong>Pending configuration.</strong> The contact channel for ARBOCK LABS has not been set up yet. No address is shown until a real, monitored one exists.</p>
-</blockquote>
-<p class="notice" role="status"><strong>Pendente de configuração / Pending configuration.</strong> This form does not send anything yet.</p>
-<form class="contact-form" id="contact-form" data-disabled="true" novalidate>
-<div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name"></div>
-<div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div>
-<div class="field"><label for="message">Project description</label><textarea id="message" name="message" rows="6"></textarea></div>
-<div class="field"><label for="offer">Offer</label><select id="offer" name="offer"><option value="">—</option><option value="S01">S01 · Business Automation &amp; AI</option><option value="S02">S02 · Custom Software &amp; MVP Development</option><option value="S03">S03 · AI Code Rescue &amp; Technical Delivery</option></select></div>
-<fieldset class="field"><legend>I have a repository</legend>
-<label><input type="radio" name="repo" value="yes"> Yes</label> <label><input type="radio" name="repo" value="no"> No</label></fieldset>
-<button type="submit" disabled aria-describedby="form-pending">Send — Pending configuration</button>
-<p id="form-pending" class="muted">Pendente de configuração / Pending configuration</p>
+<div class="notice notice--warn" role="status">
+<p class="notice__title">Pendente de configuração / Pending configuration</p>
+<p class="notice__body">The contact channel is not configured yet. Nothing you type here is sent.</p>
+</div>
+<form class="form" id="contact-form" novalidate>
+<div class="field"><label class="field__label" for="f-name">Name <span class="req" aria-hidden="true">*</span></label><input class="input" id="f-name" name="name" type="text" autocomplete="name" required></div>
+<div class="field"><label class="field__label" for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" required></div>
+<div class="field"><label class="field__label" for="f-service">Service <span class="opt">(optional)</span></label><select class="select" id="f-service" name="service"><option value="">Not sure yet</option><option value="s01">S01 · Business Automation &amp; AI</option><option value="s02">S02 · Custom Software &amp; MVP Development</option><option value="s03">S03 · AI Code Rescue &amp; Technical Delivery</option></select></div>
+<div class="field"><label class="field__label" for="f-msg">What problem are you trying to solve? <span class="req" aria-hidden="true">*</span></label>
+<p class="field__hint" id="f-msg-hint">A few sentences is enough. Don't include passwords or customer data.</p>
+<textarea class="textarea" id="f-msg" name="message" required aria-describedby="f-msg-hint"></textarea></div>
+<div class="field"><label class="field__label" for="f-repo">Repository URL <span class="opt">(optional, for S03)</span></label><input class="input" id="f-repo" name="repo" type="url" inputmode="url"></div>
+<label class="choice"><input type="checkbox" name="consent"> <span>I understand this message is reviewed by a person before any reply.</span></label>
+<div class="btn-row"><button class="btn btn--primary" type="submit" disabled aria-describedby="f-submit-note">Send</button></div>
+<p class="field__hint" id="f-submit-note">Submit is disabled until a real contact channel is configured (Pending configuration).</p>
 </form>
-<p>Public code profile: <a href="https://github.com/lughlammas">https://github.com/lughlammas</a></p>
-<h2>What happens next</h2>
-<p>You get a reply, and if there is a fit, a short assessment proposal with scope, what will be checked, and what will not be promised.</p>
-</article>
+
+
+<p>Public code profile: <a href="https://github.com/lughlammas">https://github.com/lughlammas</a></p></section>
+</div></div>
+
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Independent studio led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Work</h2><ul><li><a href="/work/flowdesk/">FLOWDESK</a></li><li><a href="/work/comercial-template/">Comercial Template</a></li><li><a href="/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Language</h2><ul><li><a href="/contact/" hreflang="en" lang="en">English</a></li><li><a href="/pt/contact/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>

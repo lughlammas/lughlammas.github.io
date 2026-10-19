@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/">ARBOCK LABS</a>
-<nav aria-label="Main">
+<div class="container site-header__bar">
+<a class="brand" href="/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Primary">
+<ul class="nav-list">
+<li><a href="/services/">Services</a></li>
+<li><a href="/work/" aria-current="page">Work</a></li>
+<li><a href="/methodology/">Methodology</a></li>
+<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/work/comercial-template/" hreflang="en" lang="en" aria-current="true">EN</a>
+<a href="/pt/work/comercial-template/" hreflang="pt-BR" lang="pt-BR">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/contact/">Discuss Your Project</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Primary (mobile)">
 <ul class="nav-list">
 <li><a href="/services/">Services</a></li>
 <li><a href="/work/" aria-current="page">Work</a></li>
@@ -26,29 +45,49 @@
 <li><a href="/contact/">Contact</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/pt/work/comercial-template/" hreflang="pt-BR" lang="pt-BR">Português</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<article class="wrap section">
-<nav aria-label="Breadcrumb" class="crumbs"><a href="/work/">Work</a></nav>
+<div class="section"><div class="container">
+<header class="case-header">
+<p class="label"><a href="/work/">Work</a> / Comercial Template</p>
 <h1>comercial-template</h1>
-<p>A full-stack application for client records and commercial proposals.
-Repository: <a href="https://github.com/lughlammas/comercial-template">https://github.com/lughlammas/comercial-template</a> · commit <code>3ead252</code></p>
-<h2>1. Problem</h2>
+<div class="lede"><p>A full-stack application for client records and commercial proposals.
+Repository: <a href="https://github.com/lughlammas/comercial-template">https://github.com/lughlammas/comercial-template</a> · commit <code>3ead252</code></p></div>
+<dl class="facts"><div><dt>Status</dt><dd>Public repository · not deployed</dd></div><div><dt>Stack</dt><dd>Next.js App Router, TypeScript, Tailwind, NextAuth, Prisma + SQLite, @react-pdf</dd></div><div><dt>Tests run</dt><dd><code>npm test</code> → 24/24 · typecheck exit 0 · 2026-10-19</dd></div><div><dt>Source</dt><dd><a href="https://github.com/lughlammas/comercial-template">github.com/lughlammas/comercial-template</a> @ 3ead252</dd></div></dl>
+
+</header>
+
+<div class="case-layout">
+<nav class="case-toc" aria-label="On this page"><ol><li><a href="#c-problem">Problem</a></li><li><a href="#c-context">Context</a></li><li><a href="#c-solution">Solution</a></li><li><a href="#c-arch">Architecture</a></li><li><a href="#c-evidence">Evidence</a></li><li><a href="#c-roles">Human role and AI tools</a></li><li><a href="#c-tests">Tests executed</a></li><li><a href="#c-limits">Limitations</a></li><li><a href="#c-need">Commercial relevance</a></li></ol></nav>
+<div class="case-body">
+<section id="c-problem" aria-labelledby="c-problem-h"><h2 id="c-problem-h"><span class="num">01</span>Problem</h2>
 <p>The problem this project takes on is proposals written in documents and spreadsheets: totals calculated by hand, no history per client, and a clean PDF that has to be formatted again every time. It tests whether that flow (client → proposal → line items → total → PDF) can be a small, reliable, reusable application.</p>
-<h2>2. Context</h2>
+</section>
+<section id="c-context" aria-labelledby="c-context-h"><h2 id="c-context-h"><span class="num">02</span>Context</h2>
 <p>A demonstration application with a Brazilian Portuguese interface and synthetic seed data. It is not deployed and has no users; no production adoption is claimed.</p>
-<h2>3. Solution</h2>
+</section>
+<section id="c-solution" aria-labelledby="c-solution-h"><h2 id="c-solution-h"><span class="num">03</span>Solution</h2>
 <ul>
 <li>Email and password registration and login, with bcrypt-hashed passwords and JWT sessions.</li>
 <li>A protected dashboard, plus creation, listing and detail views for clients and proposals.</li>
 <li>Line items with quantities, prices and totals rounded to cents.</li>
 <li>A PDF of each proposal generated on the server and downloaded only by its owner.</li>
 </ul>
-<h2>4. Architecture</h2>
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>comercial-template</span><span class="sep">·</span><span>proposal detail</span></div>
+<div class="stage__media">
+<img src="/assets/img/comercial-template-07-proposal-detail.webp" width="1440" height="900" loading="lazy" decoding="async" alt="Comercial Template proposal detail at 1440px: line items, quantities, prices, total and a Download PDF button, synthetic data.">
+<img src="/assets/img/comercial-template-m03-proposal-detail-390.webp" width="780" height="1688" loading="lazy" decoding="async" alt="Comercial Template proposal detail at 390px mobile width, seeded fictional proposal with line items and total.">
+</div>
+<figcaption>Real capture · commit 3ead252 · local run, synthetic data (<code>scripts/e2e-smoke.mjs</code> + seeded demo) · 2026-10-19 09:23 BRT</figcaption>
+</figure></section>
+<section id="c-arch" aria-labelledby="c-arch-h"><h2 id="c-arch-h"><span class="num">04</span>Architecture</h2>
 <p>A single Next.js App Router application in TypeScript. Pages are React Server Components that query the database through Prisma (SQLite); writes go through Server Actions; one route handler renders PDFs with @react-pdf/renderer. Middleware blocks protected routes without a session. A Dockerfile and a standalone build are configured.</p>
-<h2>5. Evidence</h2>
+</section>
+<section id="c-evidence" aria-labelledby="c-evidence-h"><h2 id="c-evidence-h"><span class="num">05</span>Evidence</h2>
 <ul>
 <li><strong>24/24 unit tests passed</strong> (4 files: money, server actions, middleware, PDF route), and the typecheck is clean, in the run for this site on 2026-10-19.</li>
 <li><strong>CI passed</strong> on the current commit. The "Web validation" workflow runs install, lint, unit tests, production build, typecheck and a browser smoke test against the production build.</li>
@@ -65,10 +104,12 @@ Repository: <a href="https://github.com/lughlammas/comercial-template">https://g
 <li>Product walkthrough with the documented 2026-10-07 browser run: <a href="https://github.com/lughlammas/comercial-template/blob/3ead2526b0a2d5e5f7970b539016dba8f56def3c/docs/PRODUCT_WALKTHROUGH.md">https://github.com/lughlammas/comercial-template/blob/3ead2526b0a2d5e5f7970b539016dba8f56def3c/docs/PRODUCT_WALKTHROUGH.md</a></li>
 <li>Local test log of the 24/24 run for this site: not public. It is kept in the sprint workspace (<code>logs/comercial-template-test.log</code>), and the public CI run above covers the same tests.</li>
 </ul>
-<h2>6. Human role and AI tools</h2>
+</section>
+<section id="c-roles" aria-labelledby="c-roles-h"><h2 id="c-roles-h"><span class="num">06</span>Human role and AI tools</h2>
 <p>Built through human-directed AI-assisted development: AI tools contributed to product, implementation, QA and documentation, under human direction. The repository contains application source, not an agent platform.</p>
-<h2>7. Tests executed</h2>
-<table>
+</section>
+<section id="c-tests" aria-labelledby="c-tests-h"><h2 id="c-tests-h"><span class="num">07</span>Tests executed</h2>
+<div class="table-wrap"><table class="table">
 <thead>
 <tr>
 <th>Check</th>
@@ -103,8 +144,9 @@ Repository: <a href="https://github.com/lughlammas/comercial-template">https://g
 <td></td>
 </tr>
 </tbody>
-</table>
-<h2>8. Limitations</h2>
+</table></div>
+</section>
+<section id="c-limits" class="limitations" aria-labelledby="c-limits-h"><h2 id="c-limits-h"><span class="num">08</span>Limitations</h2>
 <ul>
 <li>No hosted demo or deployment.</li>
 <li>Docker image not verified: the Dockerfile copies a <code>public/</code> folder that does not exist.</li>
@@ -112,20 +154,47 @@ Repository: <a href="https://github.com/lughlammas/comercial-template">https://g
 <li>No email verification, password reset or login rate limiting.</li>
 <li>Money stored as floating point (rounded per line); BRL and pt-BR hard-coded.</li>
 <li>Schema applied with <code>db push</code>, without migration history.</li>
-<li>11 high-severity advisories remain in tooling dependencies (0 critical).</li>
+<li>11 high-severity advisories remain in tooling and optional dependencies (0 critical), per <code>npm audit</code> on 2026-10-19.</li>
 <li>No performance, accessibility or security tests.</li>
+<li>Header overflows horizontally below ~420 px (measured at 360/390 px); 'Ver demo' button contrast 1.04:1 and footer text 3.66:1 (WCAG AA requires 4.5:1).</li>
 <li>No LICENSE file.</li>
 </ul>
-<h2>9. Commercial relevance</h2>
+</section>
+<section id="c-need" aria-labelledby="c-need-h"><h2 id="c-need-h"><span class="num">09</span>Commercial relevance</h2>
 <p>This is the reference for <strong>S02 · Custom Software &amp; MVP</strong>: authentication, data ownership, a money calculation with tests, and a document output, delivered with its limits stated. It is also a base that can be adapted to similar flows (quotes, receipts, simple contracts) after an assessment of what each one needs.</p>
 <p class="more">→ <a href="/services/index.html#s02">S02 · Custom Software &amp; MVP Development</a> · <a href="/contact/">Discuss Your Project</a></p>
-</article>
+</section>
+<nav class="pager" aria-label="Case study"><a href="/work/flowdesk/">← Previous case: FLOWDESK</a><a href="/work/sherlock/">Next case: SHERLOCK →</a></nav>
+</div>
+</div>
+</div></div>
+<section class="section" aria-labelledby="cta-title">
+<div class="container">
+<div class="cta">
+<div>
+<h2 id="cta-title">Have a problem that should become software?</h2>
+<p>Describe what you have and what is not working.</p>
+</div>
+<div class="btn-row">
+<a class="btn btn--primary" href="/contact/">Discuss Your Project</a>
+<a class="btn btn--secondary" href="/work/">See the work</a>
+</div>
+</div>
+</div>
+</section>
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Independent studio led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Work</h2><ul><li><a href="/work/flowdesk/">FLOWDESK</a></li><li><a href="/work/comercial-template/">Comercial Template</a></li><li><a href="/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Language</h2><ul><li><a href="/work/comercial-template/" hreflang="en" lang="en">English</a></li><li><a href="/pt/work/comercial-template/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>

@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/pt/">ARBOCK LABS</a>
-<nav aria-label="Principal">
+<div class="container site-header__bar">
+<a class="brand" href="/pt/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Principal">
+<ul class="nav-list">
+<li><a href="/pt/services/">Serviços</a></li>
+<li><a href="/pt/work/">Projetos</a></li>
+<li><a href="/pt/methodology/" aria-current="page">Metodologia</a></li>
+<li><a href="/pt/about/">Sobre</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/methodology/" hreflang="en" lang="en">EN</a>
+<a href="/pt/methodology/" hreflang="pt-BR" lang="pt-BR" aria-current="true">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/pt/contact/">Solicite uma proposta</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Principal (celular)">
 <ul class="nav-list">
 <li><a href="/pt/services/">Serviços</a></li>
 <li><a href="/pt/work/">Projetos</a></li>
@@ -26,45 +45,73 @@
 <li><a href="/pt/contact/">Contato</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/methodology/" hreflang="en" lang="en">English</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<article class="wrap section">
+<div class="section"><div class="container">
+<header class="section__head">
+<p class="label">Metodologia</p>
 <h1>Desenvolvimento assistido por IA sob direção humana</h1>
+
 <p>Ferramentas de IA escrevem muito código, e rápido. Se esse código funciona, se é honesto sobre os próprios limites e se dá para manter depende de quem dirige as ferramentas. Esta página descreve como essa direção funciona aqui.</p>
 <blockquote>
 <p><strong>O que isto não é.</strong> O método está escrito no repositório público <strong>AI Coordinator Portfolio</strong>, que reúne playbooks, definições de papéis, modelos de prompt e registros de decisão. Ele não contém runtime de agentes, agendador nem serviço de orquestração, e não executa nada sozinho. É um método, não uma plataforma nem um produto.</p>
 </blockquote>
 <hr />
-<h2>1. Uma pessoa é dona do objetivo</h2>
+</header>
+<div class="prose"><ol class="steps"><li><div><h2 class="h3">Uma pessoa é dona do objetivo</h2>
 <p>Guilherme define o objetivo, as restrições e os pontos de aprovação, e dá o aceite final. Escalonamentos e decisões vão para ele.</p>
-<h2>2. O problema vira critério verificável</h2>
+</div></li><li><div><h2 class="h3">O problema vira critério verificável</h2>
 <p>Cada ciclo começa com um briefing: problema, público, restrições, o que já existe e uma definição de sucesso observável. Dele saem <strong>de 5 a 10 critérios de aceite do tipo passa/não passa</strong>, com o que está dentro e fora do escopo por escrito.</p>
-<h2>3. O trabalho é distribuído por papel</h2>
+</div></li><li><div><h2 class="h3">O trabalho é distribuído por papel</h2>
 <p>Produto, Código, QA, Docs e Comercial são papéis. Cada um pode ser ocupado por uma pessoa, por uma ferramenta de IA supervisionada ou pelas duas, e cada papel tem um artefato mínimo a entregar ao seguinte.</p>
-<h2>4. Toda passagem de bastão é escrita</h2>
+</div></li><li><div><h2 class="h3">Toda passagem de bastão é escrita</h2>
 <p>O handoff registra o que foi entregue, o que está pendente, quais critérios validar agora, <strong>como verificar (comandos e passos)</strong> e os bloqueios.</p>
-<h2>5. O resultado é inspecionado, e recusado quando preciso</h2>
+</div></li><li><div><h2 class="h3">O resultado é inspecionado, e recusado quando preciso</h2>
 <p>O QA devolve bugs reproduzíveis. Trabalho fora dos critérios não é aceito. Diante de ambiguidade (duas versões de um projeto, fonte faltando, conflito de branch), o trabalho para naquele item e a dúvida é relatada, sem chute.</p>
-<h2>6. Só conta o que foi executado</h2>
-<p>"Relatar apenas checagens efetivamente feitas e resultados efetivamente observados" (tradução nossa de "Report only checks actually performed and results actually observed"). Um teste só conta como aprovado depois de rodar, e o comando vai para o registro. Este site segue a mesma regra: cada número aqui aponta para um log de teste ou um registro de CI.</p>
-<h2>7. Ações irreversíveis esperam o dono</h2>
+</div></li><li><div><h2 class="h3">Só conta o que foi executado</h2>
+<p>"Relatar apenas checagens efetivamente feitas e resultados efetivamente observados" (tradução nossa de "Report only checks actually performed and results actually observed"). Um teste só conta como aprovado depois de rodar, e o comando vai para o registro. Este site segue a mesma regra: cada número aqui aponta para um log de teste, um registro de CI ou um documento citado do repositório.</p>
+</div></li><li><div><h2 class="h3">Ações irreversíveis esperam o dono</h2>
 <p>Apagar branches ou releases, mudar visibilidade ou licença, reescrever histórico e mexer em segredos exigem aprovação explícita do dono.</p>
 <hr />
-<h2>Exemplo aplicado</h2>
+</div></li></ol>
+<section><h2>Exemplo aplicado</h2>
 <p><strong>GitHub &amp; Project Estate Consolidation:</strong> auditoria e consolidação, por iniciativa própria, da conta do GitHub e do workspace do próprio Guilherme. Agentes de IA fizeram o inventário, as comparações, as varreduras, as edições e os rascunhos de relatório; Guilherme tomou todas as decisões de visibilidade, licença, marca e projetos ambíguos. A varredura de segredos no histórico de 41 repositórios teve 0 ocorrências. Um merge que conflitava com trabalho mais novo de uma sessão paralela foi abortado em vez de forçado. <strong>Não foi trabalho pago para cliente.</strong></p>
 <p class="more">→ <a href="https://github.com/lughlammas/ai-coordinator-portfolio/blob/main/case-studies/github-project-estate-consolidation.md">github.com/lughlammas/ai-coordinator-portfolio/blob/main/case-studies/github-project-estate-consolidation.md</a></p>
-<h2>O que não afirmamos</h2>
+</section>
+<section class="limitations"><h2>O que não afirmamos</h2>
 <p>Não há números de produtividade, velocidade ou qualidade para este método. Ele define um processo; sozinho, não prova que algum produto passou no QA.</p>
-<p class="more">→ <a href="https://github.com/lughlammas/ai-coordinator-portfolio">Leia o método</a></p>
-</article>
+<p class="more">→ <a href="https://github.com/lughlammas/ai-coordinator-portfolio">Leia o método</a></p></section></div>
+</div></div>
+<section class="section" aria-labelledby="cta-title">
+<div class="container">
+<div class="cta">
+<div>
+<h2 id="cta-title">Tem um problema que deveria virar software?</h2>
+<p>Conte o que você tem e o que não está funcionando.</p>
+</div>
+<div class="btn-row">
+<a class="btn btn--primary" href="/pt/contact/">Solicite uma proposta</a>
+<a class="btn btn--secondary" href="/pt/work/">Ver os projetos</a>
+</div>
+</div>
+</div>
+</section>
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/pt/services/">Serviços</a></li><li><a href="/pt/work/">Projetos</a></li><li><a href="/pt/methodology/">Metodologia</a></li><li><a href="/pt/about/">Sobre</a></li><li><a href="/pt/contact/">Contato</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Projetos</h2><ul><li><a href="/pt/work/flowdesk/">FLOWDESK</a></li><li><a href="/pt/work/comercial-template/">Comercial Template</a></li><li><a href="/pt/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Idioma</h2><ul><li><a href="/methodology/" hreflang="en" lang="en">English</a></li><li><a href="/pt/methodology/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>

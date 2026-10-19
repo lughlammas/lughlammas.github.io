@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/">ARBOCK LABS</a>
-<nav aria-label="Main">
+<div class="container site-header__bar">
+<a class="brand" href="/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Primary">
+<ul class="nav-list">
+<li><a href="/services/">Services</a></li>
+<li><a href="/work/" aria-current="page">Work</a></li>
+<li><a href="/methodology/">Methodology</a></li>
+<li><a href="/about/">About</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/work/sherlock/" hreflang="en" lang="en" aria-current="true">EN</a>
+<a href="/pt/work/sherlock/" hreflang="pt-BR" lang="pt-BR">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/contact/">Discuss Your Project</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Primary (mobile)">
 <ul class="nav-list">
 <li><a href="/services/">Services</a></li>
 <li><a href="/work/" aria-current="page">Work</a></li>
@@ -26,20 +45,31 @@
 <li><a href="/contact/">Contact</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/pt/work/sherlock/" hreflang="pt-BR" lang="pt-BR">Português</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<article class="wrap section">
-<nav aria-label="Breadcrumb" class="crumbs"><a href="/work/">Work</a></nav>
+<div class="section"><div class="container">
+<header class="case-header">
+<p class="label"><a href="/work/">Work</a> / SHERLOCK</p>
 <h1>SHERLOCK</h1>
-<p>A visual chess investigation and analysis environment.
-Repository: <a href="https://github.com/lughlammas/sherlock">https://github.com/lughlammas/sherlock</a> · commit <code>e632035</code> · Android release v0.1.3</p>
-<h2>1. Problem</h2>
+<div class="lede"><p>A visual chess investigation and analysis environment.
+Repository: <a href="https://github.com/lughlammas/sherlock">https://github.com/lughlammas/sherlock</a> · commit <code>e632035</code> · Android release v0.1.3</p></div>
+<dl class="facts"><div><dt>Status</dt><dd>v0.1.3 · Android APK release</dd></div><div><dt>Stack</dt><dd>React, TypeScript, Vite, Express, WebSocket, chess.js</dd></div><div><dt>Tests run</dt><dd><code>npm test</code> → 8/8 · typecheck exit 0 · 2026-10-19</dd></div><div><dt>Source</dt><dd><a href="https://github.com/lughlammas/sherlock">github.com/lughlammas/sherlock</a> @ e632035</dd></div></dl>
+
+</header>
+
+<div class="case-layout">
+<nav class="case-toc" aria-label="On this page"><ol><li><a href="#c-problem">Problem</a></li><li><a href="#c-context">Context</a></li><li><a href="#c-solution">Solution</a></li><li><a href="#c-arch">Architecture</a></li><li><a href="#c-evidence">Evidence</a></li><li><a href="#c-roles">Human role and AI tools</a></li><li><a href="#c-tests">Tests executed</a></li><li><a href="#c-limits">Limitations</a></li><li><a href="#c-need">Commercial relevance</a></li></ol></nav>
+<div class="case-body">
+<section id="c-problem" aria-labelledby="c-problem-h"><h2 id="c-problem-h"><span class="num">01</span>Problem</h2>
 <p>A chess engine is a command-line program that speaks a text protocol (UCI). Putting it behind a visual interface raises integration problems: starting and stopping the process, parsing its output, cancelling a search, and making sure that a late answer from an old search never overwrites the current position.</p>
-<h2>2. Context</h2>
+</section>
+<section id="c-context" aria-labelledby="c-context-h"><h2 id="c-context-h"><span class="num">02</span>Context</h2>
 <p>Its own project, also used as an engineering showcase. It integrates the engine Lughnasadh, version 0.2. A newer engine version (0.4.0) is maintained separately and has <strong>not</strong> been integrated or validated in SHERLOCK.</p>
-<h2>3. Solution</h2>
+</section>
+<section id="c-solution" aria-labelledby="c-solution-h"><h2 id="c-solution-h"><span class="num">03</span>Solution</h2>
 <ul>
 <li>Responsive board; load, copy and reset positions (FEN).</li>
 <li>Analysis by depth or by time, with live depth, nodes, speed, evaluation and principal line, and a stop button.</li>
@@ -47,10 +77,19 @@ Repository: <a href="https://github.com/lughlammas/sherlock">https://github.com/
 <li>A mode in which two engine processes play each other.</li>
 <li>An Android version.</li>
 </ul>
-<h2>4. Architecture</h2>
-<p>Browser (React) → WebSocket → SHERLOCK controller → Lughnasadh adapter → engine as a child process. The interface <strong>never</strong> speaks raw UCI; the adapter owns the protocol, timeouts and <strong>session tokens</strong>, so stale replies are discarded, and the board position survives an engine timeout, crash or restart.
+<figure class="stage stage--pair">
+<div class="stage__bar"><span>sherlock</span><span class="sep">·</span><span>hub</span></div>
+<div class="stage__media">
+<img src="/assets/img/sherlock-02-hub-1440.webp" width="1440" height="900" loading="lazy" decoding="async" alt="SHERLOCK hub screen at 1440px: chessboard in the starting position and a case-file menu with Play, Analyze and Train options.">
+<img src="/assets/img/sherlock-01-hub-390.webp" width="780" height="1688" loading="lazy" decoding="async" alt="SHERLOCK hub screen at 390px mobile width: chessboard above the case-file menu.">
+</div>
+<figcaption>Real capture · commit e632035 · local production build · hub screen only (no engine binary on the capture machine, so no analysis is shown) · 2026-10-19 09:24 BRT</figcaption>
+</figure></section>
+<section id="c-arch" aria-labelledby="c-arch-h"><h2 id="c-arch-h"><span class="num">04</span>Architecture</h2>
+<p>Browser (React) → WebSocket → SHERLOCK controller → Lughnasadh adapter → engine as a child process. The interface <strong>never</strong> speaks raw UCI; the adapter owns the protocol, timeouts and <strong>session tokens</strong>, so stale replies are discarded (covered by the session tests). By design, the board position is kept across an engine timeout, crash or restart; that path is exercised only by the smoke scripts, which were not run here.
 On Android, the same interface runs in a WebView and reaches the native engine through a JavaScript bridge and <code>ProcessBuilder</code>, with no Node or WebSocket dependency in the APK.</p>
-<h2>5. Evidence</h2>
+</section>
+<section id="c-evidence" aria-labelledby="c-evidence-h"><h2 id="c-evidence-h"><span class="num">05</span>Evidence</h2>
 <ul>
 <li><strong>8/8 tests passed</strong> in the run for this site on 2026-10-19: 6 UCI-parser tests and 2 session tests, including "drops stale info when session rotates". Typecheck clean.</li>
 <li><strong>Release v0.1.3</strong> with its APK is public on GitHub, and the repository publishes the APK's SHA-256.</li>
@@ -64,10 +103,12 @@ On Android, the same interface runs in a WebView and reaches the native engine t
 <li>Published APK SHA-256: <a href="https://github.com/lughlammas/sherlock/blob/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/Sherlock-0.1.3-s21.apk.sha256">https://github.com/lughlammas/sherlock/blob/e63203515a1b0ed3fbdf388e0bb317267bb14cfb/Sherlock-0.1.3-s21.apk.sha256</a></li>
 <li>Test log of the 8/8 run: not public. The repository has no CI, so the run exists only in the sprint workspace (<code>logs/sherlock-test.log</code>).</li>
 </ul>
-<h2>6. Human role and AI tools</h2>
+</section>
+<section id="c-roles" aria-labelledby="c-roles-h"><h2 id="c-roles-h"><span class="num">06</span>Human role and AI tools</h2>
 <p>Built through human-directed AI-assisted development.</p>
-<h2>7. Tests executed</h2>
-<table>
+</section>
+<section id="c-tests" aria-labelledby="c-tests-h"><h2 id="c-tests-h"><span class="num">07</span>Tests executed</h2>
+<div class="table-wrap"><table class="table">
 <thead>
 <tr>
 <th>Check</th>
@@ -97,8 +138,9 @@ On Android, the same interface runs in a WebView and reaches the native engine t
 <td></td>
 </tr>
 </tbody>
-</table>
-<h2>8. Limitations</h2>
+</table></div>
+</section>
+<section id="c-limits" class="limitations" aria-labelledby="c-limits-h"><h2 id="c-limits-h"><span class="num">08</span>Limitations</h2>
 <ul>
 <li>No continuous integration.</li>
 <li>Tests use mocked engine lines; real-engine behaviour is covered only by smoke scripts that were not run here.</li>
@@ -106,16 +148,42 @@ On Android, the same interface runs in a WebView and reaches the native engine t
 <li>No playing-strength or performance benchmark.</li>
 <li>Engine-versus-engine mode runs two processes and uses substantial battery and memory.</li>
 </ul>
-<h2>9. Commercial relevance</h2>
+</section>
+<section id="c-need" aria-labelledby="c-need-h"><h2 id="c-need-h"><span class="num">09</span>Commercial relevance</h2>
 <p>SHERLOCK shows integration work: a native process, a text protocol, a real-time interface and mobile packaging, with the failure cases (timeouts, crashes, late replies) handled explicitly. That is the kind of plumbing behind <strong>S02 · Custom Software</strong> and the diagnosis in <strong>S03 · AI Code Rescue</strong>.</p>
 <p class="more">→ <a href="/services/">Services</a> · <a href="/contact/">Discuss Your Project</a></p>
-</article>
+</section>
+<nav class="pager" aria-label="Case study"><a href="/work/comercial-template/">← Previous case: Comercial Template</a><a href="/work/flowdesk/">Next case: FLOWDESK →</a></nav>
+</div>
+</div>
+</div></div>
+<section class="section" aria-labelledby="cta-title">
+<div class="container">
+<div class="cta">
+<div>
+<h2 id="cta-title">Have a problem that should become software?</h2>
+<p>Describe what you have and what is not working.</p>
+</div>
+<div class="btn-row">
+<a class="btn btn--primary" href="/contact/">Discuss Your Project</a>
+<a class="btn btn--secondary" href="/work/">See the work</a>
+</div>
+</div>
+</div>
+</section>
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Independent studio led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Led by Guilherme Cavalcanti. Human-directed AI-assisted development.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/services/">Services</a></li><li><a href="/work/">Work</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Work</h2><ul><li><a href="/work/flowdesk/">FLOWDESK</a></li><li><a href="/work/comercial-template/">Comercial Template</a></li><li><a href="/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Language</h2><ul><li><a href="/work/sherlock/" hreflang="en" lang="en">English</a></li><li><a href="/pt/work/sherlock/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>

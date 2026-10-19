@@ -15,9 +15,28 @@
 <body>
 <a class="skip-link" href="#main">Pular para o conteúdo</a>
 <header class="site-header">
-<div class="wrap nav-bar">
-<a class="brand" href="/pt/">ARBOCK LABS</a>
-<nav aria-label="Principal">
+<div class="container site-header__bar">
+<a class="brand" href="/pt/">
+<span class="brand__name">ARBOCK LABS</span>
+<span class="brand__desc">Independent Software &amp; Applied AI Studio</span>
+</a>
+<nav class="nav-desktop" aria-label="Principal">
+<ul class="nav-list">
+<li><a href="/pt/services/">Serviços</a></li>
+<li><a href="/pt/work/">Projetos</a></li>
+<li><a href="/pt/methodology/">Metodologia</a></li>
+<li><a href="/pt/about/">Sobre</a></li>
+</ul>
+</nav>
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+<a href="/contact/" hreflang="en" lang="en">EN</a>
+<a href="/pt/contact/" hreflang="pt-BR" lang="pt-BR" aria-current="true">PT</a>
+</div>
+<a class="btn btn--primary nav-cta" href="/pt/contact/">Solicite uma proposta</a>
+<details class="nav-mobile">
+<summary>Menu</summary>
+<div class="nav-mobile__panel">
+<nav aria-label="Principal (celular)">
 <ul class="nav-list">
 <li><a href="/pt/services/">Serviços</a></li>
 <li><a href="/pt/work/">Projetos</a></li>
@@ -26,14 +45,19 @@
 <li><a href="/pt/contact/" aria-current="page">Contato</a></li>
 </ul>
 </nav>
-<a class="lang-switch" href="/contact/" hreflang="en" lang="en">English</a>
+</div>
+</details>
 </div>
 </header>
 <main id="main" tabindex="-1">
-<article class="wrap section">
+<div class="section"><div class="container container--narrow">
+<header class="section__head">
+<p class="label">Contato</p>
 <h1>Solicite uma proposta</h1>
+
 <p>Conte o que você tem, o que não está funcionando e o que seria "pronto" para você. O primeiro passo é sempre uma avaliação, não um orçamento.</p>
-<h2>Vale incluir</h2>
+</header>
+<section><h2>Vale incluir</h2>
 <ul>
 <li>O que o software ou o processo deveria fazer.</li>
 <li>O que existe hoje (repositório, protótipo, planilha, nada ainda).</li>
@@ -41,31 +65,43 @@
 <li>Restrições: prazo, faixa de orçamento, hospedagem, sensibilidade dos dados.</li>
 <li>A oferta que parece mais próxima: S01 Automação, S02 MVP ou S03 AI Code Rescue.</li>
 </ul>
-<h2>Canal de contato</h2>
-<blockquote>
+</section>
+<section aria-labelledby="ch-h"><h2 id="ch-h">Canal de contato</h2>
 <p><strong>Pendente de configuração.</strong> O canal de contato da ARBOCK LABS ainda não foi configurado. Nenhum endereço aparece aqui até existir um real e acompanhado.</p>
-</blockquote>
-<p class="notice" role="status"><strong>Pendente de configuração / Pending configuration.</strong> Este formulário ainda não envia nada.</p>
-<form class="contact-form" id="contact-form" data-disabled="true" novalidate>
-<div class="field"><label for="name">Nome</label><input id="name" name="name" type="text" autocomplete="name"></div>
-<div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div>
-<div class="field"><label for="message">Descrição do projeto</label><textarea id="message" name="message" rows="6"></textarea></div>
-<div class="field"><label for="offer">Oferta</label><select id="offer" name="offer"><option value="">—</option><option value="S01">S01 · Business Automation &amp; AI</option><option value="S02">S02 · Custom Software &amp; MVP Development</option><option value="S03">S03 · AI Code Rescue &amp; Technical Delivery</option></select></div>
-<fieldset class="field"><legend>Tenho repositório</legend>
-<label><input type="radio" name="repo" value="yes"> Sim</label> <label><input type="radio" name="repo" value="no"> Não</label></fieldset>
-<button type="submit" disabled aria-describedby="form-pending">Enviar — Pendente de configuração</button>
-<p id="form-pending" class="muted">Pendente de configuração / Pending configuration</p>
+<div class="notice notice--warn" role="status">
+<p class="notice__title">Pendente de configuração / Pending configuration</p>
+<p class="notice__body">O canal de contato ainda não foi configurado. Nada do que você digitar aqui é enviado.</p>
+</div>
+<form class="form" id="contact-form" novalidate>
+<div class="field"><label class="field__label" for="f-name">Nome <span class="req" aria-hidden="true">*</span></label><input class="input" id="f-name" name="name" type="text" autocomplete="name" required></div>
+<div class="field"><label class="field__label" for="f-email">E-mail <span class="req" aria-hidden="true">*</span></label><input class="input" id="f-email" name="email" type="email" autocomplete="email" required></div>
+<div class="field"><label class="field__label" for="f-service">Serviço <span class="opt">(opcional)</span></label><select class="select" id="f-service" name="service"><option value="">Ainda não sei</option><option value="s01">S01 · Business Automation &amp; AI</option><option value="s02">S02 · Custom Software &amp; MVP Development</option><option value="s03">S03 · AI Code Rescue &amp; Technical Delivery</option></select></div>
+<div class="field"><label class="field__label" for="f-msg">Que problema você quer resolver? <span class="req" aria-hidden="true">*</span></label>
+<p class="field__hint" id="f-msg-hint">Algumas frases bastam. Não inclua senhas nem dados de clientes.</p>
+<textarea class="textarea" id="f-msg" name="message" required aria-describedby="f-msg-hint"></textarea></div>
+<div class="field"><label class="field__label" for="f-repo">URL do repositório <span class="opt">(opcional, para S03)</span></label><input class="input" id="f-repo" name="repo" type="url" inputmode="url"></div>
+<label class="choice"><input type="checkbox" name="consent"> <span>Entendo que esta mensagem é lida por uma pessoa antes de qualquer resposta.</span></label>
+<div class="btn-row"><button class="btn btn--primary" type="submit" disabled aria-describedby="f-submit-note">Enviar</button></div>
+<p class="field__hint" id="f-submit-note">O envio fica desativado até existir um canal real (Pendente de configuração).</p>
 </form>
-<p>Perfil público de código: <a href="https://github.com/lughlammas">https://github.com/lughlammas</a></p>
-<h2>O que acontece depois</h2>
-<p>Você recebe uma resposta e, se fizer sentido, uma proposta curta de avaliação com escopo, o que será verificado e o que não será prometido.</p>
-</article>
+
+
+<p>Perfil público de código: <a href="https://github.com/lughlammas">https://github.com/lughlammas</a></p></section>
+</div></div>
+
 </main>
 <footer class="site-footer">
-<div class="wrap">
-<p><strong>ARBOCK LABS</strong> · Independent Software &amp; Applied AI Studio</p>
-<p>Estúdio independente liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
-<p><a href="https://github.com/lughlammas">GitHub</a></p>
+<div class="container">
+<div class="site-footer__grid">
+<div>
+<p class="brand__name">ARBOCK LABS</p>
+<p>Independent Software &amp; Applied AI Studio. Liderado por Guilherme Cavalcanti. Desenvolvimento assistido por IA sob direção humana.</p>
+</div>
+<nav aria-labelledby="ft-site"><h2 id="ft-site">Site</h2><ul><li><a href="/pt/services/">Serviços</a></li><li><a href="/pt/work/">Projetos</a></li><li><a href="/pt/methodology/">Metodologia</a></li><li><a href="/pt/about/">Sobre</a></li><li><a href="/pt/contact/">Contato</a></li></ul></nav>
+<nav aria-labelledby="ft-work"><h2 id="ft-work">Projetos</h2><ul><li><a href="/pt/work/flowdesk/">FLOWDESK</a></li><li><a href="/pt/work/comercial-template/">Comercial Template</a></li><li><a href="/pt/work/sherlock/">SHERLOCK</a></li></ul></nav>
+<nav aria-labelledby="ft-lang"><h2 id="ft-lang">Idioma</h2><ul><li><a href="/contact/" hreflang="en" lang="en">English</a></li><li><a href="/pt/contact/" hreflang="pt-BR" lang="pt-BR">Português</a></li><li><a href="https://github.com/lughlammas">GitHub</a></li></ul></nav>
+</div>
+<div class="site-footer__legal"><span>© 2026 Guilherme Cavalcanti</span><span>ARBOCK LABS</span></div>
 </div>
 </footer>
 </body>
